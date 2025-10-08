@@ -44,12 +44,6 @@ const Landing = () => {
       <NavBar />
       <div className="w-full relative overflow-hidden  h-[70vh] md:h-[100vh] flex flex-col items-center justify-center">
         <img
-          src="https://gallery.yopriceville.com/downloadfullsize/send/26456"
-          alt=""
-          loading="lazy"
-          className="absolute opacity-40 w-80 md:w-100"
-        />
-        <img
           src="https://png.pngtree.com/png-vector/20250708/ourmid/pngtree-orange-basketball-png-image_16721120.webp"
           alt=""
           loading="lazy"

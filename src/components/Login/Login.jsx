@@ -37,6 +37,9 @@ const Login = ({ state }) => {
     password: "",
   });
 
+  const [resetPass, setResetPass] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+
   const handleInput = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -63,26 +66,20 @@ const Login = ({ state }) => {
           }
         );
 
-        // Ensure response contains token and other necessary data
         if (response) {
-          // Store JWT token in localStorage
           localStorage.setItem("token", response.data.token);
-
-          // If newUser is part of the response, store the user ID as well
           if (response.data.user && response.data.user._id) {
             localStorage.setItem("userId", response.data.user._id);
           }
 
           toast.success("Login successful");
-          console.log(response);
           window.location.replace("/");
         } else {
           toast.error("Something went wrong. Please try again.");
         }
       } catch (error) {
-        // Handle error when invalid credentials are provided
         if (error.response && error.response.data.message) {
-          toast.error(error.response.data.message); // Display the error message from backend
+          toast.error(error.response.data.message);
         } else {
           toast.error("Error logging in. Please try again.");
         }
@@ -94,7 +91,7 @@ const Login = ({ state }) => {
 
   const signUp = async () => {
     if (form.userName === "" || form.email === "" || form.password === "") {
-      toast.error("input field is required");
+      toast.error("Input field is required");
     } else {
       try {
         setLoading(true);
@@ -107,21 +104,49 @@ const Login = ({ state }) => {
           }
         );
 
-        // Check if response is successful
         if (response) {
           toast.success(response.data.message);
           localStorage.setItem("userId", response.data.newUser._id);
-          console.log(response);
-          window.location.replace("/dashboard");
+          window.location.replace("/");
         } else {
           toast.error("Something went wrong. Please try again.");
         }
       } catch (error) {
-        // Check if the error response exists and has a message
         if (error.response && error.response.data.message) {
-          toast.error(error.response.data.message); // Show the error message from the backend
+          toast.error(error.response.data.message);
         } else {
           toast.error("Error registering user. Please try again.");
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  const resetPassword = async () => {
+    if (resetEmail === "") {
+      toast.error("Please enter your email to reset the password.");
+    } else {
+      try {
+        setLoading(true);
+        const response = await axios.post(
+          `${import.meta.env.VITE_REACT_APP_API}/api/auth/forgot-password`,
+          {
+            email: resetEmail,
+          }
+        );
+
+        if (response) {
+          toast.success("Password reset instructions sent to your email.");
+          setResetPass(false); // Hide reset password form after success
+        } else {
+          toast.error("Something went wrong. Please try again.");
+        }
+      } catch (error) {
+        if (error.response && error.response.data.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error("Error resetting password. Please try again.");
         }
       } finally {
         setLoading(false);
@@ -141,49 +166,60 @@ const Login = ({ state }) => {
           </p>
 
           {/* Button for switching between Login and Sign Up */}
-          <div className="w-full mt-5 rounded-[10px] flex bg-[#f8f7f7] dark:bg-[#202d43cc] gap-4 p-1">
-            <button
-              onClick={() => {
-                setType("login");
-                resetForm();
-              }}
-              className={`text-sm p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
-                type === "login" ? "dark:bg-[var(--default)] bg-[#e6e6e6]" : ""
-              }`}
-            >
-              Login
-            </button>
-            <button
-              onClick={() => {
-                setType("signUp");
-                resetForm();
-              }}
-              className={`text-sm p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
-                type === "signUp" ? "dark:bg-[var(--default)] bg-[#e6e6e6]" : ""
-              }`}
-            >
-              Register
-            </button>
-          </div>
+          {!resetPass && (
+            <div className="w-full mt-5 rounded-[10px] flex bg-[#f8f7f7] dark:bg-[#202d43cc] gap-4 p-1">
+              <button
+                onClick={() => {
+                  setType("login");
+                  resetForm();
+                }}
+                className={`text-sm p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
+                  type === "login"
+                    ? "dark:bg-[var(--default)] bg-[#e6e6e6]"
+                    : ""
+                }`}
+              >
+                Login
+              </button>
+              <button
+                onClick={() => {
+                  setType("signUp");
+                  resetForm();
+                }}
+                className={`text-sm p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
+                  type === "signUp"
+                    ? "dark:bg-[var(--default)] bg-[#e6e6e6]"
+                    : ""
+                }`}
+              >
+                Register
+              </button>
+            </div>
+          )}
 
           {/* Telegram Login Button */}
-          <div className="w-[100%] mt-3">
-            <button className="flex justify-center items-center gap-4 w-[100%] mt-1 p-3 rounded-[10px] border-[#d3d3d3] dark:bg-[transparent] dark:text-[#d3d3d3] dark:border dark:border-[white] bg-[#f1f1f1]">
-              <div>
-                <FaTelegram />
-              </div>
-              Login via Telegram
-            </button>
-          </div>
+          {!resetPass && (
+            <div className="w-[100%] mt-3">
+              <button className="flex justify-center items-center gap-4 w-[100%] mt-1 p-3 rounded-[10px] border-[#d3d3d3] dark:bg-[transparent] dark:text-[#d3d3d3] dark:border dark:border-[white] bg-[#f1f1f1]">
+                <div>
+                  <FaTelegram />
+                </div>
+                Login via Telegram
+              </button>
+            </div>
+          )}
 
           {/* Separator */}
-          <div className="text-center mt-2 text-sm uppercase font-[300] dark:text-[#d3d3d3]">
-            or
-          </div>
+          {!resetPass && (
+            <div className="text-center mt-2 text-sm uppercase font-[300] dark:text-[#d3d3d3]">
+              or
+            </div>
+          )}
 
           {/* Form Inputs */}
           <div className="flex flex-col gap-3 w-[100%]">
-            {type === "signUp" && (
+            {/* Only show these fields when resetPass is false */}
+            {!resetPass && type === "signUp" && (
               <InputField
                 label="Username"
                 name="userName"
@@ -193,31 +229,89 @@ const Login = ({ state }) => {
                 icon={<FiUser />}
               />
             )}
-            <InputField
-              label="Email"
-              name="email"
-              type="text"
-              value={form.email}
-              onChange={handleInput}
-              icon={<IoMailOutline />}
-            />
-            <InputField
-              label="Password"
-              name="password"
-              type="password" // Changed to password type
-              value={form.password}
-              onChange={handleInput}
-              icon={<IoLockClosed />}
-            />
+            {!resetPass && (
+              <InputField
+                label="Email"
+                name="email"
+                type="text"
+                value={form.email}
+                onChange={handleInput}
+                icon={<IoMailOutline />}
+              />
+            )}
+            {!resetPass && (
+              <InputField
+                label="Password"
+                name="password"
+                type="password"
+                value={form.password}
+                onChange={handleInput}
+                icon={<IoLockClosed />}
+              />
+            )}
+            {type === "login" && !resetPass && (
+              <div>
+                <button
+                  onClick={() => setResetPass(true)}
+                  className="text-blue-600 text-[12px]"
+                >
+                  Forgot password?
+                </button>
+              </div>
+            )}
           </div>
 
+          {/* Reset Password Form */}
+          {resetPass && (
+            <div className="flex flex-col gap-3 w-[100%] mt-4">
+              <h1 className="text-[16px] font-[600] text-[#2e2d2d] dark:text-[#d3d3d3]">
+                Forgot your password?
+              </h1>
+              <p className="w-[90%] text-sm text-[#787878] dark:text-[#d3d3d3]">
+                Enter your email and we'll send you instructions to reset it.
+              </p>
+              <InputField
+                label="Enter your Email"
+                name="email"
+                type="text"
+                value={resetEmail}
+                onChange={(e) => setResetEmail(e.target.value)}
+                icon={<IoMailOutline />}
+              />
+              <button
+                onClick={resetPassword}
+                className="p-2 shadow shadow-amber-400 bg-[var(--Primary)] rounded-[10px] text-white w-[100%] mt-5 font-[500] text-sm"
+              >
+                {loading ? "Sending..." : "Reset Password"}
+              </button>
+              <button
+                onClick={() => setResetPass(false)}
+                className="text-blue-600 text-sm mt-3"
+              >
+                Back to Login
+              </button>
+            </div>
+          )}
+
           {/* Submit Button */}
-          <button
-            onClick={() => (type === "login" ? login() : signUp())}
-            className="p-2 shadow shadow-amber-400 bg-[var(--Primary)] rounded-[10px] text-white w-[100%] mt-5 font-[500] text-sm"
-          >
-            {loading ? "loading....." : type === "login" ? "Login" : "Sign up"}
-          </button>
+          {!resetPass && (
+            <button
+              onClick={() =>
+                !resetPass
+                  ? type === "login"
+                    ? login()
+                    : signUp()
+                  : resetPassword()
+              }
+              className="p-2 shadow shadow-amber-400 bg-[var(--Primary)] rounded-[10px] text-white w-[100%] mt-5 font-[500] text-sm"
+            >
+              {loading
+                ? "loading....."
+                : type === "login"
+                ? "Login"
+                : "Sign up"}
+            </button>
+          )}
 
           {/* Close Buttons */}
           <button
