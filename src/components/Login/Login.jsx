@@ -303,13 +303,17 @@ const Login = ({ state }) => {
                     : signUp()
                   : resetPassword()
               }
-              className="p-2 shadow shadow-amber-400 bg-[var(--Primary)] rounded-[10px] text-white w-[100%] mt-5 font-[500] text-sm"
+              class="login"
+
+              // className="p-2 shadow shadow-amber-400 bg-[var(--Primary)] rounded-[10px] text-white w-[100%] mt-5 font-[500] text-sm"
             >
-              {loading
-                ? "loading....."
-                : type === "login"
-                ? "Login"
-                : "Sign up"}
+              <span>
+                {loading
+                  ? "loading....."
+                  : type === "login"
+                  ? "Login"
+                  : "Sign up"}
+              </span>
             </button>
           )}
 

@@ -10,7 +10,7 @@ const PopUP = () => {
     const modalShown = localStorage.getItem("modalShown");
     if (modalShown) {
       const timer = setTimeout(() => {
-        setShowPopup(true);
+        setShowPopup(false);
         // localStorage.setItem("modalShown", "true"); // Set flag to prevent future display
       }, 3000);
       return () => clearTimeout(timer);

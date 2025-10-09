@@ -25,7 +25,9 @@ const Recommendation = () => {
               className="text-3xl text-center text-[#f1f1f1] md:text-5xl font-bold"
             >
               Get Hot Betting <br />
-              <span className="text-[var(--Primary)]">Recommendation</span>
+              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+                Recommendation
+              </span>
             </p>
           </div>
         </div>
@@ -40,7 +42,10 @@ const Recommendation = () => {
             data-aos="fade-up"
             className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
           >
-            Featured <span className="text-[var(--Primary)]">Premium Tips</span>
+            Featured{" "}
+            <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+              Premium Tips
+            </span>
           </h1>
           <p className="md:w-[50%] dark:text-[#d3d3d3] w-[100%] px-10 md:px-0 text-center text-sm text-[#787878] mt-2">
             Check out All our recommendations with high success rates. Join

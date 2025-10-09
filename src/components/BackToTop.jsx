@@ -1,15 +1,15 @@
 import React from "react";
 import { AiOutlineArrowUp } from "react-icons/ai";
-
+import { PiTelegramLogo } from "react-icons/pi";
 const BackToTop = () => {
   return (
-    <div>
-      <div
-        onClick={() => window.scrollTo(0, 0)}
-        className="fixed bottom-5 right-5 bg-[var(--Primary)] p-4 rounded-full cursor-pointer hover:shadow-lg shadow-sm shadow-amber-300 duration-200"
-      >
-        <AiOutlineArrowUp color="white" />
-      </div>
+    <div className="fixed bottom-1 right-1">
+      <ul class="wrapper">
+        <li class="icon instagram">
+          <span class="tooltip">Telegram</span>
+          <PiTelegramLogo />
+        </li>
+      </ul>
     </div>
   );
 };

@@ -32,7 +32,9 @@ const About = () => {
               className="text-3xl text-center text-[#f1f1f1] md:text-5xl font-bold"
             >
               Get Hot Betting <br />
-              <span className="text-[var(--Primary)]">Recommendation</span>
+              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+                Recommendation
+              </span>
             </p>
           </div>
         </div>
@@ -78,7 +80,10 @@ const About = () => {
           data-aos="fade-down"
           className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
         >
-          Why Choose <span className="text-[var(--Primary)]">SportsTips?</span>
+          Why Choose{" "}
+          <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+            SportsTips?
+          </span>
         </h1>
       </div>
       <div className="mt-10 md:mt-15 flex-wrap flex gap-y-10 items-center justify-center ">
@@ -150,7 +155,11 @@ const About = () => {
           data-aos="fade-up"
           className="text-2xl md:text-4xl font-bold dark:text-[#f1f1f1]"
         >
-          How <span className="text-[var(--Primary)]">SportsTips</span> Works
+          How{" "}
+          <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+            SportsTips
+          </span>{" "}
+          Works
         </h1>
         <p
           data-aos="fade-down"

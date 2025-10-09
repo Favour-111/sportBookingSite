@@ -14,7 +14,10 @@ const Footer = () => {
           data-aos="fade-up"
           className="dark:text-[#fff] md:text-[50px] text-[30px] font-bold text-center text-[var(--default)]"
         >
-          Ready to Start <span className="text-[var(--Primary)]">Winning?</span>{" "}
+          Ready to Start{" "}
+          <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+            Winning?
+          </span>{" "}
         </h1>
         <p
           data-aos="fade-up"

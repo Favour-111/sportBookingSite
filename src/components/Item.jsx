@@ -32,8 +32,12 @@ const Item = () => {
           </div>
         </div>
         <div className="flex items-center justify-between mt-3">
-          <button className="w-[80%] bg-[var(--Primary)] text-white flex items-center justify-center gap-2 p-[10px] rounded text-[12px]">
-            <MdOutlineAddShoppingCart /> <div>Buy Bet Now</div>
+          <button
+            className="buy-btn"
+            // className="w-[80%] bg-[var(--Primary)] text-white flex items-center justify-center gap-2 p-[10px] rounded text-[12px]"
+          >
+            <MdOutlineAddShoppingCart className="dark:text-white" />{" "}
+            <div className="dark:text-white">Buy Bet Now</div>
           </button>
           <div className="text-[#787878] dark:text-[#b6b6b6] text-[12px] text-center">
             your bal:

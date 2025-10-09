@@ -14,6 +14,8 @@ import toast, { Toaster } from "react-hot-toast";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Settings from "./Pages/Settings";
+import ResetPass from "./Pages/ResetPass";
+import "./styles/Buttons.css";
 function App() {
   const user = localStorage.getItem("userId");
   AOS.init({
@@ -27,6 +29,10 @@ function App() {
         {!user && <Route path="/" element={<Landing />} />}
         <Route path="/recommendations" element={<Recommendation />} />
         <Route path="/about" element={<About />} />
+        <Route
+          path="/api/auth/reset-password/:id/:token"
+          element={<ResetPass />}
+        />
         <Route path="/settings/:id" element={<Settings />} />
         <Route path={user ? "" : "/"} element={<DashBoard />} />
       </Routes>
