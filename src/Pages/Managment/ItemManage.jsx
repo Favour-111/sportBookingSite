@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import { IoTrendingUp } from "react-icons/io5";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
-import { ShopContext } from "./shopContext";
 
-const Item = () => {
-  const { compareUser } = useContext(ShopContext);
+const ItemManage = () => {
   return (
     <div>
       <div className="border-1 p-5 border-gray-100 dark:border-gray-600  rounded-[15px] w-[100%] h-[fit-content] flex flex-col  gap-2 cursor-pointer hover:shadow-lg shadow-sm duration-200">
@@ -31,22 +29,19 @@ const Item = () => {
             Available on : Bet9ja SportyBet BetFair
           </div>
         </div>
-        <div className="flex items-center justify-between mt-3">
-          <button
-            className="buy-btn"
-            // className="w-[80%] bg-[var(--Primary)] text-white flex items-center justify-center gap-2 p-[10px] rounded text-[12px]"
-          >
+        <div className="flex items-center flex-col gap-3">
+          <button className="w-[100%] bg-red-400 hover:bg-red-600 duration-300 text-white flex items-center justify-center gap-2 p-[10px] rounded text-[12px]">
             <MdOutlineAddShoppingCart className="dark:text-white" />{" "}
-            <div className="dark:text-white">Buy Bet Now</div>
+            <div className="dark:text-white">Delete bet now</div>
           </button>
-          <div className="text-[#787878] dark:text-[#b6b6b6] text-[12px] text-center">
-            your bal:
-            <br />${compareUser?.availableBalance.toLocaleString() || 0}
-          </div>
+          <button className="w-[100%] bg-orange-200 hover:bg-orange-600 duration-300 text-white flex items-center justify-center gap-2 p-[10px] rounded text-[12px]">
+            <MdOutlineAddShoppingCart className="dark:text-white" />{" "}
+            <div className="dark:text-white">Deactivate Game</div>
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Item;
+export default ItemManage;

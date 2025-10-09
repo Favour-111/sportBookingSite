@@ -25,11 +25,10 @@ ChartJS.register(
 const LineChart = () => {
   const data = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-
     datasets: [
       {
         label: "Daily Orders",
-        data: [1200, 1900, 1500, 2200, 3000, 2500, 3100], // Totals on Y-axis
+        data: [1200, 1900, 1500, 2200, 3000, 2500, 3100],
         fill: true,
         backgroundColor: "rgba(75, 192, 192, 0.2)",
         borderColor: "rgba(75, 192, 192, 1)",
@@ -43,10 +42,10 @@ const LineChart = () => {
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false, // 👈 Important: makes it fill the container height
     plugins: {
       legend: {
-        position: "bottom",
-        labels: { color: "#333" },
+        display: false, // ❌ hides legend completely
       },
     },
     scales: {
@@ -55,24 +54,44 @@ const LineChart = () => {
           display: true,
           drawTicks: false,
           drawOnChartArea: true,
-          color: "rgba(0, 0, 0, 0.1)",
-          borderDash: [4, 4], // dotted vertical lines
+          color: "rgba(0, 0, 0, 0.1)", // Default light mode grid color
+          borderDash: [4, 4],
+        },
+        ticks: {
+          color: "#333", // Default light mode ticks color
         },
       },
       y: {
-        display: false, // Hides y-axis line, ticks, labels
+        display: false,
         grid: {
-          display: false, // Hides grid lines
+          display: false,
         },
       },
     },
   };
 
   return (
-    <div>
-      <div style={{ width: "100%", height: "120px", position: "relative" }}>
-        <Line data={data} options={options} style={{ width: "100%" }} />
-      </div>
+    <div className="w-[100%] sm:h-[200px] h-[150px] relative rounded-[10px] mt-[10px] dark:bg-gray-800 dark:text-white">
+      <Line
+        data={data}
+        options={{
+          ...options,
+          scales: {
+            x: {
+              ...options.scales.x,
+              grid: {
+                ...options.scales.x.grid,
+                color: "rgba(255, 255, 255, 0.2)", // Dark mode grid color
+              },
+              ticks: {
+                ...options.scales.x.ticks,
+                color: "#fff", // Dark mode ticks color
+              },
+            },
+            y: options.scales.y,
+          },
+        }}
+      />
     </div>
   );
 };

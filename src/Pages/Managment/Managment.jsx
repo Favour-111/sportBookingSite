@@ -4,11 +4,14 @@ import { BsCartCheck } from "react-icons/bs";
 import { TbUsers } from "react-icons/tb";
 
 import { GiMoneyStack } from "react-icons/gi";
-import { MdTipsAndUpdates } from "react-icons/md";
+import { MdCardTravel, MdTipsAndUpdates } from "react-icons/md";
 import Funds from "../../components/Funds/Funds";
 
 import SideBar from "../../components/SideBar/SideBar";
 import LineChart from "../../components/Charts/Line";
+import BarChat from "../../components/Charts/Bar";
+import ItemManage from "./ItemManage";
+import Footer from "./Footer";
 
 const Managment = () => {
   const [open, setOpen] = useState(false);
@@ -16,7 +19,7 @@ const Managment = () => {
   return (
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)] `}>
       <SideBar setOpen={setOpen} />
-      <div>
+      <div className="mb-10">
         <div className="px-6 pt-25">
           <div className="text-3xl text-[#2c2c2c] font-bold dark:text-[#fff]">
             Welcome back, Admin!
@@ -85,14 +88,53 @@ const Managment = () => {
           </div>
         </div>
 
-        <div className="flex items-center flex-wrap justify-between p-10">
-          <div className="w-[100%] sm:w-[48%]">
+        <div className="flex items-center flex-wrap justify-between  px-6 gap-y-10 mt-10">
+          <div className="w-[100%] sm:w-[49%] rounded-[10px] shadow shadow-[0, 10px, 10px, #000] p-5">
+            <h1 className="text-[18px] font-[500] flex items-center gap-2 dark:text-white">
+              <MdCardTravel /> <div>Purchases</div>
+            </h1>
+            <h1 className="text-[13px] text-[#787878] dark:text-[#d3d3d3]">
+              Weekly
+            </h1>
             <LineChart />
           </div>
-          <div className="w-[100%] sm:w-[48%]">ss</div>
+          <div className="w-[100%] sm:w-[49%] rounded-[10px] shadow shadow-[0, 10px, 10px, #000] p-5">
+            <h1 className="text-[18px] font-[500] flex items-center gap-2 dark:text-white">
+              <GiMoneyStack /> <div>Revenue</div>
+            </h1>
+            <h1 className="text-[13px] text-[#787878] dark:text-[#d3d3d3]">
+              Weekly
+            </h1>
+            <BarChat />
+          </div>
         </div>
-        <Funds open={open} setOpen={setOpen} />
+        <div className="mt-10 px-6">
+          <h1 className="text-[#333333] font-[700] text-lg  capitalize">
+            recently added tips
+          </h1>
+          <div className="mt-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-6">
+            <div>
+              <ItemManage />
+            </div>
+            <div>
+              <ItemManage />
+            </div>
+            <div>
+              <ItemManage />
+            </div>
+            <div>
+              <ItemManage />
+            </div>
+            <div>
+              <ItemManage />
+            </div>
+            <div>
+              <ItemManage />
+            </div>
+          </div>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
