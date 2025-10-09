@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import { RiExchangeDollarFill } from "react-icons/ri";
-import { LuClock } from "react-icons/lu";
+import { LuClock, LuLoader2 } from "react-icons/lu";
 import { GiReceiveMoney } from "react-icons/gi";
 import { BiSolidQuoteLeft } from "react-icons/bi";
 import {
@@ -22,12 +22,15 @@ import Item from "../../components/Item";
 import { ShopContext } from "../../components/shopContext";
 import BackToTop from "../../components/BackToTop";
 import Login from "../../components/Login/Login";
+import LoadingScreen from "../../components/loading/Loader";
+import { FaArrowRightLong } from "react-icons/fa6";
 const Landing = () => {
-  const { isDarkMode } = useContext(ShopContext);
+  const { isDarkMode, user } = useContext(ShopContext);
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
+  const [form, setForm] = useState(false);
 
   const handleInput = (e) => {
     const name = e.target.name;
@@ -44,7 +47,7 @@ const Landing = () => {
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)]`}>
       <NavBar />
       <div
-        className="w-full relative overflow-hidden h-[75vh] md:h-[100vh] flex flex-col items-center justify-center
+        className="w-full relative overflow-hidden h-[95vh] md:h-[100vh] flex flex-col items-center justify-center
   bg-[radial-gradient(circle_at_40%_10%,rgba(255,215,100,0.15),transparent_70%)]
   dark:bg-[radial-gradient(circle_at_40%_10%,rgba(255,255,255,0.08),transparent_10%)]"
       >
@@ -70,7 +73,7 @@ const Landing = () => {
 
         <p
           data-aos="fade-up"
-          className="text-sm dark:bg-zinc-600 dark:text-white bg-[#f1f1f1] p-1 rounded"
+          className="text-sm dark:bg-zinc-600 dark:text-white bg-[#f1f1f1] p-1 px-4 rounded-[5px]"
         >
           ⚽Best Sport Recommendation
         </p>
@@ -85,7 +88,7 @@ const Landing = () => {
         </h1>
         <p
           data-aos="fade-up"
-          className="mt-5 dark:text-[#d3d3d3] text-center text-[14px] md:text-[16px] md:w-[53%] w-[80%]"
+          className="mt-5 dark:text-[#d3d3d3] text-center text-[14px] md:text-[16px] md:w-[53%] w-[90%]"
         >
           Get exclusive recommendations from professional analysts with{" "}
           <span>
@@ -96,9 +99,25 @@ const Landing = () => {
             </span>
           </span>
         </p>
-        <button data-aos="fade-down" className="btn">
-          Start Winning Now
-        </button>
+        <div className="flex md:flex-row flex-col  items-center gap-5 mt-8 ">
+          <button
+            onClick={() => !user && setForm(true)}
+            data-aos="fade-down"
+            className="btn"
+          >
+            Start Winning Now
+          </button>
+          <button
+            data-aos="fade-down"
+            onClick={() => !user && setForm(true)}
+            className="flex items-center gap-2 justify-center border dark:shadow-none bg:border-[#787878] dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18] border-zinc-300 bg-zinc-200  sm:py-[10px] sm:px-8 px-5 py-[9px]  rounded-[12px] shadow-md hover:shadow-lg hover:bg-zinc-500 duration-300 hover:text-[#fff] shadow-zinc-200"
+          >
+            <div>Get started Now </div>
+            <div>
+              <FaArrowRightLong />
+            </div>
+          </button>
+        </div>
       </div>
       <div className="text-center">
         <p
@@ -309,6 +328,8 @@ const Landing = () => {
       </div>
       <PopUP />
       <BackToTop />
+      {form && <Login state={setForm} />}
+      {/* <LoadingScreen /> */}
     </div>
   );
 };

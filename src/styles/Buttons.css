@@ -36,7 +36,7 @@
 /* From Uiverse.io by Codecite */
 .btn {
   padding: 12px 20px;
-  border-radius: 50px;
+  border-radius: 10px;
   cursor: pointer;
   border: 0;
   background-color: #f5b700;
@@ -45,8 +45,7 @@
   text-transform: uppercase;
   font-size: 13px;
   transition: all 0.5s ease !important;
-  margin-top: 20px;
-  color: white;
+  color: rgb(1, 1, 1);
 }
 
 .btn:hover {
