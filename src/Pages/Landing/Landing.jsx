@@ -44,7 +44,7 @@ const Landing = () => {
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)]`}>
       <NavBar />
       <div
-        className="w-full relative overflow-hidden h-[70vh] md:h-[100vh] flex flex-col items-center justify-center
+        className="w-full relative overflow-hidden h-[75vh] md:h-[100vh] flex flex-col items-center justify-center
   bg-[radial-gradient(circle_at_40%_10%,rgba(255,215,100,0.15),transparent_70%)]
   dark:bg-[radial-gradient(circle_at_40%_10%,rgba(255,255,255,0.08),transparent_10%)]"
       >
