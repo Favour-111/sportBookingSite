@@ -66,13 +66,16 @@ const NavBar = ({ setOpen }) => {
           </div>
         </div> */}
         <div className="hidden md:flex items-center justify-between py-1 px-10 border-b-1 border-gray-200 bg-white dark:bg-[var(--default)] ">
-          <div>
+          <Link to="/" className="flex items-center gap-2">
             <img
               src="https://github.com/Favour-111/my-asset/blob/main/image.jpg?raw=true"
               alt=""
               className="w-12 h-12 rounded-[12px] object-contain"
             />
-          </div>
+            <div className="font-[700] text-[18px] bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+              SportsTips
+            </div>
+          </Link>
           <div>
             <ul className="flex items-center gap-4 ">
               {!user && (
@@ -222,13 +225,16 @@ const NavBar = ({ setOpen }) => {
         <div
           className={`fixed dark:bg-[#1c2330] flex md:hidden items-center justify-between py-1 px-5 border-b-1 border-gray-200 bg-white dark:border-gray-500  fixed top-0 left-0 right-0 z-50`}
         >
-          <div>
+          <Link to="/" className="flex items-center gap-2">
             <img
               src="https://github.com/Favour-111/my-asset/blob/main/image.jpg?raw=true"
               alt=""
-              className="wmd:-12 md:h-12 w-10 h-10 rounded-[12px] object-contain"
+              className="w-12 h-12 rounded-[12px] object-contain"
             />
-          </div>
+            <div className="font-[700] text-[18px] bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+              SportsTips
+            </div>
+          </Link>
           <div className="flex items-center gap-4">
             {/* <div className="text-sm font-[500] dark:text-emerald-300 text-emerald-600 ">
               Bal : <span className="text-[15px] font-[600]">$300</span>

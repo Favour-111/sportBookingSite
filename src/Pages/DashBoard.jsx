@@ -36,7 +36,7 @@ const DashBoard = () => {
         <div className="px-6 pt-25">
           <div className="text-3xl text-[#2c2c2c] font-bold dark:text-[#fff]">
             Welcome back{" "}
-            <span className="text-[var(--Primary)]">
+            <span className="text-[var(--Primary)] capitalize bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
               {compareUser?.userName}
             </span>
             !{" "}
@@ -133,7 +133,7 @@ const DashBoard = () => {
             </div>
             <button
               onClick={() => setOpen(true)}
-              className="text-sm flex gap-1 items-center justify-center mt-3 p-2.5 rounded-[10px] w-[100%] bg-green-500 text-white"
+              className="shadow-md shadow-green-400 hover:shadow-sm duration-300 hover:translate-[0.075em] text-sm flex gap-1 items-center justify-center mt-3 p-2.5 rounded-[10px] w-[100%] bg-green-500 text-white"
             >
               <div>
                 {" "}

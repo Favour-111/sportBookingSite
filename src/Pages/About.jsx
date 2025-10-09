@@ -171,7 +171,7 @@ const About = () => {
       <div className=" md:px-10 px-6 w-full flex-wrap flex items-center justify-between gap-y-5 mt-10">
         <div
           data-aos="fade-up"
-          className="md:w-[32%] w-[100%] px-5 h-[220px] border-1 border-gray-100 dark:border-gray-600 shadow-sm rounded-[10px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer"
+          className="md:w-[32%] w-[100%] px-5 h-[220px] border-1 border-gray-100 dark:border-gray-600 shadow-sm rounded-[15px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer"
         >
           <div className="w-15 h-15 bg-amber-100 text-white flex items-center justify-center rounded-full">
             <RiExchangeDollarFill size={25} className="text-amber-600" />
@@ -186,7 +186,7 @@ const About = () => {
         </div>
         <div
           data-aos="fade-up"
-          className="md:w-[32%] w-[100%] px-5 h-[220px] border-1 border-gray-100 dark:border-gray-600 shadow-sm  rounded-[10px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer"
+          className="md:w-[32%] w-[100%] px-5 h-[220px] border-1 border-gray-100 dark:border-gray-600 shadow-sm  rounded-[15px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer"
         >
           <div className="w-15 h-15 bg-[#ff63472a] text-white flex items-center justify-center rounded-full">
             <IoAnalytics size={25} className="text-[tomato]" />
@@ -201,7 +201,7 @@ const About = () => {
         </div>
         <div
           data-aos="fade-up"
-          className="md:w-[32%]  w-[100%] px-5 h-[220px] border-1 border-gray-100 dark:border-gray-600 shadow-sm  rounded-[10px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer"
+          className="md:w-[32%]  w-[100%] px-5 h-[220px] border-1 border-gray-100 dark:border-gray-600 shadow-sm  rounded-[15px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer"
         >
           <div className="w-15 h-15 bg-emerald-100 text-white flex items-center justify-center rounded-full">
             <IoTrophyOutline size={25} className="text-emerald-800" />

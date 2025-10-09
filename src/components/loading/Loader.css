@@ -1,7 +1,9 @@
 .loading-container {
+  z-index: 100000;
+
   position: fixed;
   inset: 0;
-  background: #ffffff;
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,25 +13,25 @@
 }
 
 .loading-text {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 600;
-  color: #333;
+  color: #3f3f3f;
   display: flex;
   gap: 2px;
 }
 
 .loading-letter {
   display: inline-block;
-  animation: bounce 1s infinite ease-in-out;
+  animation: appear 1s infinite ease-in-out;
 }
 
-@keyframes bounce {
+@keyframes appear {
   0%,
   100% {
-    transform: translateY(0);
+    opacity: 0;
   }
   50% {
-    transform: translateY(-12px);
+    opacity: 1;
   }
 }
 
