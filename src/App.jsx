@@ -16,6 +16,7 @@ import "aos/dist/aos.css";
 import Settings from "./Pages/Settings";
 import ResetPass from "./Pages/ResetPass";
 import "./styles/Buttons.css";
+import Managment from "./Pages/Managment/Managment";
 function App() {
   const user = localStorage.getItem("userId");
   AOS.init({
@@ -29,6 +30,7 @@ function App() {
         {!user && <Route path="/" element={<Landing />} />}
         <Route path="/recommendations" element={<Recommendation />} />
         <Route path="/about" element={<About />} />
+        <Route path="/management" element={<Managment />} />
         <Route
           path="/api/auth/reset-password/:id/:token"
           element={<ResetPass />}
