@@ -52,7 +52,7 @@ const LineChart = () => {
       x: {
         grid: {
           display: true,
-          drawTicks: false,
+          drawTicks: true,
           drawOnChartArea: true,
           color: "rgba(0, 0, 0, 0.1)", // Default light mode grid color
           borderDash: [4, 4],
@@ -64,7 +64,7 @@ const LineChart = () => {
       y: {
         display: false,
         grid: {
-          display: false,
+          display: true,
         },
       },
     },
@@ -72,26 +72,7 @@ const LineChart = () => {
 
   return (
     <div className="w-[100%] sm:h-[200px] h-[150px] relative rounded-[10px] mt-[10px] dark:bg-gray-800 dark:text-white">
-      <Line
-        data={data}
-        options={{
-          ...options,
-          scales: {
-            x: {
-              ...options.scales.x,
-              grid: {
-                ...options.scales.x.grid,
-                color: "rgba(255, 255, 255, 0.2)", // Dark mode grid color
-              },
-              ticks: {
-                ...options.scales.x.ticks,
-                color: "#fff", // Dark mode ticks color
-              },
-            },
-            y: options.scales.y,
-          },
-        }}
-      />
+      <Line data={data} options={options} />
     </div>
   );
 };

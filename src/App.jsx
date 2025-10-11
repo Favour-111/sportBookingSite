@@ -17,6 +17,9 @@ import Settings from "./Pages/Settings";
 import ResetPass from "./Pages/ResetPass";
 import "./styles/Buttons.css";
 import Managment from "./Pages/Managment/Managment";
+import Tips from "./Pages/Managment/Tips";
+import Users from "./Pages/Managment/Users";
+import BroadCast from "./Pages/Managment/BroadCast";
 function App() {
   const user = localStorage.getItem("userId");
   AOS.init({
@@ -30,7 +33,10 @@ function App() {
         {!user && <Route path="/" element={<Landing />} />}
         <Route path="/recommendations" element={<Recommendation />} />
         <Route path="/about" element={<About />} />
-        <Route path="/management" element={<Managment />} />
+        <Route path="/management/:token" element={<Managment />} />
+        <Route path="/tips-management" element={<Tips />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/broadcast-message" element={<BroadCast />} />
         <Route
           path="/api/auth/reset-password/:id/:token"
           element={<ResetPass />}

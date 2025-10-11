@@ -28,60 +28,34 @@ const BarChart = () => {
         label: "Daily Orders",
         data: [1200, 1900, 1500, 2200, 3000, 2500, 3100],
         backgroundColor: "rgba(75, 192, 192, 0.6)", // Light mode background color
-        borderColor: "rgba(75, 192, 192, 1)", // Light mode border color
-        borderWidth: 1,
-        borderRadius: 6,
+        borderRadius: 8,
+        barThickness: 24,
       },
     ],
   };
 
-  const options = {
+  const options3 = {
     responsive: true,
     maintainAspectRatio: false,
+    responsive: true,
     plugins: {
-      legend: {
-        display: false, // ❌ hides legend completely
-      },
-      tooltip: {
-        enabled: true, // keeps hover tooltips
-      },
+      legend: { display: false },
     },
     scales: {
       x: {
-        grid: {
-          display: false, // removes grid lines
-        },
-        ticks: {
-          color: "#333", // Light mode tick color
-        },
+        grid: { display: false },
+        ticks: { color: "#aaa", font: { size: 12 } },
       },
       y: {
-        display: false, // completely hides y-axis line, ticks, and labels
-        grid: {
-          display: false, // removes horizontal grid lines
-        },
+        grid: { display: false },
+        ticks: { display: false },
       },
     },
   };
 
   return (
     <div className="w-full sm:h-[200px] relative rounded-[10px] mt-[10px] dark:bg-gray-800 dark:text-white">
-      <Bar
-        data={data}
-        options={{
-          ...options,
-          scales: {
-            x: {
-              ...options.scales.x,
-              ticks: {
-                ...options.scales.x.ticks,
-                color: "#fff", // Dark mode tick color
-              },
-            },
-            y: options.scales.y,
-          },
-        }}
-      />
+      <Bar data={data} options={options3} />
     </div>
   );
 };

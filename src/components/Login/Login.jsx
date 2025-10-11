@@ -54,6 +54,14 @@ const Login = ({ state }) => {
       password: "",
     });
   };
+  const generateRandomToken = () => {
+    return (
+      "admin-" +
+      Math.random().toString(36).substr(2, 9) + // Generate random string
+      "-" +
+      Date.now() // Append current timestamp for uniqueness
+    );
+  };
 
   const login = async () => {
     if (form.email === "" || form.password === "") {
@@ -62,7 +70,10 @@ const Login = ({ state }) => {
       form.email === "admin@gmail.com" &&
       form.password === "Admin100"
     ) {
-      navigate("/management");
+      const randomToken = generateRandomToken();
+      navigate(`/management/${randomToken}`);
+
+      localStorage.setItem("adminToken", randomToken);
     } else {
       try {
         setLoading(true);

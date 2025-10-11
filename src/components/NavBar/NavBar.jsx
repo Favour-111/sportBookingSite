@@ -65,7 +65,7 @@ const NavBar = ({ setOpen }) => {
             )}
           </div>
         </div> */}
-        <div className="hidden md:flex items-center justify-between py-1 px-10 border-b-1 border-gray-200 bg-white dark:bg-[var(--default)] ">
+        <div className="hidden md:flex items-center justify-between py-1 px-10 border-b-1 backdrop-blur-xl border-gray-200  dark:bg-[var(--default)] ">
           <Link to="/" className="flex items-center gap-2">
             <img
               src="https://github.com/Favour-111/my-asset/blob/main/image.jpg?raw=true"
@@ -223,7 +223,7 @@ const NavBar = ({ setOpen }) => {
       {/* Mobile Navbar */}
       <div className="relative">
         <div
-          className={`fixed dark:bg-[#1c2330] flex md:hidden items-center justify-between py-1 px-5 border-b-1 border-gray-200 bg-white dark:border-gray-500  fixed top-0 left-0 right-0 z-50`}
+          className={`fixed dark:bg-[#1c2330] flex md:hidden items-center justify-between py-1 px-5 border-b-1 border-gray-200 backdrop-blur-xl  dark:border-gray-500  fixed top-0 left-0 right-0 z-50`}
         >
           <Link to="/" className="flex items-center gap-2">
             <img
