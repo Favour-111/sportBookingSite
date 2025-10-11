@@ -10,10 +10,11 @@ import Sidebar from "./SideBar";
 import TopBar from "./TopBar";
 import ItemManage from "./ItemManage";
 import { GiMoneyStack } from "react-icons/gi";
-import { IoAdd } from "react-icons/io5";
+import { IoAdd, IoClose } from "react-icons/io5";
 
 const Tips = () => {
   const [open, setOpen] = useState(false);
+  const [addTipModal, setAddTipModal] = useState(false);
   const { isDarkMode, compareUser, fetchUser } = useContext(ShopContext);
   return (
     <div
@@ -90,7 +91,10 @@ const Tips = () => {
               <h1 className="text-[19px] font-[600] text-black ">
                 Recently Added Tips
               </h1>
-              <button className="text-white text-sm px-4 py-2 bg-amber-400 rounded-[10px] shadow-sm flex items-center gap-1">
+              <button
+                onClick={() => setAddTipModal(true)}
+                className="text-white text-sm px-4 py-2 bg-amber-400 rounded-[10px] shadow-sm flex items-center gap-1"
+              >
                 <span>
                   {" "}
                   <IoAdd />
@@ -125,6 +129,123 @@ const Tips = () => {
               </div>
             </div>
           </div>
+
+          {/* //modal */}
+          {addTipModal && (
+            <div className="flex items-center justify-center fixed backdrop-blur-sm top-0 right-0 bottom-0 left-0 z-100000 bg-[#000000a5]">
+              <div className="h-[fit-content] relative rounded-[10px] bg-white shadow-sm p-5 w-[550px]">
+                <h1 className="text-[20px] font-[600]">Add a new tips</h1>
+                <div className="mt-4">
+                  <div className="grid gap-2 grid-cols-2">
+                    <div>
+                      <label htmlFor="" className="text-[#787878] text-sm">
+                        Tip Title
+                      </label>
+                      <input
+                        placeholder="input tip title"
+                        type="text"
+                        class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="" className="text-[#787878] text-sm">
+                        Tip Price
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="input tips price"
+                        class="block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-3 grid gap-2 grid-cols-2">
+                    <div>
+                      <label htmlFor="" className="text-[#787878] text-sm">
+                        Odd Ratio
+                      </label>
+                      <input
+                        placeholder="input Odd Ratio "
+                        type="text"
+                        class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="" className="text-[#787878] text-sm">
+                        Purchase Limit
+                      </label>
+                      <input
+                        type="number"
+                        placeholder="Purchase limit"
+                        class="block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <label htmlFor="" className="text-[#787878] text-sm">
+                      Betting Sites
+                    </label>
+                    <input
+                      placeholder="input Odd Ratio "
+                      type="text"
+                      class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                    />
+                  </div>
+                  <div className="mt-3 grid gap-2 grid-cols-2">
+                    <div>
+                      <label htmlFor="" className="text-[#787878] text-sm">
+                        Confidence Level
+                      </label>
+                      <input
+                        placeholder="input no from 1-5 "
+                        type="number"
+                        class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="" className="text-[#787878] text-sm">
+                        Duration
+                      </label>
+                      <input
+                        type="number"
+                        placeholder="Set time limit"
+                        class="block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      />
+                    </div>
+                  </div>
+                  <div className="mt-3">
+                    <label htmlFor="" className="text-[#787878] text-sm mt-3">
+                      Content after purchase
+                    </label>
+                    <textarea
+                      name=""
+                      class="block resize-none h-20 w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      id=""
+                      placeholder="contents to be displayed after purchase"
+                    ></textarea>
+                  </div>
+                  <div className="flex items-center justify-end mt-5 gap-3">
+                    <button
+                      onClick={() => setAddTipModal(false)}
+                      className="text-[#787878] bg-[#f6f6f6] rounded p-2 text-sm hover:bg-[#d3d3d3] duration-200"
+                    >
+                      Discard
+                    </button>
+                    <button className="text-green-800 bg-green-100 rounded p-2 text-sm hover:bg-[#d3d3d3] duration-200">
+                      Add Tips
+                    </button>
+                  </div>
+                  <div className="absolute top-3 right-3">
+                    <button
+                      onClick={() => setAddTipModal(false)}
+                      className="p-3"
+                    >
+                      <IoClose className="text-black" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
         <Footer />
       </div>
