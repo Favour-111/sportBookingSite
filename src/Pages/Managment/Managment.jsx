@@ -16,7 +16,8 @@ import TopBar from "./TopBar";
 
 const Managment = () => {
   const [open, setOpen] = useState(false);
-  const { isDarkMode, compareUser, fetchUser } = useContext(ShopContext);
+  const { isDarkMode, allUser, compareUser, fetchUser } =
+    useContext(ShopContext);
   return (
     <div
       className={`${isDarkMode ? "dark" : ""}flex  dark:bg-[var(--default)] `}
@@ -49,7 +50,7 @@ const Managment = () => {
                     Users
                   </div>
                   <div className="text-[#787878] text-[12px] font-[400] dark:text-[#d3d3d3]">
-                    16
+                    {allUser?.length || 0}
                   </div>
                 </div>
               </div>
