@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FiUser } from "react-icons/fi";
+import { TbMenu } from "react-icons/tb";
+import { ShopContext } from "../../components/shopContext";
 const TopBar = () => {
+  const { navOpen, setNavOpen } = useContext(ShopContext);
   return (
     <div>
-      <div className="bg-white px-6 border-b border-b-[#f1f1f1] py-2 flex items-end justify-end ">
+      <div className="bg-white px-6 border-b border-b-[#f1f1f1] py-2 flex items-end justify-between ">
+        <button
+          onClick={() => setNavOpen(true)}
+          className="bg-[#f6f6f6] rounded-[10px] p-2"
+        >
+          <TbMenu />
+        </button>
         <div className="flex items-center gap-2">
           <div className="bg-[#f6f6f6] p-3 rounded-full hover:bg-zinc-300 duration-200 relative">
             <FiUser />

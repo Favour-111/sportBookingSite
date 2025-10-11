@@ -9,6 +9,7 @@ export const ShopProvider = ({ children }) => {
   // Track dark mode state
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [navOpen, setNavOpen] = useState(false);
   const user = localStorage.getItem("userId");
   const [allUser, setAllUser] = useState([]);
   const fetchUser = async () => {
@@ -73,6 +74,8 @@ export const ShopProvider = ({ children }) => {
         allUser,
         user,
         toggleDarkMode,
+        navOpen,
+        setNavOpen,
       }}
     >
       {children}
