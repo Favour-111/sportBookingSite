@@ -88,12 +88,12 @@ const Tips = () => {
           </div>
           <div className="p-4 mt-5">
             <div className="flex items-center justify-between">
-              <h1 className="text-[19px] font-[600] text-black ">
+              <h1 className="text-[17px] font-[600] text-black ">
                 Recently Added Tips
               </h1>
               <button
                 onClick={() => setAddTipModal(true)}
-                className="text-white text-sm px-4 py-2 bg-amber-400 rounded-[10px] shadow-sm flex items-center gap-1"
+                className="text-white text-[12px] px-4 py-2 bg-amber-400 rounded-[10px] shadow-sm flex items-center gap-1"
               >
                 <span>
                   {" "}
@@ -106,7 +106,7 @@ const Tips = () => {
               type="text"
               name="first-name"
               placeholder="search game by title"
-              class="block w-[300px] mt-3 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+              class="placeholder:text-[13px] block w-[100%] sm:w-[300px] mt-4 rounded-[10px] bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
             />
             <div className="mt-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-6">
               <div>
@@ -132,7 +132,7 @@ const Tips = () => {
 
           {/* //modal */}
           {addTipModal && (
-            <div className="flex items-center justify-center fixed backdrop-blur-sm top-0 right-0 bottom-0 left-0 z-100000 bg-[#000000a5]">
+            <div className="p-5 flex items-center justify-center fixed backdrop-blur-sm top-0 right-0 bottom-0 left-0 z-100000 bg-[#000000a5]">
               <div className="h-[fit-content] relative rounded-[10px] bg-white shadow-sm p-5 w-[550px]">
                 <h1 className="text-[20px] font-[600]">Add a new tips</h1>
                 <div className="mt-4">
@@ -144,7 +144,7 @@ const Tips = () => {
                       <input
                         placeholder="input tip title"
                         type="text"
-                        class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                        class="placeholder:text-[12px] block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       />
                     </div>
                     <div>
@@ -154,7 +154,7 @@ const Tips = () => {
                       <input
                         type="text"
                         placeholder="input tips price"
-                        class="block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                        class="placeholder:text-[12px] block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       />
                     </div>
                   </div>
@@ -166,7 +166,7 @@ const Tips = () => {
                       <input
                         placeholder="input Odd Ratio "
                         type="text"
-                        class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                        class="placeholder:text-[12px] block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       />
                     </div>
                     <div>
@@ -176,7 +176,7 @@ const Tips = () => {
                       <input
                         type="number"
                         placeholder="Purchase limit"
-                        class="block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                        class="placeholder:text-[12px] block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       />
                     </div>
                   </div>
@@ -187,7 +187,7 @@ const Tips = () => {
                     <input
                       placeholder="input Odd Ratio "
                       type="text"
-                      class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      class="placeholder:text-[12px] block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                     />
                   </div>
                   <div className="mt-3 grid gap-2 grid-cols-2">
@@ -198,7 +198,7 @@ const Tips = () => {
                       <input
                         placeholder="input no from 1-5 "
                         type="number"
-                        class="block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                        class="placeholder:text-[12px] block w-[100%] mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       />
                     </div>
                     <div>
@@ -208,7 +208,7 @@ const Tips = () => {
                       <input
                         type="number"
                         placeholder="Set time limit"
-                        class="block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                        class="placeholder:text-[12px] block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       />
                     </div>
                   </div>
@@ -218,7 +218,7 @@ const Tips = () => {
                     </label>
                     <textarea
                       name=""
-                      class="block resize-none h-20 w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                      class="placeholder:text-[12px] block resize-none h-20 w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       id=""
                       placeholder="contents to be displayed after purchase"
                     ></textarea>

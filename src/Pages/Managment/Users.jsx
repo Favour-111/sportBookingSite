@@ -78,7 +78,7 @@ const Users = () => {
                 type="text"
                 name="first-name"
                 placeholder="search user by name"
-                class="block w-[300px] mt-3 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                class="placeholder:text-[12px] block w-[100%] sm:w-[300px] mt-3 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
               />
             </div>
             <div className="overflow-x-auto mt-5">

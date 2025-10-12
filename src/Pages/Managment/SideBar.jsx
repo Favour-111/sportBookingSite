@@ -38,13 +38,13 @@ const Sidebar = () => {
         <h1 className="text-[11px] uppercase text-[#d3d3d3] p-4">Menu</h1>
         <ul className=" flex flex-col gap-2 px-4">
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive(`/management/${token}`) ? "bg-[#f5f5f5]" : ""
             }`}
           >
             <Link
               to={`/management/${token}`}
-              className="flex items-center gap-2"
+              className="flex p-2 items-center gap-2"
             >
               <div>
                 <TbSmartHome />
@@ -53,35 +53,35 @@ const Sidebar = () => {
             </Link>
           </li>
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            className={`block text-sm  rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/tips-management") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/tips-management" className="flex items-center gap-2">
+            <Link to="/tips-management" className="p-2 flex items-center gap-2">
               <div>
                 <MdOutlineTipsAndUpdates />
               </div>
               Manage Tips
             </Link>
           </li>
-          <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+          {/* <li
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/analytics") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/analytics" className="flex items-center gap-2">
+            <Link to="/analytics" className="p-2 flex items-center gap-2">
               <div>
                 <TbBrandGoogleAnalytics />
               </div>
               Analytics
             </Link>
-          </li>
+          </li> */}
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/users") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/users" className="flex items-center gap-2">
+            <Link to="/users" className="p-2 flex items-center gap-2">
               <div>
                 <FiUser />
               </div>
@@ -89,11 +89,14 @@ const Sidebar = () => {
             </Link>
           </li>
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/broadcast-message") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/broadcast-message" className="flex items-center gap-2">
+            <Link
+              to="/broadcast-message"
+              className="p-2 flex items-center gap-2"
+            >
               <div>
                 <HiOutlineMegaphone />
               </div>
@@ -142,13 +145,14 @@ const Sidebar = () => {
         <h1 className="text-[11px] uppercase text-[#d3d3d3] p-4">Menu</h1>
         <ul className=" flex flex-col gap-2 px-4">
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            onClick={() => setNavOpen(false)}
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive(`/management/${token}`) ? "bg-[#f5f5f5]" : ""
             }`}
           >
             <Link
               to={`/management/${token}`}
-              className="flex items-center gap-2"
+              className="p-2 flex items-center gap-2"
             >
               <div>
                 <TbSmartHome />
@@ -157,35 +161,38 @@ const Sidebar = () => {
             </Link>
           </li>
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            onClick={() => setNavOpen(false)}
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/tips-management") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/tips-management" className="flex items-center gap-2">
+            <Link to="/tips-management" className="p-2 flex items-center gap-2">
               <div>
                 <MdOutlineTipsAndUpdates />
               </div>
               Manage Tips
             </Link>
           </li>
-          <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+          {/* <li
+            onClick={() => setNavOpen(false)}
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/analytics") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/analytics" className="flex items-center gap-2">
+            <Link to="/analytics" className="p-2 flex items-center gap-2">
               <div>
                 <TbBrandGoogleAnalytics />
               </div>
               Analytics
             </Link>
-          </li>
+          </li> */}
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            onClick={() => setNavOpen(false)}
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/users") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/users" className="flex items-center gap-2">
+            <Link to="/users" className="p-2 flex items-center gap-2">
               <div>
                 <FiUser />
               </div>
@@ -193,11 +200,15 @@ const Sidebar = () => {
             </Link>
           </li>
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            onClick={() => setNavOpen(false)}
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/broadcast-message") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/broadcast-message" className="flex items-center gap-2">
+            <Link
+              to="/broadcast-message"
+              className="p-2 flex items-center gap-2"
+            >
               <div>
                 <HiOutlineMegaphone />
               </div>
@@ -205,11 +216,12 @@ const Sidebar = () => {
             </Link>
           </li>
           <li
-            className={`block text-sm p-2 rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
+            onClick={() => setNavOpen(false)}
+            className={`block text-sm rounded-[10px] text-[#787878] rounded hover:bg-[#f5f5f5] duration-200 ${
               isActive("/logout") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/logout" className="flex items-center gap-2">
+            <Link to="/logout" className="p-2 flex items-center gap-2">
               <div>
                 <CiLogout />
               </div>
