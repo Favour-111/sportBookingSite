@@ -37,66 +37,72 @@ const BroadCast = () => {
         <div className="mb-10">
           <TopBar />
           <div className=" mt-5 p-4">
-            <h1 className="font-[700] text-[25px]">Broad cast a message</h1>
+            <h1 className="font-[600] text-[20px] text-[#545160]">
+              Broad cast a message
+            </h1>
             <p className="mt-1 text-[#787878] text-sm">
               Here you can check and share messages with users
             </p>
-            <div className="mt-10">
-              <div className=" block justify-end md:flex items-center gap-10">
-                <div>
-                  <label htmlFor="" className="text-sm text-[#787878]">
-                    Users
-                  </label>
-                  <br />
-                  <select
-                    name=""
-                    className="border border-[#d3d3d3] p-2 rounded w-[100%] md:w-[200px] outline-none text-sm"
-                    id=""
-                  >
-                    <option value="">All Users</option>
-                    <option value="">Obaloluwa</option>
-                    <option value="">Favour</option>
-                  </select>
-                </div>
-                <div className=" mt-5 md:mt-0">
-                  <label htmlFor="" className="text-sm text-[#787878]">
-                    Message Visibility
-                  </label>
-                  <br />
-                  <select
-                    name=""
-                    className="border border-[#d3d3d3] p-2 rounded w-[100%] md:w-[200px] outline-none text-sm"
-                    id=""
-                  >
-                    <option value="">Visibility</option>
-                    <option value="">Visible</option>
-                    <option value="">Hidden</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="mt-4">
-                <label htmlFor="" className="text-sm text-[#787878] ">
-                  Compose Message
-                </label>
-                <br />
-                <textarea
-                  name=""
-                  className=" w-[100%] p-4 outline-none text-sm resize-none rounded border border-[#d3d3d3] h-40"
-                  placeholder="input message for users"
-                  id=""
-                ></textarea>
-              </div>
-              <div className="w-[100%] flex justify-end">
-                <button className="flex items-center gap-1 bg-amber-400 text-white rounded-[10px] p-2 px-4 mt-3 text-sm shadow-sm">
-                  Send Now{" "}
+            <div className="mt-10 ">
+              <div className="px-4 sm:px-6 py-6 rounded-[10px]  shadow-sm">
+                <div className=" block md:flex items-center gap-10">
                   <div>
-                    <PiTelegramLogoLight />
+                    <label htmlFor="" className="text-sm text-[#787878]">
+                      Users
+                    </label>
+                    <br />
+                    <select
+                      name=""
+                      className="text-[#545160] border border-[#ebebeb] p-2 rounded-[6px] w-[100%] md:w-[200px] outline-none text-sm"
+                      id=""
+                    >
+                      <option value="">All Users</option>
+                      <option value="">Obaloluwa</option>
+                      <option value="">Favour</option>
+                    </select>
                   </div>
-                </button>
+                  <div className=" mt-5 md:mt-0">
+                    <label htmlFor="" className="text-sm text-[#787878]">
+                      Message Visibility
+                    </label>
+                    <br />
+                    <select
+                      name=""
+                      className="text-[#545160] border border-[#ebebeb] p-2 rounded-[6px] w-[100%] md:w-[200px] outline-none text-sm"
+                      id=""
+                    >
+                      <option value="">Visibility</option>
+                      <option value="">Visible</option>
+                      <option value="">Hidden</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="mt-4">
+                  <label htmlFor="" className="text-sm text-[#787878] ">
+                    Compose Message
+                  </label>
+                  <br />
+                  <textarea
+                    name=""
+                    className=" w-[100%] border-[#ebebeb] p-2 rounded-[6px] outline-none text-sm resize-none  border  h-40"
+                    placeholder="input message for users"
+                    id=""
+                  ></textarea>
+                </div>
+                <div className="w-[100%] flex justify-end">
+                  <button className="flex items-center gap-1 bg-amber-400 text-white rounded-[10px] p-2 px-4 mt-3 text-sm shadow-sm">
+                    Send Now{" "}
+                    <div>
+                      <PiTelegramLogoLight />
+                    </div>
+                  </button>
+                </div>
               </div>
               <div className="mt-10">
-                <h1 className="font-[700] text-[25px]">All Messages</h1>
+                <h1 className="font-[600] text-[20px] text-[#545160]">
+                  All Messages
+                </h1>
                 <div className="overflow-x-auto mt-5">
                   <table className="min-w-full bg-white border overflow-hidden border-gray-200 rounded-lg shadow-md">
                     <thead className="bg-gray-100">
@@ -121,21 +127,20 @@ const BroadCast = () => {
                           key={user.id}
                           className="border-b border-b-[#f1f1f1] hover:bg-gray-50"
                         >
-                          <td className="py-3 px-6 text-sm text-gray-800">
+                          <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                             <div className="flex items-center gap-1">
-                              <div className="bg-green-600 rounded-full w-[fit-content] p-1"></div>
                               {user.name}
                             </div>
                           </td>
-                          <td className="py-3 px-6 text-sm text-gray-800">
+                          <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                             {user.email}
                           </td>
-                          <td className="py-3 px-6 text-sm text-gray-800">
+                          <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                             {user.role}
                           </td>
-                          <td className="py-3 px-6 text-sm text-gray-800">
+                          <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                             <button className="text-blue-500 hover:text-blue-700">
-                              Deactivate
+                              Block
                             </button>
                             <button className="ml-4 text-red-500 hover:text-red-700">
                               Delete

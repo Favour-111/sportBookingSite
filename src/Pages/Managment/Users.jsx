@@ -37,7 +37,8 @@ const Users = () => {
         <div className="mb-10">
           <TopBar />
           <div className="mt-5 px-4">
-            <h1 className="text-[25px] font-[700] ">users</h1>
+            <h1 className="font-[600] text-[20px] text-[#545160] ">users</h1>
+
             <div className="grid md:grid-cols-3 grid-cols-2 items-center gap-3  mt-5">
               <div className=" bg-white border-[#f1d1d1] shadow-sm  px-5 py-5 rounded-[10px]">
                 <div className="bg-[#f6f6f6] p-2 rounded-[10px] w-[fit-content]">
@@ -54,7 +55,9 @@ const Users = () => {
                 <div className="bg-[#f6f6f6] p-2 rounded-[10px] w-[fit-content]">
                   <MdBlock className="text-[#787878] text-[2em]" />
                 </div>
-                <div className="mt-2 font-[700] text-2xl">120</div>
+                <div className="mt-2 font-[700] text-2xl  text-[#545160]">
+                  120
+                </div>
                 <div className="flex items-center justify-between">
                   <div className="sm:text-[sm] text-[11px] text-[#787878]">
                     Blocked Users
@@ -65,7 +68,9 @@ const Users = () => {
                 <div className="bg-[#f6f6f6] p-2 rounded-[10px] w-[fit-content]">
                   <PiUsersFourLight className="text-[#787878] text-[2em]" />
                 </div>
-                <div className="mt-2 font-[700] text-2xl">120</div>
+                <div className="mt-2 font-[700] text-2xl text-[#545160]">
+                  120
+                </div>
                 <div className="flex items-center justify-between">
                   <div className="sm:text-[sm] text-[11px] text-[#787878]">
                     Active Users
@@ -78,7 +83,7 @@ const Users = () => {
                 type="text"
                 name="first-name"
                 placeholder="search user by name"
-                class="placeholder:text-[12px] block w-[100%] sm:w-[300px] mt-3 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+                class="placeholder:text-[12px] block w-[100%] sm:w-[300px] mt-3 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-100 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
               />
             </div>
             <div className="overflow-x-auto mt-5">
@@ -105,7 +110,7 @@ const Users = () => {
                       key={user.id}
                       className="border-b border-b-[#f1f1f1] hover:bg-gray-50"
                     >
-                      <td className="py-3 px-6 text-sm text-gray-800">
+                      <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                         <div className="flex items-center gap-1">
                           <div className="bg-[#f6f6f6] rounded-full w-[fit-content] p-2">
                             <TbUser />
@@ -113,13 +118,13 @@ const Users = () => {
                           {user.name}
                         </div>
                       </td>
-                      <td className="py-3 px-6 text-sm text-gray-800">
+                      <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                         {user.email}
                       </td>
-                      <td className="py-3 px-6 text-sm text-gray-800">
+                      <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                         {user.role}
                       </td>
-                      <td className="py-3 px-6 text-sm text-gray-800">
+                      <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                         <button className="text-blue-500 hover:text-blue-700">
                           Block
                         </button>

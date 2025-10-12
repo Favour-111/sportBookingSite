@@ -28,7 +28,7 @@ const Managment = () => {
       <div className="h-[100vh] overflow-y-scroll">
         <div className="mb-10">
           <TopBar />
-          <div className="px-6 pt-5">
+          <div className="px-4 sm:px-6 pt-5">
             <div className="text-3xl text-[#2c2c2c] font-bold dark:text-[#fff]">
               Welcome back, Admin!
             </div>
@@ -96,7 +96,7 @@ const Managment = () => {
             </div>
           </div>
 
-          <div className="flex items-center flex-wrap justify-between  px-6 gap-y-10 mt-10">
+          <div className="flex items-center flex-wrap justify-between px-4 sm:px-6 gap-y-10 mt-10">
             <div className="w-[100%] sm:w-[49%]  shadow shadow-[0, 10px, 10px, #000] p-5">
               <h1 className="text-[18px] font-[500] flex items-center gap-2 dark:text-white">
                 <MdCardTravel /> <div>Purchases Overview</div>
@@ -127,7 +127,7 @@ const Managment = () => {
               <BarChat />
             </div>
           </div>
-          <div className="mt-10 px-6">
+          <div className="mt-10 px-4 sm:px-6">
             <h1 className="text-[#333333] font-[700] text-lg  capitalize">
               recently added tips
             </h1>

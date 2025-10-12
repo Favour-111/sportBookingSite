@@ -27,7 +27,7 @@ const Tips = () => {
         <div className="mb-10">
           <TopBar />
           <div className="p-4 mt-5">
-            <h1 className="text-[19px] font-[600] text-black ">
+            <h1 className="font-[600] text-[20px] text-[#545160] ">
               Tips Management
             </h1>
             <div className="grid md:grid-cols-4 grid-cols-2  items-center gap-3  mt-5">
@@ -88,7 +88,7 @@ const Tips = () => {
           </div>
           <div className="p-4 mt-5">
             <div className="flex items-center justify-between">
-              <h1 className="text-[17px] font-[600] text-black ">
+              <h1 className="font-[600] text-[20px] text-[#545160]">
                 Recently Added Tips
               </h1>
               <button
@@ -105,8 +105,8 @@ const Tips = () => {
             <input
               type="text"
               name="first-name"
-              placeholder="search game by title"
-              class="placeholder:text-[13px] block w-[100%] sm:w-[300px] mt-4 rounded-[10px] bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
+              placeholder="Search game by title"
+              class="placeholder:text-[13px] block w-[100%] sm:w-[300px] mt-4 rounded-[10px] bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-100 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
             />
             <div className="mt-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1  gap-6">
               <div>
