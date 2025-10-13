@@ -12,6 +12,8 @@ export const ShopProvider = ({ children }) => {
   const [navOpen, setNavOpen] = useState(false);
   const user = localStorage.getItem("userId");
   const [allUser, setAllUser] = useState([]);
+  const [games, setAllGames] = useState([]);
+  const [gameLoad, setGameLoading] = useState([]);
   const fetchUser = async () => {
     try {
       setLoading(true);
@@ -30,8 +32,27 @@ export const ShopProvider = ({ children }) => {
       setLoading(false);
     }
   };
+  const fetchAllGames = async () => {
+    try {
+      setGameLoading(true);
+      const response = await axios.get(
+        `${import.meta.env.VITE_REACT_APP_API}/api/games/allGame`
+      );
+      if (response) {
+        setAllGames(response.data);
+        console.log(response.data);
+      } else {
+        console.log("Error Fetching Games");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setGameLoading(false);
+    }
+  };
   useEffect(() => {
     fetchUser();
+    fetchAllGames();
   }, []);
   console.log(allUser);
 
@@ -75,7 +96,12 @@ export const ShopProvider = ({ children }) => {
         user,
         toggleDarkMode,
         navOpen,
+        setLoading,
         setNavOpen,
+        games,
+        allUser,
+        gameLoad,
+        fetchAllGames,
       }}
     >
       {children}
