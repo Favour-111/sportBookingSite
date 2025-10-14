@@ -13,31 +13,34 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import axios from "axios";
+import { FaStar } from "react-icons/fa6";
+
+// Custom star icon component (use your own SVG or icon here)
+const StarIcon = ({ filled }) => (
+  <FaStar size={14} color={`${filled ? "gold" : "#f1f1f1"}`} />
+);
+
 const Item = ({ item, setForm, setOpens }) => {
   const [open, setOpen] = useState(false);
   const { compareUser, user, balLoader, updateBalance, fetchAllGames } =
     useContext(ShopContext);
   const active = true;
-  // Example of total value and current value
-  const totalValue = item?.purchaseLimit; // This could be dynamic, e.g., 20, 40, etc.
-  const currentValue = item?.CurrentLimit; // This could be dynamic as well, representing progress
-  // const [form, setForm] = useState(false);
-  const progress = (currentValue / totalValue) * 100; // Calculate percentage
+  const totalValue = item?.purchaseLimit;
+  const currentValue = item?.CurrentLimit;
+  const progress = (currentValue / totalValue) * 100;
+
   const handleBuyBet = async () => {
     if (!user) {
       setForm(true); // If not logged in, prompt the user to log in
     } else {
       const amountToSubtract = item?.tipPrice;
 
-      // Check if the user has sufficient balance
       if (compareUser?.availableBalance < amountToSubtract) {
         toast.error("Insufficient balance");
       } else {
         try {
-          // Deduct the amount from the balance
           await updateBalance(amountToSubtract);
 
-          // Make a request to the backend to update the 'purchasedBy' field
           const response = await axios.put(
             `${import.meta.env.VITE_REACT_APP_API}/api/games/${item._id}/buy`,
             { userId: compareUser?._id }
@@ -52,7 +55,6 @@ const Item = ({ item, setForm, setOpens }) => {
           if (response.status === 200 && response2.status === 200) {
             toast.success("Game purchased successfully!");
 
-            // Add the game to the user's bet history
             const betEntry = {
               gameContent: item?.contentAfterPurchase,
               gameName: item?.tipTitle,
@@ -60,7 +62,6 @@ const Item = ({ item, setForm, setOpens }) => {
               tipPrice: item?.tipPrice,
             };
 
-            // Update the betHistory with a PUT request
             const updateHistoryResponse = await axios.put(
               `${import.meta.env.VITE_REACT_APP_API}/api/auth/addBetHistory/${
                 compareUser._id
@@ -80,11 +81,19 @@ const Item = ({ item, setForm, setOpens }) => {
           console.error("Error buying bet:", error);
           toast.error("An error occurred while purchasing the game");
         } finally {
-          // Fetch all games after the purchase process is completed
           fetchAllGames();
         }
       }
     }
+  };
+
+  // Render stars based on confidenceLevel
+  const renderStars = (confidenceLevel) => {
+    let stars = [];
+    for (let i = 0; i < 5; i++) {
+      stars.push(<StarIcon key={i} filled={i < confidenceLevel} />);
+    }
+    return stars;
   };
 
   return (
@@ -98,6 +107,11 @@ const Item = ({ item, setForm, setOpens }) => {
             ${item?.tipPrice}
           </div>
         </div>
+        {/* Render the custom star rating */}
+        <div className="flex gap-1 ">
+          {renderStars(item?.confidenceLevel || 0)}
+        </div>
+
         {!item?.purchasedBy.includes(user) ? (
           <div className=" text-red-400 flex items-center gap-1">
             <div>
@@ -124,7 +138,7 @@ const Item = ({ item, setForm, setOpens }) => {
             Available on : {item?.bettingSites}
           </div>
         </div>
-        {/* Progress Bar */}
+
         {totalValue ? (
           <>
             <div className="mt-2 flex items-center justify-between">
@@ -141,13 +155,12 @@ const Item = ({ item, setForm, setOpens }) => {
             <div className="w-full bg-gray-200 rounded-full h-2 ">
               <div
                 className="bg-green-500 h-2 rounded-full"
-                style={{ width: `${progress}%` }} // Dynamic width based on current/total value
+                style={{ width: `${progress}%` }}
               />
             </div>
           </>
-        ) : (
-          <></>
-        )}
+        ) : null}
+
         {!item?.purchasedBy.includes(user) && totalValue === currentValue ? (
           <button
             className=" mt-2 w-[100%] bg-red-100 rounded flex items-center gap-2 py-2 justify-center"
@@ -161,7 +174,7 @@ const Item = ({ item, setForm, setOpens }) => {
           </button>
         ) : (
           <div className="flex items-center justify-between mt-3">
-            {!item?.purchasedBy.includes(user) ? ( // Compare by user._id if `user` is an object
+            {!item?.purchasedBy.includes(user) ? (
               <button
                 className="buy-btn"
                 onClick={handleBuyBet}
@@ -176,13 +189,11 @@ const Item = ({ item, setForm, setOpens }) => {
           </div>
         )}
 
-        {/* // If balance is insufficient, show an error message */}
         <Dialog open={open} onClose={setOpen} className="relative z-10">
           <DialogBackdrop
             transition
             className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
           />
-
           <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
               <DialogPanel

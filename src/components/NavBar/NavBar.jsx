@@ -145,8 +145,8 @@ const NavBar = ({ setOpen }) => {
                   className={`${
                     drop
                       ? "translate-y-0 opacity-100"
-                      : "translate-y-[-10px] opacity-0"
-                  } fixed mt-2 w-[200px] overflow-hidden right-[120px] dark:bg-[var(--default)] border dark:border-[#787878] border-[#d3d3d3] bg-[#fbfbfb] z-50 shadow rounded-[8px] transition-all duration-300 ease-in-out`}
+                      : "translate-y-[-10px] opacity-0 pointer-events-none"
+                  } fixed mt-2 w-[200px] right-[120px] dark:bg-[var(--default)] border dark:border-[#787878] border-[#d3d3d3] bg-[#fbfbfb] z-50 shadow rounded-[8px] transition-all duration-300 ease-in-out`}
                 >
                   <button className="dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-3 dark:text-[#d3d3d3] border-b dark:border-[#787878] hover:bg-[#f1f1f1] duration-200 border-b-[#0000000a]">
                     <div>
@@ -268,9 +268,9 @@ const NavBar = ({ setOpen }) => {
                 <div
                   className={`${
                     drop
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-[-10px] opacity-0"
-                  } fixed mt-2 w-[200px] overflow-hidden right-[50px] dark:bg-[var(--default)] border dark:border-[#787878] border-none bg-[#fbfbfb] z-50 shadow rounded-[8px] transition-all duration-300 ease-in-out`}
+                      ? "translate-y-0 opacity-100 visibility-visible"
+                      : "translate-y-[-10px] opacity-0 visibility-hidden pointer-events-none"
+                  } fixed mt-2 w-[200px] right-[120px] dark:bg-[var(--default)] border dark:border-[#787878] border-[#d3d3d3] bg-[#fbfbfb] z-[9999] shadow rounded-[8px] transition-all duration-300 ease-in-out`}
                 >
                   <button className="dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-3 dark:text-[#d3d3d3] border-b dark:border-[#787878] hover:bg-[#f1f1f1] duration-200 border-b-[#0000000a]">
                     <div>

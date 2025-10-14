@@ -5,7 +5,7 @@ import { ShopContext } from "../components/shopContext";
 import NavBar from "../components/NavBar/NavBar";
 
 import { BsGraphUpArrow } from "react-icons/bs";
-
+import { HiDotsHorizontal, HiOutlineRefresh } from "react-icons/hi";
 import {
   IoAdd,
   IoCheckmarkCircleOutline,
@@ -20,6 +20,7 @@ import { FaCoins } from "react-icons/fa6";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import Funds from "../components/Funds/Funds";
 import { BiRefresh } from "react-icons/bi";
+import { RxDotFilled } from "react-icons/rx";
 
 const DashBoard = () => {
   const [page, setPage] = useState("live");
@@ -31,8 +32,10 @@ const DashBoard = () => {
     gameFilter,
     games,
     gameLoad,
+    loading,
     fetchUser,
   } = useContext(ShopContext);
+
   return (
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)] `}>
       <NavBar setOpen={setOpen} />
@@ -109,43 +112,84 @@ const DashBoard = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-between px-5 md:px-6 mt-15">
-          <div className="w-[100%] md:w-[23%] border border-[#eaeaea] h-[fit-content] dark:border-zinc-600 dark:bg-[#1b2336] px-6 py-5 rounded-[10px] ">
+          <div className="w-[100%] md:w-[23%] border border-[#eaeaea] h-[fit-content] dark:border-zinc-600 dark:bg-[#1b2336] px-3 py-5 rounded-[10px] ">
             <h1 className="text-[20px] text-[#282828] font-[600] dark:text-[#fff] mb-3 flex items-center gap-2">
               <div className="bg-[tomato] text-white p-2 rounded-[10px]">
                 <IoWalletOutline />{" "}
               </div>
               Your wallet
             </h1>
-            <div className="flex flex-col gap-2 items-center dark:bg-[#1b273c] bg-[#f1f1f1] py-4 rounded-[10px] mt-6">
-              <p className="text-[13px] text-[#787878] dark:text-[#d3d3d3]">
-                Available balance
-              </p>
-              <div className="flex items-center gap-1 ">
-                <button
-                  onClick={() => fetchUser()}
-                  className="dark:text-white text-[25px]"
-                >
-                  <BiRefresh />
-                </button>
-                <h1 className="text-2xl dark:text-white font-[700]">
-                  ${compareUser?.availableBalance.toLocaleString()}
-                </h1>
+            <div className="px-4 dark:bg-[#1b273c] bg-[#f6f6f6] py-5 rounded-[10px] mt-6">
+              <img
+                src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png"
+                alt=""
+                width={60}
+              />
+              <div className="flex justify-between items-center gap-1 mt-1 ">
+                <div>
+                  {" "}
+                  <h1 className="text-2xl dark:text-white font-[700]">
+                    ${compareUser?.availableBalance.toLocaleString()}
+                  </h1>
+                </div>
+                <div>
+                  <HiDotsHorizontal />
+                </div>
               </div>
-              <div className="bg-green-100 w-[fit-content] text-[12px] px-2 rounded text-[#3a3a3a]">
-                Active account
+              <p className="text-[13px] text-[#787878] dark:text-[#d3d3d3]">
+                Balance
+              </p>
+              <div className="flex items-center justify-between mt-3">
+                <div className="flex items-center gap-1">
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                </div>
+
+                <div className="flex items-center gap-1">
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                  <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
+                </div>
+
+                <div className="tracking-wider  font-[600]">
+                  {compareUser?._id.slice(-4)}
+                </div>
               </div>
             </div>
-            <button
-              onClick={() => setOpen(true)}
-              disabled={balLoader}
-              className="shadow-md shadow-green-400 hover:shadow-sm duration-300 hover:translate-[0.075em] text-sm flex gap-1 items-center justify-center mt-3 p-2.5 rounded-[10px] w-[100%] bg-green-500 text-white"
-            >
-              <div>
-                {" "}
-                <IoAdd />{" "}
-              </div>
-              {balLoader ? "Loading......." : "Add Funds"}
-            </button>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setOpen(true)}
+                disabled={balLoader}
+                className=" duration-300 hover:bg-amber-500 text-sm flex gap-1 items-center justify-center mt-3 p-2 hover:text-white rounded-[30px] w-[100%] border border-amber-300 text-amber-600"
+              >
+                <div>
+                  {" "}
+                  <IoAdd />{" "}
+                </div>
+                {balLoader ? "Loading......." : "Deposit"}
+              </button>
+              <button
+                onClick={() => fetchUser()}
+                disabled={loading}
+                className="text-sm duration-300 hover:bg-amber-500 text-sm flex gap-1 items-center justify-center mt-3 p-2.5 rounded-[30px] w-[100%] bg-amber-400 text-white"
+              >
+                <div>
+                  {" "}
+                  <HiOutlineRefresh />{" "}
+                </div>
+                {loading ? "Hold....." : "Refresh Bal"}
+              </button>
+            </div>
             <div className="flex items-center justify-between">
               <h1 className="mt-3 text-[13px] dark:text-[#f1f1f1] text-[#787878]">
                 Recent Activity
@@ -157,32 +201,63 @@ const DashBoard = () => {
                 View All <GoArrowRight />{" "}
               </button>
             </div>
+
             <div className="flex flex-col gap-3 mt-3">
-              {compareUser?.betHistory
-                .reverse()
-                .slice(0, 4)
-                .map((item) => (
-                  <div className="bg-[#f7f7f7] rounded-[10px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ">
-                    <div className="w-[15%]">
-                      <div className="bg-red-100 p-2 rounded-[5px]">
-                        <LuTrendingDown className="text-red-600" />
+              {compareUser?.betHistory.length > 0 ? (
+                compareUser?.betHistory
+                  .reverse()
+                  .slice(0, 4)
+                  .map((item) => (
+                    <div
+                      className={`bg-[#f7f7f7] rounded-[10px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ${
+                        item.tipPrice < 0 ? "bg-red-100" : ""
+                      }`}
+                      key={item._id} // Make sure to add a unique key for each item
+                    >
+                      <div className="w-[15%]">
+                        <div
+                          className={`${
+                            item.tipPrice < 0 ? "bg-red-100" : "bg-green-100"
+                          } p-2 rounded-[5px]`}
+                        >
+                          <LuTrendingDown
+                            className={`${
+                              item.tipPrice < 0
+                                ? "text-red-600"
+                                : "text-green-600"
+                            }`}
+                          />
+                        </div>
+                      </div>
+                      <div className="w-[85%]">
+                        <div>
+                          <div className="text-[16px] font-[600] text-red-600 mt-2">
+                            ${item.tipPrice}
+                          </div>
+                          <div className="text-[13px] font-[500] dark:text-[#fff]">
+                            Purchased: {item.gameName}
+                          </div>
+                          <div className="dark:text-[#d3d3d3] text-[12px] font-light">
+                            {item.gameDate}
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="w-[85%]">
-                      <div>
-                        <div className="text-[16px] font-[600] text-red-600 mt-2">
-                          ${item.tipPrice}
-                        </div>
-                        <div className="text-[13px] font-[500] dark:text-[#fff]">
-                          Purchased:{item.gameName}
-                        </div>
-                        <div className="dark:text-[#d3d3d3] text-[12px] font-light">
-                          {item.gameDate}
-                        </div>
-                      </div>
-                    </div>
+                  ))
+              ) : (
+                <div className="flex flex-col items-center justify-center gap-3">
+                  <div>
+                    <img
+                      src="https://cdni.iconscout.com/illustration/premium/thumb/product-is-empty-illustration-svg-download-png-6430781.png"
+                      alt=""
+                      width={140}
+                    />
                   </div>
-                ))}
+                  <div className="text-sm text-center text-gray-500 dark:text-[#d3d3d3] py-4">
+                    Nothing here....
+                  </div>
+                </div>
+              )}
             </div>
           </div>
           <div className="w-[100%] md:mt-0 mt-10 md:w-[75%]">
@@ -213,7 +288,7 @@ const DashBoard = () => {
                 </h1>
 
                 {gameLoad ? (
-                  <div className="h-150 gap-2 flex flex-col items-center justify-center">
+                  <div className="h-100 gap-2 flex flex-col items-center justify-center">
                     <div role="status">
                       <svg
                         aria-hidden="true"
@@ -236,7 +311,7 @@ const DashBoard = () => {
                     <div className="text-sm">Loading...</div>
                   </div>
                 ) : gameFilter.length <= 0 ? (
-                  <div className="flex justify-center items-center flex-col gap-3">
+                  <div className="flex justify-center h-100 items-center flex-col gap-3">
                     <div>
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/2039/2039083.png"
@@ -283,38 +358,57 @@ const DashBoard = () => {
                   </div>{" "}
                   My Purchase
                 </h1>
-                {compareUser.betHistory.reverse().map((item) => {
-                  return (
-                    <div className="flex flex-col gap-3 mt-5">
-                      <div className="p-4 rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336]">
-                        <div className="flex items-center justify-between">
-                          <h1 className="font-[700] dark:text-[#f1f1f1]">
-                            {item.gameName}
-                          </h1>
-                          <div>
-                            <div className="text-[12px] font-[400] flex items-center gap-1 dark:text-[#f1f1f1] dark:bg-[#222a3a] bg-[#f1f1f1] rounded px-1 py-[3px] text-[#787878] dark:text-[#d3d3d3]">
+
+                <div className="flex flex-col gap-3 mt-5">
+                  {compareUser?.betHistory.length > 0 ? (
+                    compareUser?.betHistory.reverse().map((item) => {
+                      return (
+                        <div
+                          className="flex flex-col gap-3 mt-5"
+                          key={item._id}
+                        >
+                          <div className="p-4 rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336]">
+                            <div className="flex items-center justify-between">
+                              <h1 className="font-[700] dark:text-[#f1f1f1]">
+                                {item.gameName}
+                              </h1>
                               <div>
-                                <IoCheckmarkCircleOutline className="text-green-400" />
-                              </div>{" "}
-                              successful
+                                <div className="text-[12px] font-[400] flex items-center gap-1 dark:text-[#f1f1f1] dark:bg-[#222a3a] bg-[#f1f1f1] rounded px-1 py-[3px] text-[#787878] dark:text-[#d3d3d3]">
+                                  <div>
+                                    <IoCheckmarkCircleOutline className="text-green-400" />
+                                  </div>{" "}
+                                  successful
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex items-center gap-20 mt-4">
+                              <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
+                                Price
+                                <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
+                                  ${item.tipPrice}
+                                </span>
+                              </div>
+                            </div>
+                            <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
+                              {item.gameContent}
                             </div>
                           </div>
                         </div>
-                        <div className="flex items-center gap-20 mt-4">
-                          <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
-                            Price
-                            <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
-                              ${item.tipPrice}
-                            </span>
-                          </div>
-                        </div>
-                        <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
-                          {item.gameContent}
-                        </div>
+                      );
+                    })
+                  ) : (
+                    <div className="h-100 flex flex-col justify-center items-center gap-3">
+                      <img
+                        src=" https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-illustration-svg-download-png-2809510.png"
+                        alt=""
+                        width={200}
+                      />
+                      <div className="text-center py-4 text-gray-500 dark:text-[#d3d3d3]">
+                        No purchased items. Buy tips to view history.
                       </div>
                     </div>
-                  );
-                })}
+                  )}
+                </div>
               </div>
             )}
           </div>
