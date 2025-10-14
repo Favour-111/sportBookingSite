@@ -7,7 +7,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import Login from "../Login/Login";
 import { Link, useNavigate } from "react-router-dom";
 import { RiUser3Line } from "react-icons/ri";
-import { FiSettings } from "react-icons/fi";
+import { FiSettings, FiUser } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { FaAngleDown } from "react-icons/fa6";
 const NavBar = ({ setOpen }) => {
@@ -137,13 +137,9 @@ const NavBar = ({ setOpen }) => {
               <div className="relative">
                 <button
                   onClick={() => SetDrop(!drop)}
-                  className="overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f1f1f1] border-white"
+                  className="overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
                 >
-                  <img
-                    src="https://png.pngtree.com/png-clipart/20250517/original/pngtree-3d-profile-icon-png-image_21011546.png"
-                    alt=""
-                    className="w-10"
-                  />
+                  <FiUser />
                 </button>
                 <div
                   className={`${
@@ -265,13 +261,9 @@ const NavBar = ({ setOpen }) => {
               <div className="relative">
                 <button
                   onClick={() => SetDrop(!drop)}
-                  className="overflow-hidden dark:bg-[var(--default)] border  w-9 h-9 flex items-center justify-center rounded-full bg-[#f1f1f1] border-[#d3d3d3]"
+                  className="overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
                 >
-                  <img
-                    src="https://png.pngtree.com/png-clipart/20250517/original/pngtree-3d-profile-icon-png-image_21011546.png"
-                    alt=""
-                    className="w-10"
-                  />
+                  <FiUser />
                 </button>
                 <div
                   className={`${

@@ -10,7 +10,7 @@ import { useState } from "react";
 
 const Recommendation = () => {
   const [form, setForm] = useState(false);
-  const { isDarkMode, games, gameLoad } = useContext(ShopContext);
+  const { isDarkMode, gameFilter, games, gameLoad } = useContext(ShopContext);
   return (
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)]`}>
       <NavBar />
@@ -73,7 +73,7 @@ const Recommendation = () => {
             </div>
             <div className="text-sm">Loading...</div>
           </div>
-        ) : games.length <= 0 ? (
+        ) : gameFilter.length <= 0 ? (
           <div className="flex justify-center items-center flex-col gap-3">
             <div>
               <img
@@ -89,7 +89,7 @@ const Recommendation = () => {
         ) : (
           <div className="w-full ">
             <div className="mt-10 w-[90%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
-              {games.map((item) => {
+              {gameFilter.map((item) => {
                 return (
                   <div data-aos="fade-up" className="w-full max-w-sm">
                     <Item item={item} setForm={setForm} />

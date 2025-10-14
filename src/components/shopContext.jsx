@@ -76,6 +76,7 @@ export const ShopProvider = ({ children }) => {
     localStorage.setItem("darkMode", !isDarkMode); // Save to localStorage
   };
 
+  const gameFilter = games.filter((item) => item.active === true);
   // Update the class on <html> when dark mode changes
   useEffect(() => {
     if (isDarkMode) {
@@ -84,7 +85,16 @@ export const ShopProvider = ({ children }) => {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
-
+  const updateBalance = (amount) => {
+    const updatedUser = {
+      ...compareUser,
+      availableBalance: compareUser?.availableBalance - amount,
+    };
+    // Assuming you're using a state to manage all users, update that state here
+    setAllUser(
+      allUser.map((user) => (user._id === compareUser._id ? updatedUser : user))
+    );
+  };
   return (
     <ShopContext.Provider
       value={{
@@ -93,9 +103,11 @@ export const ShopProvider = ({ children }) => {
         compareUser,
         fetchUser,
         allUser,
+        gameFilter,
         user,
         toggleDarkMode,
         navOpen,
+        updateBalance,
         setLoading,
         setNavOpen,
         games,

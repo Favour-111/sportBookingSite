@@ -24,7 +24,7 @@ import { BiRefresh } from "react-icons/bi";
 const DashBoard = () => {
   const [page, setPage] = useState("live");
   const [open, setOpen] = useState(false);
-  const { isDarkMode, compareUser, games, gameLoad, fetchUser } =
+  const { isDarkMode, compareUser, gameFilter, games, gameLoad, fetchUser } =
     useContext(ShopContext);
   return (
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)] `}>
@@ -259,7 +259,7 @@ const DashBoard = () => {
                     </div>
                     <div className="text-sm">Loading...</div>
                   </div>
-                ) : games.length <= 0 ? (
+                ) : gameFilter.length <= 0 ? (
                   <div className="flex justify-center items-center flex-col gap-3">
                     <div>
                       <img
@@ -275,12 +275,13 @@ const DashBoard = () => {
                 ) : (
                   <div className="w-full ">
                     <div className="mt-5 w-[100%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
-                      {games.map((item) => {
+                      {gameFilter.map((item) => {
                         return (
                           <div data-aos="fade-up" className="w-full max-w-sm">
                             <Item
                               Bal={compareUser?.availableBalance.toLocaleString()}
                               item={item}
+                              setOpens={setOpen}
                             />
                           </div>
                         );
@@ -293,25 +294,7 @@ const DashBoard = () => {
           >
             View all Recommendation <GoArrowRight />
           </Link> */}
-                      <div className="col-span-full" data-aos="fade-down">
-                        <button class="cssbuttons-io-button">
-                          View all Recommendation
-                          <div class="icon">
-                            <svg
-                              height="24"
-                              width="24"
-                              viewBox="0 0 24 24"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M0 0h24v24H0z" fill="none"></path>
-                              <path
-                                d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                                fill="currentColor"
-                              ></path>
-                            </svg>
-                          </div>
-                        </button>
-                      </div>
+                      <div className="col-span-full" data-aos="fade-down"></div>
                     </div>
                   </div>
                 )}
