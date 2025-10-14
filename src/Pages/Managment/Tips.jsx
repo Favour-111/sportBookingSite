@@ -13,9 +13,17 @@ import { GiMoneyStack } from "react-icons/gi";
 import { IoAdd, IoClose } from "react-icons/io5";
 import axios from "axios";
 import toast from "react-hot-toast";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+import { FiMessageSquare } from "react-icons/fi";
 
 const Tips = () => {
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [addTipModal, setAddTipModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
@@ -32,6 +40,13 @@ const Tips = () => {
   });
   const [message, setMessage] = useState(false);
   const [error, setError] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState(null);
+
+  const handleViewClick = (message) => {
+    setSelectedMessage(message); // Set the selected message
+    setOpenModal(true); // Open the modal
+  };
+
   const { isDarkMode, games, gameLoad, fetchAllGames } =
     useContext(ShopContext);
   const handleInput = (e) => {
@@ -78,6 +93,40 @@ const Tips = () => {
   };
   console.log(games);
 
+  // Handle toggling the active status of a specific tip
+  const toggleActiveStatus = async (itemId, currentStatus) => {
+    setLoading(true);
+    try {
+      const response = await axios.put(
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/games/${itemId}/toggle-active`
+      );
+      fetchAllGames(); // Refresh the games list
+      toast.success(response.data.message); // Show success message
+
+      // Update the status of the specific item
+    } catch (error) {
+      console.error("Error toggling active status:", error);
+      toast.error("Error activating/deactivating tip.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Delete the game
+  const deleteGame = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/games/${id}`
+      );
+      toast.success(response.data.message); // Display success message
+      fetchAllGames();
+    } catch (error) {
+      console.error("Error deleting game:", error);
+      toast.error("Failed to delete game.");
+    }
+  };
   return (
     <div
       className={`${isDarkMode ? "dark" : ""}flex  dark:bg-[var(--default)] `}
@@ -217,15 +266,232 @@ const Tips = () => {
                 </div>
               </div>
             ) : (
-              <div className="mt-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-                {games.map((item) => {
-                  return (
-                    <div key={item._id}>
-                      <ItemManage item={item} />
+              <>
+                <h1 className="mt-5 text-bold text-zinc-600 text-[20px] capitalize font-[600]">
+                  All Games
+                </h1>
+                <div>
+                  {loading ? (
+                    <div className="h-100 gap-2 flex flex-col items-center justify-center">
+                      <div role="status">
+                        <svg
+                          aria-hidden="true"
+                          className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                          viewBox="0 0 100 101"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                            fill="currentColor"
+                          />
+                          <path
+                            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                            fill="currentFill"
+                          />
+                        </svg>
+                        <span className="sr-only">Loading...</span>
+                      </div>
+                      <div className="text-sm">Loading...</div>
                     </div>
-                  );
-                })}
-              </div>
+                  ) : games.length <= 0 ? (
+                    <div className="flex justify-center items-center flex-col gap-3">
+                      <div>
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/512/2039/2039083.png"
+                          alt=""
+                          className="mt-10"
+                          width={100}
+                        />
+                      </div>
+                      <div className="text-center text-20 text-gray-500">
+                        No Tip available
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto mt-5">
+                      <table className="min-w-full bg-white border overflow-hidden border-gray-200 rounded-lg shadow-md">
+                        <thead className="bg-gray-100">
+                          <tr>
+                            <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
+                              Tip Title
+                            </th>
+                            <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
+                              Tips Price
+                            </th>
+                            <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
+                              TIps Ratio
+                            </th>
+                            <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
+                              Durations
+                            </th>
+                            <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
+                              Actions
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {games.map((user) => (
+                            <tr
+                              key={user.id}
+                              className="border-b border-b-[#f1f1f1] hover:bg-gray-50"
+                            >
+                              <td className="py-3 px-6 text-[15px] text-gray-800 font-[600] whitespace-nowrap">
+                                {user.tipTitle}
+                              </td>
+                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                ${user.tipPrice.toLocaleString()}
+                              </td>
+                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                {user.oddRatio}
+                              </td>
+                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                {user.duration}:00 hrs
+                              </td>
+                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                <button
+                                  onClick={() => handleViewClick(user)} // Open the modal with user info
+                                  className="mr-4 text-blue-500 hover:text-blue-700"
+                                >
+                                  View
+                                </button>
+                                <button
+                                  onClick={
+                                    () =>
+                                      toggleActiveStatus(user._id, user.active) // Toggle the active status for this tip
+                                  }
+                                  className={
+                                    user.active
+                                      ? "mr-4 text-red-500 hover:text-red-700"
+                                      : "mr-4 text-green-500 hover:text-green-700"
+                                  }
+                                >
+                                  {user.active ? "Hide" : "Show"}{" "}
+                                  {/* Display the appropriate label */}
+                                </button>
+                                <button
+                                  onClick={() => deleteGame(user._id)} // Delete the game
+                                  className="ml-4 text-red-500 hover:text-red-700"
+                                >
+                                  Delete
+                                </button>
+                              </td>
+
+                              {/* Modal */}
+                              <Dialog
+                                open={openModal}
+                                onClose={() => setOpenModal(false)}
+                                className="relative z-10"
+                              >
+                                <DialogBackdrop
+                                  transition
+                                  className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+                                />
+                                <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                  <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                    <DialogPanel
+                                      transition
+                                      className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+                                    >
+                                      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                        <div className="sm:flex sm:items-start">
+                                          <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:size-10">
+                                            <FiMessageSquare color="blue" />
+                                          </div>
+                                          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                            <DialogTitle
+                                              as="h3"
+                                              className="text-base font-semibold text-gray-900"
+                                            >
+                                              Message Details
+                                            </DialogTitle>
+                                            <div className="mt-2">
+                                              {/* Displaying selected message content */}
+                                              {selectedMessage && (
+                                                <div>
+                                                  <p className="text-sm text-gray-500">
+                                                    <strong>Tip Title:</strong>{" "}
+                                                    {selectedMessage.tipTitle}
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>Tip Price:</strong>{" "}
+                                                    {selectedMessage.tipPrice}
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>odd Ratio:</strong>{" "}
+                                                    {selectedMessage.oddRatio}
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>
+                                                      Betting Sites:
+                                                    </strong>{" "}
+                                                    {
+                                                      selectedMessage.bettingSites
+                                                    }
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>
+                                                      Confidence Level:
+                                                    </strong>{" "}
+                                                    {
+                                                      selectedMessage.confidenceLevel
+                                                    }
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>
+                                                      Content after Purchase:
+                                                    </strong>{" "}
+                                                    {
+                                                      selectedMessage.contentAfterPurchase
+                                                    }
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>duration:</strong>{" "}
+                                                    {selectedMessage.duration}
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>
+                                                      purchase Limit:
+                                                    </strong>{" "}
+                                                    {
+                                                      selectedMessage.purchaseLimit
+                                                    }
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>
+                                                      Betting Type:
+                                                    </strong>{" "}
+                                                    {
+                                                      selectedMessage.bettingType
+                                                    }
+                                                  </p>
+                                                </div>
+                                              )}
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                        <button
+                                          type="button"
+                                          onClick={() => setOpenModal(false)}
+                                          className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                                        >
+                                          Close
+                                        </button>
+                                      </div>
+                                    </DialogPanel>
+                                  </div>
+                                </div>
+                              </Dialog>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
+              </>
             )}
           </div>
 

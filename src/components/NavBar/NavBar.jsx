@@ -65,7 +65,7 @@ const NavBar = ({ setOpen }) => {
             )}
           </div>
         </div> */}
-        <div className="hidden md:flex items-center justify-between py-1 px-10 border-b-1 backdrop-blur-xl border-gray-200 dark:border-gray-600  dark:bg-[#1c233085] ">
+        <div className="hidden md:flex items-center justify-between py-1 px-10 border-b-1 backdrop-blur-xl bg-[#ffffff1b] border-gray-200 dark:border-gray-600  dark:bg-[#1c233085] ">
           <Link to="/" className="flex items-center gap-2">
             <img
               src="https://github.com/Favour-111/my-asset/blob/main/image.jpg?raw=true"

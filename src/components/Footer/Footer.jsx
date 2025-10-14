@@ -1,8 +1,11 @@
 import React from "react";
 import { IoTrophyOutline } from "react-icons/io5";
 import { LuCrown } from "react-icons/lu";
+import Login from "../Login/Login";
+import { useState } from "react";
 
 const Footer = () => {
+  const [form, setForm] = useState(false);
   return (
     <div className="mt-20">
       <div className="w-full dark:bg-[#1c2330] bg-[#f1f1f1] text-white py-20 px-5 flex flex-col  justify-center items-center gap-2">
@@ -28,6 +31,7 @@ const Footer = () => {
         </p>
         <div className="flex items-center gap-5 mt-5">
           <button
+            onClick={() => setForm(true)}
             data-aos="fade-down"
             className="flex gap-3 items-center text-sm text-white bg-[var(--Primary)] px-7 py-3 shadow-sm rounded-[10px] font-medium"
           >
@@ -92,6 +96,7 @@ const Footer = () => {
       <div className="bg-[#f1f1f1] dark:text-[#d3d3d3]  dark:bg-[#1c2330] p-5 text-center text-sm text-[#787878]">
         © 2024 SportsTips. All rights reserved by Horbah's Tech.
       </div>
+      {form && <Login state={setForm} />}
     </div>
   );
 };

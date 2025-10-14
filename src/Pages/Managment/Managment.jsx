@@ -63,7 +63,7 @@ const Managment = () => {
                     Tips
                   </div>
                   <div className="text-[#787878] text-[12px] font-[400] dark:text-[#d3d3d3]">
-                    3
+                    {games?.length || 0}
                   </div>
                 </div>
               </div>

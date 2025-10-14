@@ -6,8 +6,16 @@ import axios from "axios";
 import Footer from "./Footer";
 import Sidebar from "./SideBar";
 import TopBar from "./TopBar";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from "@headlessui/react";
+import { FiMessageSquare } from "react-icons/fi";
 
 const BroadCast = () => {
+  const [openModal, setOpenModal] = useState(false);
   const [open, setOpen] = useState(false);
   const [loader, setLoader] = useState(false);
   const { isDarkMode, allUser } = useContext(ShopContext);
@@ -18,6 +26,13 @@ const BroadCast = () => {
     visibility: "",
   });
 
+  const [selectedMessage, setSelectedMessage] = useState(null);
+
+  const handleViewClick = (message) => {
+    setSelectedMessage(message); // Set the selected message
+    setOpenModal(true); // Open the modal
+  };
+
   const handleInput = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -26,19 +41,28 @@ const BroadCast = () => {
 
   // Send message to users
   const sendMessage = async () => {
-    setLoader(true);
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_REACT_APP_API}/api/message/addMessage`,
-        form
-      );
-      toast.success("Broadcast message has been added");
-      fetchMessage();
-    } catch (error) {
-      console.error("Error sending message:", error);
-      toast.error("Error sending message");
-    } finally {
-      setLoader(false);
+    if (form.title === "" || form.message === "" || form.visibility === "") {
+      toast.error("inputs cannot be empty");
+    } else {
+      setLoader(true);
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_REACT_APP_API}/api/message/addMessage`,
+          form
+        );
+        toast.success("Broadcast message has been added");
+        setForm({
+          title: "",
+          message: "",
+          visibility: "",
+        });
+        fetchMessage();
+      } catch (error) {
+        console.error("Error sending message:", error);
+        toast.error("Error sending message");
+      } finally {
+        setLoader(false);
+      }
     }
   };
 
@@ -144,6 +168,7 @@ const BroadCast = () => {
                       onChange={handleInput}
                       type="text"
                       name="title"
+                      value={form.title}
                       placeholder="Input message title"
                       className="text-[#545160] border border-[#ebebeb] p-2 rounded-[6px] w-[100%] md:w-[200px] outline-none text-sm"
                     />
@@ -155,6 +180,7 @@ const BroadCast = () => {
                     <br />
                     <select
                       name="visibility"
+                      value={form.visibility}
                       onChange={handleInput}
                       className="text-[#545160] border border-[#ebebeb] p-2 rounded-[6px] w-[100%] md:w-[200px] outline-none text-sm"
                     >
@@ -172,6 +198,7 @@ const BroadCast = () => {
                   <br />
                   <textarea
                     name="message"
+                    value={form.message}
                     onChange={handleInput}
                     className="w-[100%] border-[#ebebeb] p-2 rounded-[6px] outline-none text-sm resize-none border h-40"
                     placeholder="Input message for users"
@@ -251,7 +278,6 @@ const BroadCast = () => {
                         </tr>
                       </thead>
                       <tbody>
-                        {/* Replace with actual messages from your DB */}
                         {allMessage.map((user) => (
                           <tr
                             key={user.id}
@@ -270,6 +296,12 @@ const BroadCast = () => {
                               {user.createdAt.slice(0, 10)}
                             </td>
                             <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                              <button
+                                onClick={() => handleViewClick(user)} // Set the selected message
+                                className="mr-4 text-blue-500 hover:text-blue-700"
+                              >
+                                View
+                              </button>
                               <button
                                 onClick={() =>
                                   deactivateMessage(user._id, user.visibility)
@@ -291,6 +323,74 @@ const BroadCast = () => {
                                 Delete
                               </button>
                             </td>
+
+                            {/* Modal */}
+                            <Dialog
+                              open={openModal}
+                              onClose={() => setOpenModal(false)}
+                              className="relative z-10"
+                            >
+                              <DialogBackdrop
+                                transition
+                                className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+                              />
+                              <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                  <DialogPanel
+                                    transition
+                                    className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+                                  >
+                                    <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                      <div className="sm:flex sm:items-start">
+                                        <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:size-10">
+                                          <FiMessageSquare color="blue" />
+                                        </div>
+                                        <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                          <DialogTitle
+                                            as="h3"
+                                            className="text-base font-semibold text-gray-900"
+                                          >
+                                            Message Details
+                                          </DialogTitle>
+                                          <div className="mt-2">
+                                            {/* Displaying selected message content */}
+                                            {selectedMessage && (
+                                              <div>
+                                                <p className="text-sm text-gray-500">
+                                                  <strong>Title:</strong>{" "}
+                                                  {selectedMessage.title}
+                                                </p>
+                                                <p className="text-sm mt-3 text-gray-500">
+                                                  <strong>Message:</strong>{" "}
+                                                  {selectedMessage.message}
+                                                </p>
+                                                <p className="text-sm mt-3 text-gray-500">
+                                                  <strong>Visibility:</strong>{" "}
+                                                  {selectedMessage.visibility}
+                                                </p>
+                                                <p className="text-sm mt-3 text-gray-500">
+                                                  <strong>Created At:</strong>{" "}
+                                                  {selectedMessage.createdAt}
+                                                </p>
+                                              </div>
+                                            )}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                      <button
+                                        type="button"
+                                        onClick={() => setOpenModal(false)}
+                                        className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                                      >
+                                        Close
+                                      </button>
+                                    </div>
+                                  </DialogPanel>
+                                </div>
+                              </div>
+                            </Dialog>
                           </tr>
                         ))}
                       </tbody>

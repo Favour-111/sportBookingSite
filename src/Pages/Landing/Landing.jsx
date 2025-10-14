@@ -25,7 +25,7 @@ import Login from "../../components/Login/Login";
 import LoadingScreen from "../../components/loading/Loader";
 import { FaArrowRightLong } from "react-icons/fa6";
 const Landing = () => {
-  const { isDarkMode, user } = useContext(ShopContext);
+  const { isDarkMode, user, games, gameLoad } = useContext(ShopContext);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -226,24 +226,14 @@ const Landing = () => {
           {/* i am to put the featured games here */}
           <div className="w-full ">
             <div className="mt-10 w-[90%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
-              <div data-aos="fade-up" className="w-full max-w-sm">
-                <Item />
-              </div>
-              <div data-aos="fade-up" className="w-full max-w-sm">
-                <Item />
-              </div>
-              <div data-aos="fade-up" className="w-full max-w-sm">
-                <Item />
-              </div>
-              <div data-aos="fade-up" className="w-full max-w-sm">
-                <Item />
-              </div>
-              <div data-aos="fade-up" className="w-full max-w-sm">
-                <Item />
-              </div>
-              <div data-aos="fade-up" className="w-full max-w-sm">
-                <Item />
-              </div>
+              {games.map((item) => {
+                return (
+                  <div data-aos="fade-up" className="w-full max-w-sm">
+                    <Item item={item} />
+                  </div>
+                );
+              })}
+
               {/* <Link
             data-aos="fade-down"
             to="/recommendations"
