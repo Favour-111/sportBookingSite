@@ -4,11 +4,13 @@ import { GoArrowRight } from "react-icons/go";
 import { ShopContext } from "../components/shopContext";
 import NavBar from "../components/NavBar/NavBar";
 
-import { BsGraphUpArrow } from "react-icons/bs";
+import { BsEye, BsGraphUpArrow } from "react-icons/bs";
 import { HiDotsHorizontal, HiOutlineRefresh } from "react-icons/hi";
 import {
   IoAdd,
   IoCheckmarkCircleOutline,
+  IoEyeOffOutline,
+  IoEyeOutline,
   IoWalletOutline,
 } from "react-icons/io5";
 import { TbShoppingCartStar } from "react-icons/tb";
@@ -35,7 +37,11 @@ const DashBoard = () => {
     loading,
     fetchUser,
   } = useContext(ShopContext);
+  const [blur, SetBlur] = useState(false);
 
+  const total = compareUser?.betHistory.reduce((acc, item) => {
+    return acc + item.tipPrice; // Add the tipPrice of each item to the accumulator
+  }, 0); // Start the accumulator at 0
   return (
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)] `}>
       <NavBar setOpen={setOpen} />
@@ -66,7 +72,7 @@ const DashBoard = () => {
                   Purchases
                 </div>
                 <div className="text-[#787878] text-[12px] font-[400] dark:text-[#d3d3d3]">
-                  {compareUser?.totalBetsBought}
+                  {compareUser?.betHistory.length}
                 </div>
               </div>
             </div>
@@ -92,7 +98,7 @@ const DashBoard = () => {
                   Total Spent
                 </div>
                 <div className="text-[#787878] text-[12px] font-[400] dark:text-[#d3d3d3]">
-                  ${compareUser?.totalMoneySpent}
+                  ${total?.toLocaleString()}
                 </div>
               </div>
             </div>
@@ -105,14 +111,14 @@ const DashBoard = () => {
                   Active Tips
                 </div>
                 <div className="text-[#787878] text-[12px] font-[400] dark:text-[#d3d3d3]">
-                  3
+                  {gameFilter.length}
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div className="flex flex-col md:flex-row justify-between px-5 md:px-6 mt-15">
-          <div className="w-[100%] md:w-[23%] border border-[#eaeaea] h-[fit-content] dark:border-zinc-600 dark:bg-[#1b2336] px-3 py-5 rounded-[10px] ">
+          <div className="w-[100%] md:w-[23%] border border-[#eaeaea] h-[fit-content] dark:border-zinc-600 dark:bg-[#1b2336] px-5 py-5 rounded-[10px] ">
             <h1 className="text-[20px] text-[#282828] font-[600] dark:text-[#fff] mb-3 flex items-center gap-2">
               <div className="bg-[tomato] text-white p-2 rounded-[10px]">
                 <IoWalletOutline />{" "}
@@ -123,18 +129,29 @@ const DashBoard = () => {
               <img
                 src="https://download.logo.wine/logo/Mastercard/Mastercard-Logo.wine.png"
                 alt=""
+                loading="lazy"
                 width={60}
               />
-              <div className="flex justify-between items-center gap-1 mt-1 ">
+              <div className="flex items-center gap-4 mt-1 ">
                 <div>
                   {" "}
-                  <h1 className="text-2xl dark:text-white font-[700]">
+                  <h1
+                    className={`text-2xl dark:text-white font-[700] ${
+                      blur && "blur-sm"
+                    }`}
+                  >
                     ${compareUser?.availableBalance.toLocaleString()}
                   </h1>
                 </div>
-                <div>
-                  <HiDotsHorizontal />
-                </div>
+                {blur ? (
+                  <button onClick={() => SetBlur(false)}>
+                    <IoEyeOutline size={20} />
+                  </button>
+                ) : (
+                  <button onClick={() => SetBlur(true)}>
+                    <IoEyeOffOutline size={20} />
+                  </button>
+                )}
               </div>
               <p className="text-[13px] text-[#787878] dark:text-[#d3d3d3]">
                 Balance
@@ -195,7 +212,7 @@ const DashBoard = () => {
                 Recent Activity
               </h1>
               <button
-                onClick={() => page === "history"}
+                onClick={() => setPage(page === "live" ? "purchase" : "live")}
                 className="mt-3 text-[11px] text-blue-500 flex items-center gap-1 cursor-pointer"
               >
                 View All <GoArrowRight />{" "}
