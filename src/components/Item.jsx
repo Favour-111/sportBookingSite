@@ -60,6 +60,8 @@ const Item = ({ item, setForm, setOpens }) => {
               gameName: item?.tipTitle,
               gameDate: new Date(),
               tipPrice: item?.tipPrice,
+              tipName: item.bettingType,
+              tipOdd: item.oddRatio,
             };
 
             const updateHistoryResponse = await axios.put(

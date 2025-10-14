@@ -402,10 +402,10 @@ const DashBoard = () => {
                               </div>
                             </div>
                             <h1 className="text-sm font-[400] my-2 text-green-500">
-                              odds:2.5
+                              odds:{item.tipOdd}
                             </h1>
                             <h1 className="text-sm font-[400]  text-red-400">
-                              over 2.5
+                              {item.tipName}
                             </h1>
                             <div className="flex items-center gap-20 mt-2">
                               <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
