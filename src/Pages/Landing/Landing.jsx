@@ -264,13 +264,16 @@ const Landing = () => {
           ) : (
             <div className="w-full ">
               <div className="mt-10 w-[90%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
-                {gameFilter.map((item) => {
-                  return (
-                    <div data-aos="fade-up" className="w-full max-w-sm">
-                      <Item item={item} setForm={setForm} />
-                    </div>
-                  );
-                })}
+                {gameFilter
+                  .reverse()
+                  .slice(0, 6)
+                  .map((item) => {
+                    return (
+                      <div data-aos="fade-up" className="w-full max-w-sm">
+                        <Item item={item} setForm={setForm} />
+                      </div>
+                    );
+                  })}
 
                 {/* <Link
                   data-aos="fade-down"

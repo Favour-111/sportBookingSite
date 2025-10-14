@@ -24,8 +24,15 @@ import { BiRefresh } from "react-icons/bi";
 const DashBoard = () => {
   const [page, setPage] = useState("live");
   const [open, setOpen] = useState(false);
-  const { isDarkMode, compareUser, gameFilter, games, gameLoad, fetchUser } =
-    useContext(ShopContext);
+  const {
+    isDarkMode,
+    balLoader,
+    compareUser,
+    gameFilter,
+    games,
+    gameLoad,
+    fetchUser,
+  } = useContext(ShopContext);
   return (
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)] `}>
       <NavBar setOpen={setOpen} />
@@ -130,83 +137,52 @@ const DashBoard = () => {
             </div>
             <button
               onClick={() => setOpen(true)}
+              disabled={balLoader}
               className="shadow-md shadow-green-400 hover:shadow-sm duration-300 hover:translate-[0.075em] text-sm flex gap-1 items-center justify-center mt-3 p-2.5 rounded-[10px] w-[100%] bg-green-500 text-white"
             >
               <div>
                 {" "}
                 <IoAdd />{" "}
               </div>
-              Add Funds
+              {balLoader ? "Loading......." : "Add Funds"}
             </button>
             <div className="flex items-center justify-between">
               <h1 className="mt-3 text-[13px] dark:text-[#f1f1f1] text-[#787878]">
                 Recent Activity
               </h1>
-              <h1 className="mt-3 text-[11px] text-blue-500 flex items-center gap-1 cursor-pointer">
+              <button
+                onClick={() => page === "history"}
+                className="mt-3 text-[11px] text-blue-500 flex items-center gap-1 cursor-pointer"
+              >
                 View All <GoArrowRight />{" "}
-              </h1>
+              </button>
             </div>
             <div className="flex flex-col gap-3 mt-3">
-              <div className="bg-[#f7f7f7] rounded-[10px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ">
-                <div className="w-[15%]">
-                  <div className="bg-red-100 p-2 rounded-[5px]">
-                    <LuTrendingDown className="text-red-600" />
-                  </div>
-                </div>
-                <div className="w-[85%]">
-                  <div>
-                    <div className="text-[16px] font-[600] text-red-600 mt-2">
-                      $15.5
+              {compareUser?.betHistory
+                .reverse()
+                .slice(0, 4)
+                .map((item) => (
+                  <div className="bg-[#f7f7f7] rounded-[10px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ">
+                    <div className="w-[15%]">
+                      <div className="bg-red-100 p-2 rounded-[5px]">
+                        <LuTrendingDown className="text-red-600" />
+                      </div>
                     </div>
-                    <div className="text-[13px] font-[500] dark:text-[#fff]">
-                      Purchased: Chelsea vs Liverpool - Both Teams to Score
-                    </div>
-                    <div className="dark:text-[#d3d3d3] text-[12px] font-light">
-                      2025-10-06T13:46:41.453
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-[#f7f7f7] rounded-[10px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ">
-                <div className="w-[15%]">
-                  <div className="bg-red-100 p-2 rounded-[5px]">
-                    <LuTrendingDown className="text-red-600" />
-                  </div>
-                </div>
-                <div className="w-[85%]">
-                  <div>
-                    <div className="text-[16px] font-[600] text-red-600 mt-2">
-                      $15.5
-                    </div>
-                    <div className="text-[13px] font-[500] dark:text-[#fff]">
-                      Purchased: Chelsea vs Liverpool - Both Teams to Score
-                    </div>
-                    <div className="dark:text-[#d3d3d3] text-[12px] font-light">
-                      2025-10-06T13:46:41.453
+                    <div className="w-[85%]">
+                      <div>
+                        <div className="text-[16px] font-[600] text-red-600 mt-2">
+                          ${item.tipPrice}
+                        </div>
+                        <div className="text-[13px] font-[500] dark:text-[#fff]">
+                          Purchased:{item.gameName}
+                        </div>
+                        <div className="dark:text-[#d3d3d3] text-[12px] font-light">
+                          {item.gameDate}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div className="bg-[#f7f7f7] rounded-[10px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ">
-                <div className="w-[15%]">
-                  <div className="bg-red-100 p-2 rounded-[5px]">
-                    <LuTrendingDown className="text-red-600" />
-                  </div>
-                </div>
-                <div className="w-[85%]">
-                  <div>
-                    <div className="text-[16px] font-[600] text-red-600 mt-2">
-                      $15.5
-                    </div>
-                    <div className="text-[13px] font-[500] dark:text-[#fff]">
-                      Purchased: Chelsea vs Liverpool - Both Teams to Score
-                    </div>
-                    <div className="dark:text-[#d3d3d3] text-[12px] font-light">
-                      2025-10-06T13:46:41.453
-                    </div>
-                  </div>
-                </div>
-              </div>
+                ))}
             </div>
           </div>
           <div className="w-[100%] md:mt-0 mt-10 md:w-[75%]">
@@ -275,7 +251,7 @@ const DashBoard = () => {
                 ) : (
                   <div className="w-full ">
                     <div className="mt-5 w-[100%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
-                      {gameFilter.map((item) => {
+                      {gameFilter.reverse().map((item) => {
                         return (
                           <div data-aos="fade-up" className="w-full max-w-sm">
                             <Item
@@ -307,67 +283,38 @@ const DashBoard = () => {
                   </div>{" "}
                   My Purchase
                 </h1>
-
-                <div className="flex flex-col gap-3 mt-5">
-                  <div className="p-4 rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336]">
-                    <div className="flex items-center justify-between">
-                      <h1 className="font-[700] dark:text-[#f1f1f1]">
-                        Lakers vs Addidas
-                      </h1>
-                      <div>
-                        <div className="text-[12px] font-[400] flex items-center gap-1 dark:text-[#f1f1f1] dark:bg-[#222a3a] bg-[#f1f1f1] rounded px-1 py-[3px] text-[#787878] dark:text-[#d3d3d3]">
+                {compareUser.betHistory.reverse().map((item) => {
+                  return (
+                    <div className="flex flex-col gap-3 mt-5">
+                      <div className="p-4 rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336]">
+                        <div className="flex items-center justify-between">
+                          <h1 className="font-[700] dark:text-[#f1f1f1]">
+                            {item.gameName}
+                          </h1>
                           <div>
-                            <IoCheckmarkCircleOutline className="text-green-400" />
-                          </div>{" "}
-                          successful
+                            <div className="text-[12px] font-[400] flex items-center gap-1 dark:text-[#f1f1f1] dark:bg-[#222a3a] bg-[#f1f1f1] rounded px-1 py-[3px] text-[#787878] dark:text-[#d3d3d3]">
+                              <div>
+                                <IoCheckmarkCircleOutline className="text-green-400" />
+                              </div>{" "}
+                              successful
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-20 mt-4">
+                          <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
+                            Price
+                            <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
+                              ${item.tipPrice}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
+                          {item.gameContent}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-20 mt-4">
-                      <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
-                        Price
-                        <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
-                          $15.00
-                        </span>
-                      </div>
-                    </div>
-                    <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aspernatur quae voluptas similique culpa perferendis.
-                      Inventore illo ullam maxime accusantium libero?
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-col gap-3 mt-5">
-                  <div className="p-4 rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336]">
-                    <div className="flex items-center justify-between">
-                      <h1 className="font-[700] dark:text-[#f1f1f1]">
-                        Lakers vs Addidas
-                      </h1>
-                      <div>
-                        <div className="text-[12px] font-[400] flex items-center gap-1 dark:text-[#f1f1f1] dark:bg-[#222a3a] bg-[#f1f1f1] rounded px-1 py-[3px] text-[#787878] dark:text-[#d3d3d3]">
-                          <div>
-                            <IoCheckmarkCircleOutline className="text-green-400" />
-                          </div>{" "}
-                          successful
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-20 mt-4">
-                      <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
-                        Price
-                        <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
-                          $15.00
-                        </span>
-                      </div>
-                    </div>
-                    <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                      Aspernatur quae voluptas similique culpa perferendis.
-                      Inventore illo ullam maxime accusantium libero?
-                    </div>
-                  </div>
-                </div>
+                  );
+                })}
               </div>
             )}
           </div>

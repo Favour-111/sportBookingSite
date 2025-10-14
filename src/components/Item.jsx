@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { IoTrendingUp } from "react-icons/io5";
-import { MdOutlineAddShoppingCart } from "react-icons/md";
+import { MdCancel, MdOutlineAddShoppingCart } from "react-icons/md";
 import { ShopContext } from "./shopContext";
 import { LuUsers } from "react-icons/lu";
 import { CiLock, CiWarning } from "react-icons/ci";
@@ -12,28 +12,77 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-const Item = ({ item, setForm, Bal, setOpens }) => {
-  const [open, setOpen] = useState(true);
-  const { compareUser, user, updateBalance } = useContext(ShopContext);
+import axios from "axios";
+const Item = ({ item, setForm, setOpens }) => {
+  const [open, setOpen] = useState(false);
+  const { compareUser, user, balLoader, updateBalance, fetchAllGames } =
+    useContext(ShopContext);
   const active = true;
   // Example of total value and current value
   const totalValue = item?.purchaseLimit; // This could be dynamic, e.g., 20, 40, etc.
   const currentValue = item?.CurrentLimit; // This could be dynamic as well, representing progress
   // const [form, setForm] = useState(false);
   const progress = (currentValue / totalValue) * 100; // Calculate percentage
-  const handleBuyBet = () => {
+  const handleBuyBet = async () => {
     if (!user) {
-      setForm(true);
+      setForm(true); // If not logged in, prompt the user to log in
     } else {
-      // Check if the user has sufficient balance
       const amountToSubtract = item?.tipPrice;
 
+      // Check if the user has sufficient balance
       if (compareUser?.availableBalance < amountToSubtract) {
-        setOpen(true);
+        toast.error("Insufficient balance");
       } else {
-        // If balance is sufficient, update the balance
-        updateBalance(amountToSubtract);
-        toast.success("Bet purchased successfully!");
+        try {
+          // Deduct the amount from the balance
+          await updateBalance(amountToSubtract);
+
+          // Make a request to the backend to update the 'purchasedBy' field
+          const response = await axios.put(
+            `${import.meta.env.VITE_REACT_APP_API}/api/games/${item._id}/buy`,
+            { userId: compareUser?._id }
+          );
+
+          const response2 = await axios.put(
+            `${import.meta.env.VITE_REACT_APP_API}/api/games/${
+              item._id
+            }/increment-current-limit`
+          );
+
+          if (response.status === 200 && response2.status === 200) {
+            toast.success("Game purchased successfully!");
+
+            // Add the game to the user's bet history
+            const betEntry = {
+              gameContent: item?.contentAfterPurchase,
+              gameName: item?.tipTitle,
+              gameDate: new Date(),
+              tipPrice: item?.tipPrice,
+            };
+
+            // Update the betHistory with a PUT request
+            const updateHistoryResponse = await axios.put(
+              `${import.meta.env.VITE_REACT_APP_API}/api/auth/addBetHistory/${
+                compareUser._id
+              }`,
+              betEntry
+            );
+
+            if (updateHistoryResponse.status === 200) {
+              console.log("Bet added to history");
+            } else {
+              toast.error("Failed to update bet history");
+            }
+          } else {
+            toast.error("Failed to purchase game");
+          }
+        } catch (error) {
+          console.error("Error buying bet:", error);
+          toast.error("An error occurred while purchasing the game");
+        } finally {
+          // Fetch all games after the purchase process is completed
+          fetchAllGames();
+        }
       }
     }
   };
@@ -49,7 +98,7 @@ const Item = ({ item, setForm, Bal, setOpens }) => {
             ${item?.tipPrice}
           </div>
         </div>
-        {active ? (
+        {!item?.purchasedBy.includes(user) ? (
           <div className=" text-red-400 flex items-center gap-1">
             <div>
               <CiLock />
@@ -99,16 +148,34 @@ const Item = ({ item, setForm, Bal, setOpens }) => {
         ) : (
           <></>
         )}
-        <div className="flex items-center justify-between mt-3">
+        {!item?.purchasedBy.includes(user) && totalValue === currentValue ? (
           <button
-            className="buy-btn"
-            onClick={handleBuyBet}
-            // className="w-[80%] bg-[var(--Primary)] text-white flex items-center justify-center gap-2 p-[10px] rounded text-[12px]"
+            className=" mt-2 w-[100%] bg-red-100 rounded flex items-center gap-2 py-2 justify-center"
+            onClick={() => toast.error("this game has been sold out")}
+            disabled={balLoader}
           >
-            <MdOutlineAddShoppingCart className="dark:text-white" />{" "}
-            <div className="dark:text-white">Buy Bet Now</div>
+            <MdCancel className="dark:text-white text-red-600" />{" "}
+            <div className="dark:text-white text-red-500 text-[12px]">
+              Game is Sold out
+            </div>
           </button>
-        </div>
+        ) : (
+          <div className="flex items-center justify-between mt-3">
+            {!item?.purchasedBy.includes(user) ? ( // Compare by user._id if `user` is an object
+              <button
+                className="buy-btn"
+                onClick={handleBuyBet}
+                disabled={balLoader}
+              >
+                <MdOutlineAddShoppingCart className="dark:text-white" />{" "}
+                <div className="dark:text-white">
+                  {balLoader ? "Loading..." : "Buy Bet Now"}
+                </div>
+              </button>
+            ) : null}
+          </div>
+        )}
+
         {/* // If balance is insufficient, show an error message */}
         <Dialog open={open} onClose={setOpen} className="relative z-10">
           <DialogBackdrop
@@ -145,6 +212,7 @@ const Item = ({ item, setForm, Bal, setOpens }) => {
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
+                    disabled={balLoader}
                     onClick={() => {
                       setOpen(false);
                       setOpens(true);

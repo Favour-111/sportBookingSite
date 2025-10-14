@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 // Create the context
 export const ShopContext = createContext();
@@ -11,6 +12,7 @@ export const ShopProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const user = localStorage.getItem("userId");
+  const [balLoader, setBalLoader] = useState(false);
   const [allUser, setAllUser] = useState([]);
   const [games, setAllGames] = useState([]);
   const [gameLoad, setGameLoading] = useState([]);
@@ -85,16 +87,45 @@ export const ShopProvider = ({ children }) => {
       document.documentElement.classList.remove("dark");
     }
   }, [isDarkMode]);
-  const updateBalance = (amount) => {
-    const updatedUser = {
-      ...compareUser,
-      availableBalance: compareUser?.availableBalance - amount,
-    };
-    // Assuming you're using a state to manage all users, update that state here
-    setAllUser(
-      allUser.map((user) => (user._id === compareUser._id ? updatedUser : user))
-    );
+  const updateBalance = async (amount) => {
+    try {
+      setBalLoader(true);
+      // Update the balance on the frontend
+      const updatedUser = {
+        ...compareUser,
+        availableBalance: compareUser?.availableBalance - amount,
+      };
+
+      // Update the user state in the frontend
+      setAllUser(
+        allUser.map((user) =>
+          user._id === compareUser._id ? updatedUser : user
+        )
+      );
+
+      // Send the balance update to the backend
+      const response = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_API}/api/auth/updateBalance`,
+        {
+          userId: compareUser?._id,
+          amount: amount,
+        }
+      );
+
+      // Check if the response is successful
+      if (response.status === 200) {
+        toast.success("Balance updated successfully!");
+      } else {
+        toast.error("Failed to update balance on server.");
+      }
+    } catch (error) {
+      console.error("Error updating balance:", error);
+      toast.error("An error occurred while updating balance.");
+    } finally {
+      setBalLoader(false);
+    }
   };
+
   return (
     <ShopContext.Provider
       value={{
@@ -113,6 +144,7 @@ export const ShopProvider = ({ children }) => {
         games,
         allUser,
         gameLoad,
+        balLoader,
         fetchAllGames,
       }}
     >

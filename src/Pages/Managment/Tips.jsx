@@ -47,7 +47,7 @@ const Tips = () => {
     setOpenModal(true); // Open the modal
   };
 
-  const { isDarkMode, games, gameLoad, fetchAllGames } =
+  const { isDarkMode, games, gameLoad, fetchAllGames, allUser } =
     useContext(ShopContext);
   const handleInput = (e) => {
     const name = e.target.name;
@@ -464,6 +464,27 @@ const Tips = () => {
                                                     {
                                                       selectedMessage.bettingType
                                                     }
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>
+                                                      Purchase By:
+                                                    </strong>{" "}
+                                                    {selectedMessage.purchasedBy
+                                                      .length > 0
+                                                      ? selectedMessage.purchasedBy
+                                                          .map((userId) => {
+                                                            const user =
+                                                              allUser.find(
+                                                                (item) =>
+                                                                  item._id ===
+                                                                  userId
+                                                              );
+                                                            return user
+                                                              ? user.userName
+                                                              : "Unknown User"; // Fallback if user not found
+                                                          })
+                                                          .join(", ") // Join all usernames if there are multiple
+                                                      : "No users"}
                                                   </p>
                                                 </div>
                                               )}
