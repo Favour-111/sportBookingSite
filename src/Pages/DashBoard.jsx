@@ -145,11 +145,14 @@ const DashBoard = () => {
                 </div>
                 {blur ? (
                   <button onClick={() => SetBlur(false)}>
-                    <IoEyeOutline size={20} />
+                    <IoEyeOutline className="dark:text-[#f6f6f6]" size={20} />
                   </button>
                 ) : (
                   <button onClick={() => SetBlur(true)}>
-                    <IoEyeOffOutline size={20} />
+                    <IoEyeOffOutline
+                      className="dark:text-[#f6f6f6]"
+                      size={20}
+                    />
                   </button>
                 )}
               </div>
@@ -178,7 +181,7 @@ const DashBoard = () => {
                   <div className="bg-[#787878] h-1.5 w-1.5 rounded-full"></div>
                 </div>
 
-                <div className="tracking-wider  font-[600]">
+                <div className="tracking-wider dark:text-[#f6f6f6] font-[600]">
                   {compareUser?._id.slice(-4)}
                 </div>
               </div>
@@ -398,7 +401,13 @@ const DashBoard = () => {
                                 </div>
                               </div>
                             </div>
-                            <div className="flex items-center gap-20 mt-4">
+                            <h1 className="text-sm font-[400] my-2 text-green-500">
+                              odds:2.5
+                            </h1>
+                            <h1 className="text-sm font-[400]  text-red-400">
+                              over 2.5
+                            </h1>
+                            <div className="flex items-center gap-20 mt-2">
                               <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
                                 Price
                                 <span className="font-[600] text-[14px] text-[black] dark:text-[white]">

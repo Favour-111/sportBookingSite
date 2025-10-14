@@ -137,7 +137,7 @@ const NavBar = ({ setOpen }) => {
               <div className="relative">
                 <button
                   onClick={() => SetDrop(!drop)}
-                  className="overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
+                  className="dark:text-[#f6f6f6] overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
                 >
                   <FiUser />
                 </button>
@@ -261,7 +261,7 @@ const NavBar = ({ setOpen }) => {
               <div className="relative">
                 <button
                   onClick={() => SetDrop(!drop)}
-                  className="overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
+                  className="dark:text-[#f6f6f6] overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
                 >
                   <FiUser />
                 </button>
