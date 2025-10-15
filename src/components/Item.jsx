@@ -22,12 +22,72 @@ const StarIcon = ({ filled }) => (
 
 const Item = ({ item, setForm, setOpens }) => {
   const [open, setOpen] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(null);
+  const [isBlinking, setIsBlinking] = useState(false);
   const { compareUser, user, balLoader, updateBalance, fetchAllGames } =
     useContext(ShopContext);
   const active = true;
   const totalValue = item?.purchaseLimit;
   const currentValue = item?.CurrentLimit;
   const progress = (currentValue / totalValue) * 100;
+
+  console.log(item.createdAt);
+
+  useEffect(() => {
+    if (item?.createdAt && item?.duration) {
+      const createdAt = new Date(item.createdAt);
+      const endTime = createdAt.getTime() + item.duration * 60000;
+
+      const interval = setInterval(() => {
+        const currentTime = new Date().getTime();
+        const timeLeft = endTime - currentTime;
+
+        if (timeLeft <= 0) {
+          clearInterval(interval);
+          setRemainingTime("Game expired");
+
+          // Trigger an action when time has elapsed
+          handleTimeElapsed(); // Example of a function that performs an action when time is up
+        } else {
+          const minutes = Math.floor(timeLeft / 60000);
+          const seconds = Math.floor((timeLeft % 60000) / 1000);
+          setRemainingTime(`${minutes}m ${seconds}s`);
+
+          // Check if there are 10 minutes or less remaining
+          if (minutes <= 10) {
+            setIsBlinking(true); // Start blinking effect
+          } else {
+            setIsBlinking(false); // Stop blinking
+          }
+        }
+      }, 1000); // Update every second
+
+      return () => clearInterval(interval);
+    }
+  }, [item]);
+
+  // Example function to handle action when time has elapsed
+  const handleTimeElapsed = async () => {
+    // Trigger an action when time has elapsed
+    toast.error("The game has expired!");
+
+    // Example API call to deactivate the game
+    try {
+      await axios.put(
+        `${import.meta.env.VITE_REACT_APP_API}/api/games/${
+          item._id
+        }/toggle-active`
+      );
+      toast(`${item.tipTitle} has ben deactivated`);
+      fetchAllGames();
+      console.log("Game deactivated after time expiration");
+    } catch (error) {
+      console.error("Error deactivating game:", error);
+    }
+
+    // Set isExpired to true so the UI reflects the change
+    setIsExpired(true);
+  };
 
   const handleBuyBet = async () => {
     if (!user) {
@@ -133,8 +193,12 @@ const Item = ({ item, setForm, setOpens }) => {
           </div>
         </div>
         <div>
-          <div className="bg-[#f1f1f1] p-2 rounded-[10px] text-[13px] text-[#787878]">
-            {item?.duration}:00 hours remaining
+          <div
+            className={`bg-[#f1f1f1] p-2 rounded-[10px] text-[11px] text-[#787878] ${
+              isBlinking ? "blinking" : ""
+            }`}
+          >
+            {remainingTime} : Minutes remaining
           </div>
           <div className="text-[12px] text-[orangered] dark:text-[tomato] opacity-80 mt-2 dark:opacity-100">
             Available on : {item?.bettingSites}

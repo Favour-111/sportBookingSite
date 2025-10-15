@@ -127,6 +127,42 @@ const Tips = () => {
       toast.error("Failed to delete game.");
     }
   };
+  const [status, setStatus] = useState(selectedMessage?.status);
+  const handleStatusChange = async (e) => {
+    const newStatus = e.target.value;
+    console.log("Selected Status:", newStatus); // Debugging log
+
+    setStatus(newStatus);
+
+    if (!selectedMessage) return;
+
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_APP_API}/api/games/updategameStatus/${
+          selectedMessage._id
+        }`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ gameStatus: newStatus }),
+        }
+      );
+
+      const data = await response.json();
+      console.log("Backend Response:", data); // Debugging log
+
+      if (!response.ok) throw new Error("Failed to update Game status");
+
+      setSelectedMessage((prev) => ({ ...prev, gameStatus: newStatus }));
+      alert("Game status updated successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("Failed to update status");
+    }
+  };
+
   return (
     <div
       className={`${isDarkMode ? "dark" : ""}flex  dark:bg-[var(--default)] `}
@@ -410,6 +446,32 @@ const Tips = () => {
                                               {selectedMessage && (
                                                 <div>
                                                   <p className="text-sm text-gray-500">
+                                                    <strong>Tip Status:</strong>{" "}
+                                                    {selectedMessage?.status}
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
+                                                    <strong>
+                                                      Status Edit:
+                                                    </strong>{" "}
+                                                    <select
+                                                      className="p-1 rounded border border-[#d3d3d3]"
+                                                      value={status} // Bind the select value to the status state
+                                                      onChange={(e) =>
+                                                        handleStatusChange(e)
+                                                      } // Trigger the status update on change
+                                                    >
+                                                      <option value="Pending">
+                                                        Pending⏳
+                                                      </option>
+                                                      <option value="Hit✅">
+                                                        Hit✅
+                                                      </option>
+                                                      <option value="Miss❌">
+                                                        Miss❌
+                                                      </option>
+                                                    </select>
+                                                  </p>
+                                                  <p className="text-sm mt-3 text-gray-500">
                                                     <strong>Tip Title:</strong>{" "}
                                                     {selectedMessage.tipTitle}
                                                   </p>

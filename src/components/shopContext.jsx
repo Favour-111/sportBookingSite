@@ -11,6 +11,7 @@ export const ShopProvider = ({ children }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
+  const [mainLoading, setMainLoading] = useState(false);
   const user = localStorage.getItem("userId");
   const [balLoader, setBalLoader] = useState(false);
   const [allUser, setAllUser] = useState([]);
@@ -18,6 +19,7 @@ export const ShopProvider = ({ children }) => {
   const [gameLoad, setGameLoading] = useState([]);
   const fetchUser = async () => {
     try {
+      setMainLoading(true);
       setLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_REACT_APP_API}/api/auth/getUsers`
@@ -31,11 +33,13 @@ export const ShopProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     } finally {
+      setMainLoading(false);
       setLoading(false);
     }
   };
   const fetchAllGames = async () => {
     try {
+      setMainLoading(true);
       setGameLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_REACT_APP_API}/api/games/allGame`
@@ -49,6 +53,7 @@ export const ShopProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     } finally {
+      setMainLoading(false);
       setGameLoading(false);
     }
   };
@@ -90,6 +95,7 @@ export const ShopProvider = ({ children }) => {
   const updateBalance = async (amount) => {
     try {
       setBalLoader(true);
+      setMainLoading(true);
       // Update the balance on the frontend
       const updatedUser = {
         ...compareUser,
@@ -123,6 +129,7 @@ export const ShopProvider = ({ children }) => {
       toast.error("An error occurred while updating balance.");
     } finally {
       setBalLoader(false);
+      setMainLoading(false);
     }
   };
 
@@ -135,6 +142,7 @@ export const ShopProvider = ({ children }) => {
         fetchUser,
         allUser,
         gameFilter,
+        mainLoading,
         user,
         toggleDarkMode,
         navOpen,
