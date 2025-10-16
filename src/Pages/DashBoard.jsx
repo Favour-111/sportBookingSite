@@ -311,7 +311,7 @@ const DashBoard = () => {
                 </button>
               </div>
               {page === "live" ? (
-                <div className="mt-5 ">
+                <div className="mt-5">
                   <h1 className="text-2xl font-bold dark:text-[#f1f1f1]">
                     🏆 Live Recommendations
                   </h1>
@@ -335,12 +335,11 @@ const DashBoard = () => {
                             fill="currentFill"
                           />
                         </svg>
-                        <span className="sr-only">Loading...</span>
                       </div>
                       <div className="text-sm">Loading...</div>
                     </div>
-                  ) : gameFilter.length <= 0 ? (
-                    <div className="flex justify-center h-100 items-center flex-col gap-3">
+                  ) : gameFilter.length === 0 ? (
+                    <div className="h-100 w-full flex flex-col justify-center items-center gap-3">
                       <div>
                         <img
                           src="https://cdn-icons-png.flaticon.com/512/2039/2039083.png"
@@ -353,37 +352,27 @@ const DashBoard = () => {
                       </div>
                     </div>
                   ) : (
-                    <div className="w-full ">
-                      <div className="mt-5 w-[100%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
-                        {gameFilter.reverse().map((item) => {
-                          return (
-                            <div data-aos="fade-up" className="w-full max-w-sm">
-                              <Item
-                                Bal={compareUser?.availableBalance.toLocaleString()}
-                                item={item}
-                                setOpens={setOpen}
-                              />
-                            </div>
-                          );
-                        })}
-
-                        {/* <Link
-            data-aos="fade-down"
-            to="/recommendations"
-            className="col-span-full mx-auto bg-[var(--Primary)] text-[12px] shadow shadow-amber-300 text-white px-5 py-2 rounded-[10px] flex items-center gap-2 hover:shadow-lg hover:shadow-amber-300 duration-200"
-          >
-            View all Recommendation <GoArrowRight />
-          </Link> */}
-                        <div
-                          className="col-span-full"
-                          data-aos="fade-down"
-                        ></div>
+                    <div className="w-full">
+                      <div className="mt-5 w-[100%] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
+                        {gameFilter.reverse().map((item) => (
+                          <div
+                            data-aos="fade-up"
+                            className="w-full max-w-sm"
+                            key={item._id}
+                          >
+                            <Item
+                              Bal={compareUser?.availableBalance.toLocaleString()}
+                              item={item}
+                              setOpens={setOpen}
+                            />
+                          </div>
+                        ))}
                       </div>
                     </div>
                   )}
                 </div>
               ) : page === "purchase" ? (
-                <div className="mt-5 ">
+                <div className="mt-5">
                   <h1 className="text-2xl font-bold dark:text-[#f1f1f1] flex items-center gap-2">
                     <div>
                       <TbShoppingCartStar />
@@ -391,152 +380,147 @@ const DashBoard = () => {
                     My Purchase
                   </h1>
 
-                  <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
-                    {compareUser?.betHistory.length > 0 ? (
-                      compareUser?.betHistory
-                        .reverse()
-                        .filter((item) => item?.status === "Pending")
-                        .map((item) => {
-                          return (
-                            <div
-                              className="flex flex-col gap-3 mt-5"
-                              key={item._id}
-                            >
-                              <div className="rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336] overflow-hidden">
-                                <div>
-                                  <img
-                                    src="https://github.com/Favour-111/my-asset/blob/main/Screenshot%202025-10-15%20191308.png?raw=true"
-                                    alt=""
-                                  />
-                                </div>
-                                <div className="p-4">
-                                  <div className="flex items-center justify-between">
-                                    <h1 className="font-[700] dark:text-[#f1f1f1]">
-                                      {item.gameName}
-                                    </h1>
-                                  </div>
-                                  <div>
-                                    <div className="w-[fit-content] mt-2 text-[11px] font-[400] flex items-center gap-1 dark:text-[#f1f1f1] dark:bg-[#222a3a] bg-[#f6f6f6] rounded-full px-2 py-[4px] text-[#787878] ">
-                                      ⏳ Pending
-                                    </div>
-                                  </div>
-                                  <div></div>
-
-                                  <div className="flex items-center gap-10 mt-2">
-                                    <h1 className="text-sm font-[400] my-2 text-green-500">
-                                      odds:{item.tipOdd}
-                                    </h1>
-
-                                    <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
-                                      Price
-                                      <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
-                                        ${item.tipPrice}
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
-                                    {item.gameContent}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })
-                    ) : (
-                      <div className="h-100 w-[100%] flex flex-col justify-center items-center gap-3">
+                  {compareUser?.betHistory.length === 0 ? (
+                    <div className="h-100 w-full flex flex-col justify-center items-center gap-3">
+                      <div>
                         <img
-                          src=" https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-illustration-svg-download-png-2809510.png"
+                          src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-illustration-svg-download-png-2809510.png"
                           alt=""
                           width={200}
                         />
-                        <div className="text-center py-4 text-gray-500 dark:text-[#d3d3d3]">
-                          No purchased items. Buy tips to view history.
-                        </div>
                       </div>
-                    )}
-                  </div>
+                      <div className="text-center py-4 text-gray-500 dark:text-[#d3d3d3]">
+                        No purchased items. Buy tips to view history.
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
+                      {compareUser?.betHistory
+                        .reverse()
+                        .filter((item) => item?.status === "Pending")
+                        .map((item) => (
+                          <div
+                            className="flex flex-col gap-3 mt-5"
+                            key={item._id}
+                          >
+                            <div className="rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336] overflow-hidden">
+                              <div>
+                                <img
+                                  src="https://github.com/Favour-111/my-asset/blob/main/Screenshot%202025-10-15%20191308.png?raw=true"
+                                  alt=""
+                                />
+                              </div>
+                              <div className="p-4">
+                                <div className="flex items-center justify-between">
+                                  <h1 className="font-[700] dark:text-[#f1f1f1]">
+                                    {item.gameName}
+                                  </h1>
+                                </div>
+                                <div>
+                                  <div className="w-[fit-content] mt-2 text-[11px] font-[400] flex items-center gap-1 dark:text-[#f1f1f1] dark:bg-[#222a3a] bg-[#f6f6f6] rounded-full px-2 py-[4px] text-[#787878]">
+                                    ⏳ Pending
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-10 mt-2">
+                                  <h1 className="text-sm font-[400] my-2 text-green-500">
+                                    odds:{item.tipOdd}
+                                  </h1>
+                                  <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
+                                    Price
+                                    <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
+                                      ${item.tipPrice}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
+                                  {item.gameContent}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  )}
                 </div>
               ) : (
-                <div className="mt-5 ">
+                <div className="mt-5">
                   <h1 className="text-2xl font-bold dark:text-[#f1f1f1] flex items-center gap-2">
                     <div>
                       <MdContentPasteSearch />
                     </div>{" "}
                     Game Result
                   </h1>
-                  <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
-                    {compareUser?.betHistory?.length ? (
-                      compareUser?.betHistory
-                        .filter((item) => item?.status !== "Pending")
-                        .reverse() // Reverse the array for most recent first
-                        .map((item) => {
-                          return (
-                            <div
-                              className="flex flex-col gap-3 mt-5"
-                              key={item._id}
-                            >
-                              <div className="rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336] overflow-hidden">
-                                <div>
-                                  <img
-                                    src="https://github.com/Favour-111/my-asset/blob/main/Screenshot%202025-10-15%20191308.png?raw=true"
-                                    alt=""
-                                  />
-                                </div>
-                                <div className="p-4">
-                                  <div className="flex items-center justify-between">
-                                    <h1 className="font-[700] dark:text-[#f1f1f1]">
-                                      {item.gameName}
-                                    </h1>
-                                  </div>
-                                  <div>
-                                    {item.status === "Hit✅" ? (
-                                      <div className="w-[fit-content] mt-2 text-[11px] font-[500] flex items-center gap-1 text-green-600 dark:bg-[#222a3a] bg-green-100 rounded-full px-2 py-[4px]  ">
-                                        <div>
-                                          <IoCheckmarkCircleOutline className="text-green-600" />
-                                        </div>
-                                        Bet Won! 🏆
-                                      </div>
-                                    ) : (
-                                      <div className="w-[fit-content] mt-2 text-[11px] font-[400] flex items-center gap-1 text-red-600 dark:bg-[#222a3a] bg-red-100 rounded-full px-2 py-[4px]  ">
-                                        <div></div> Bet Lost ❌
-                                        <GiCancel className="text-red-400" />
-                                      </div>
-                                    )}
-                                  </div>
-
-                                  <div className="flex items-center gap-10 mt-2">
-                                    <h1 className="text-sm font-[400] my-2 text-green-500">
-                                      odds:{item.tipOdd}
-                                    </h1>
-
-                                    <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
-                                      Price
-                                      <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
-                                        ${item.tipPrice}
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
-                                    {item.gameContent}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })
-                    ) : (
-                      <div className="h-100 w-[100%]  flex flex-col justify-center items-center gap-3">
+                  {compareUser?.betHistory?.length === 0 ? (
+                    <div className="h-100 w-full flex flex-col justify-center items-center gap-3">
+                      <div>
                         <img
-                          src=" https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-illustration-svg-download-png-2809510.png"
+                          src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-illustration-svg-download-png-2809510.png"
                           alt=""
                           width={200}
                         />
-                        <div className="text-center py-4 text-gray-500 dark:text-[#d3d3d3]">
-                          No purchased items. Buy tips to view history.
-                        </div>
                       </div>
-                    )}
-                  </div>
+                      <div className="text-center py-4 text-gray-500 dark:text-[#d3d3d3]">
+                        No purchased items. Buy tips to view history.
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
+                      {compareUser?.betHistory
+                        .filter((item) => item?.status !== "Pending")
+                        .reverse()
+                        .map((item) => (
+                          <div
+                            className="flex flex-col gap-3 mt-5"
+                            key={item._id}
+                          >
+                            <div className="rounded-[10px] border border-[#eaeaea] dark:border-zinc-600 dark:bg-[#1b2336] overflow-hidden">
+                              <div>
+                                <img
+                                  src="https://github.com/Favour-111/my-asset/blob/main/Screenshot%202025-10-15%20191308.png?raw=true"
+                                  alt=""
+                                />
+                              </div>
+                              <div className="p-4">
+                                <div className="flex items-center justify-between">
+                                  <h1 className="font-[700] dark:text-[#f1f1f1]">
+                                    {item.gameName}
+                                  </h1>
+                                </div>
+                                <div>
+                                  {item.status === "Hit✅" ? (
+                                    <div className="w-[fit-content] mt-2 text-[11px] font-[500] flex items-center gap-1 text-green-600 dark:bg-[#222a3a] bg-green-100 rounded-full px-2 py-[4px]">
+                                      <div>
+                                        <IoCheckmarkCircleOutline className="text-green-600" />
+                                      </div>
+                                      Bet Won! 🏆
+                                    </div>
+                                  ) : (
+                                    <div className="w-[fit-content] mt-2 text-[11px] font-[400] flex items-center gap-1 text-red-600 dark:bg-[#222a3a] bg-red-100 rounded-full px-2 py-[4px]">
+                                      <div></div> Bet Lost ❌
+                                      <GiCancel className="text-red-400" />
+                                    </div>
+                                  )}
+                                </div>
+                                <div className="flex items-center gap-10 mt-2">
+                                  <h1 className="text-sm font-[400] my-2 text-green-500">
+                                    odds:{item.tipOdd}
+                                  </h1>
+                                  <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
+                                    Price
+                                    <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
+                                      ${item.tipPrice}
+                                    </span>
+                                  </div>
+                                </div>
+                                <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-4">
+                                  {item.gameContent}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                    </div>
+                  )}
                 </div>
               )}
             </div>
