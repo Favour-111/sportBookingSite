@@ -61,7 +61,6 @@ const Tips = () => {
         form.tipPrice === "" ||
         form.tipTitle === "" ||
         form.oddRatio === "" ||
-        form.bettingType === "" ||
         form.confidenceLevel === "" ||
         form.contentAfterPurchase === "" ||
         form.duration === ""
@@ -146,7 +145,7 @@ const Tips = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ gameStatus: newStatus }),
+          body: JSON.stringify({ gameStatus: newStatus }), // Ensure this matches the backend's expected field
         }
       );
 
@@ -155,7 +154,11 @@ const Tips = () => {
 
       if (!response.ok) throw new Error("Failed to update Game status");
 
-      setSelectedMessage((prev) => ({ ...prev, gameStatus: newStatus }));
+      // Update selectedMessage state to reflect the new status
+      setSelectedMessage((prev) => ({
+        ...prev,
+        status: newStatus, // Ensure this matches the updated field in the game model
+      }));
       alert("Game status updated successfully!");
     } catch (error) {
       console.error(error);
@@ -382,7 +385,7 @@ const Tips = () => {
                                 {user.oddRatio}
                               </td>
                               <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
-                                {user.duration}:00 hrs
+                                {user.duration}: min
                               </td>
                               <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
                                 <button
@@ -455,10 +458,10 @@ const Tips = () => {
                                                     </strong>{" "}
                                                     <select
                                                       className="p-1 rounded border border-[#d3d3d3]"
-                                                      value={status} // Bind the select value to the status state
+                                                      value={status} // This should bind the select value to the state
                                                       onChange={(e) =>
                                                         handleStatusChange(e)
-                                                      } // Trigger the status update on change
+                                                      } // Update on change
                                                     >
                                                       <option value="Pending">
                                                         Pending⏳
@@ -685,7 +688,7 @@ const Tips = () => {
                         type="number"
                         name="duration"
                         onChange={handleInput}
-                        placeholder="Set time limit"
+                        placeholder="Set time limit (in minute)"
                         class="placeholder:text-[12px] block  w-[100%]  mt-1 rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-1 focus:-outline-offset-2 focus:outline-amber-200 sm:text-sm/6"
                       />
                     </div>

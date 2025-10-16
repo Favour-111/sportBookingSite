@@ -8,22 +8,22 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import { CiWarning } from "react-icons/ci";
+import { IoCheckmarkSharp } from "react-icons/io5";
+
 const Funds = ({ open, setOpen, userToken }) => {
   const prices = [100, 250, 500, 1000, 2000, 3000, 5000];
 
-  // State to hold selected amount and custom amount
   const [selectedAmount, setSelectedAmount] = useState(null);
   const [balance, setBalance] = useState(0);
-
-  const updateBalance = (newBalance) => {
-    setBalance(newBalance);
-  };
   const [modalShown, setModalOpen] = useState(false);
   const [customAmount, setCustomAmount] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const userId = localStorage.getItem("userId");
+
+  const updateBalance = (newBalance) => {
+    setBalance(newBalance);
+  };
 
   // Handle quick selection of amount
   const handleQuickSelect = (amount) => {
@@ -73,14 +73,13 @@ const Funds = ({ open, setOpen, userToken }) => {
       );
 
       if (response) {
-        // Assuming the response contains the updated balance
-        const { availableBalance } = response.data.availableBalance;
+        const { availableBalance } = response.data;
 
         // Update balance in the parent component
         updateBalance(availableBalance);
 
-        // Log success message
-        setModalOpen(true);
+        setModalOpen(true); // Show modal after successful deposit
+        setOpen(false); // Close the deposit modal
 
         console.log("Deposit successful", response.data);
       } else {
@@ -98,7 +97,7 @@ const Funds = ({ open, setOpen, userToken }) => {
     <div>
       {open && (
         <div className="fixed p-5 top-0 right-0 bottom-0 left-0 bg-[#00000050] z-10000 flex items-center justify-center">
-          <div className="relative h-[fit-content] md:w-[400px] dark:bg-[var(--default)] border  dark:border-[#787878] border-[#fff] w-[100%] bg-[white] rounded-[20px] p-5">
+          <div className="relative h-[fit-content] md:w-[400px] dark:bg-[var(--default)] border dark:border-[#787878] border-[#fff] w-[100%] bg-[white] rounded-[20px] p-5">
             <h1 className="font-[600] dark:text-[#d3d3d3]">
               Quick selection amount
             </h1>
@@ -159,64 +158,67 @@ const Funds = ({ open, setOpen, userToken }) => {
               <MdClose />
             </button>
           </div>
-          <Dialog open={modalShown} onClose={setOpen} className="relative z-10">
-            <DialogBackdrop
-              transition
-              className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-            />
-            <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-              <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <DialogPanel
-                  transition
-                  className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                >
-                  <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div className="sm:flex sm:items-start">
-                      <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
-                        <CiWarning className="size-6 text-red-600" />
-                      </div>
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <DialogTitle
-                          as="h3"
-                          className="text-base font-semibold text-gray-900"
-                        >
-                          Insufficient Balance
-                        </DialogTitle>
-                        <div className="mt-2">
-                          <p className="text-sm text-gray-500">
-                            You do not have enough balance to make this
-                            purchase.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setModalOpen(false);
-                        setOpen(false);
-                      }}
-                      className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    >
-                      Add Funds
-                    </button>
-                    <button
-                      type="button"
-                      data-autofocus
-                      onClick={() => setOpen(false)}
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </DialogPanel>
-              </div>
-            </div>
-          </Dialog>
         </div>
       )}
+
+      {/* Success Modal */}
+      <Dialog
+        open={modalShown}
+        onClose={() => setModalOpen(false)}
+        className="relative z-10"
+      >
+        <DialogBackdrop
+          transition
+          className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+        />
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+            <DialogPanel
+              transition
+              className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+            >
+              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:size-10">
+                    <IoCheckmarkSharp className="size-6 text-green-600" />
+                  </div>
+                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                    <DialogTitle
+                      as="h3"
+                      className="text-base font-semibold text-gray-900"
+                    >
+                      Deposit Successful
+                    </DialogTitle>
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-500">
+                        Your deposit has been successfully processed. You can
+                        now use your funds to make purchases.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <button
+                  type="button"
+                  onClick={() => setModalOpen(false)}
+                  className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-green-500 sm:ml-3 sm:w-auto"
+                >
+                  Continue Betting
+                </button>
+                <button
+                  type="button"
+                  data-autofocus
+                  onClick={() => setModalOpen(false)}
+                  className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                >
+                  Cancel
+                </button>
+              </div>
+            </DialogPanel>
+          </div>
+        </div>
+      </Dialog>
     </div>
   );
 };

@@ -24,6 +24,7 @@ import BackToTop from "../../components/BackToTop";
 import Login from "../../components/Login/Login";
 import LoadingScreen from "../../components/loading/Loader";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { PiSoccerBallThin } from "react-icons/pi";
 const Landing = () => {
   const { isDarkMode, user, games, gameFilter, gameLoad } =
     useContext(ShopContext);
@@ -88,9 +89,12 @@ const Landing = () => {
 
             <p
               data-aos="fade-up"
-              className="text-sm dark:bg-zinc-600 dark:text-white bg-[#f1f1f1] p-1 px-4 rounded-[5px]"
+              className="flex items-center gap-2 text-sm dark:bg-zinc-600 dark:text-white bg-[#fff] p-2 px-4 rounded-full border-1 border-[#f1f1f1]"
             >
-              ⚽Best Sport Recommendation
+              <div>
+                <PiSoccerBallThin size={18} />
+              </div>{" "}
+              <div>Best Sport Recommendation</div>
             </p>
             <h1
               data-aos="fade-up"

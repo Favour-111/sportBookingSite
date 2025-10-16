@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { IoTrendingUp } from "react-icons/io5";
+import { IoCheckmarkSharp, IoTrendingUp } from "react-icons/io5";
 import { MdCancel, MdOutlineAddShoppingCart } from "react-icons/md";
 import { ShopContext } from "./shopContext";
 import { LuUsers } from "react-icons/lu";
@@ -22,6 +22,7 @@ const StarIcon = ({ filled }) => (
 
 const Item = ({ item, setForm, setOpens }) => {
   const [open, setOpen] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [remainingTime, setRemainingTime] = useState(null);
   const [isBlinking, setIsBlinking] = useState(false);
   const { compareUser, user, balLoader, updateBalance, fetchAllGames } =
@@ -88,7 +89,6 @@ const Item = ({ item, setForm, setOpens }) => {
     // Set isExpired to true so the UI reflects the change
     setIsExpired(true);
   };
-
   const handleBuyBet = async () => {
     if (!user) {
       setForm(true); // If not logged in, prompt the user to log in
@@ -96,10 +96,10 @@ const Item = ({ item, setForm, setOpens }) => {
       const amountToSubtract = item?.tipPrice;
 
       if (compareUser?.availableBalance < amountToSubtract) {
-        toast.error("Insufficient balance");
+        setOpen(true); // If balance is insufficient, open the "insufficient balance" modal
       } else {
         try {
-          await updateBalance(amountToSubtract);
+          await updateBalance(amountToSubtract); // Deduct amount from balance
 
           const response = await axios.put(
             `${import.meta.env.VITE_REACT_APP_API}/api/games/${item._id}/buy`,
@@ -113,17 +113,21 @@ const Item = ({ item, setForm, setOpens }) => {
           );
 
           if (response.status === 200 && response2.status === 200) {
-            toast.success("Game purchased successfully!");
+            setOpenModal(true); // Open the success modal after a successful purchase
 
+            // Create a bet entry for the history
             const betEntry = {
+              gameId: item?._id,
               gameContent: item?.contentAfterPurchase,
               gameName: item?.tipTitle,
               gameDate: new Date(),
               tipPrice: item?.tipPrice,
               tipName: item.bettingType,
               tipOdd: item.oddRatio,
+              status: item.status,
             };
 
+            // Add bet entry to user's history
             const updateHistoryResponse = await axios.put(
               `${import.meta.env.VITE_REACT_APP_API}/api/auth/addBetHistory/${
                 compareUser._id
@@ -258,24 +262,18 @@ const Item = ({ item, setForm, setOpens }) => {
         <Dialog open={open} onClose={setOpen} className="relative z-10">
           <DialogBackdrop
             transition
-            className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+            className="fixed inset-0 bg-gray-500/75 transition-opacity"
           />
           <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
             <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-              <DialogPanel
-                transition
-                className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-              >
+              <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl">
                 <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:size-10">
                       <CiWarning className="size-6 text-red-600" />
                     </div>
                     <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                      <DialogTitle
-                        as="h3"
-                        className="text-base font-semibold text-gray-900"
-                      >
+                      <DialogTitle className="text-base font-semibold text-gray-900">
                         Insufficient Balance
                       </DialogTitle>
                       <div className="mt-2">
@@ -289,10 +287,9 @@ const Item = ({ item, setForm, setOpens }) => {
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    disabled={balLoader}
                     onClick={() => {
-                      setOpen(false);
-                      setOpens(true);
+                      setOpen(false); // Close insufficient balance modal
+                      setOpens(true); // Prompt user to add funds (this may be your fund modal)
                     }}
                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
                   >
@@ -300,11 +297,61 @@ const Item = ({ item, setForm, setOpens }) => {
                   </button>
                   <button
                     type="button"
-                    data-autofocus
-                    onClick={() => setOpen(false)}
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                    onClick={() => setOpen(false)} // Close modal
+                    className="inline-flex w-full justify-center rounded-md bg-zinc-300 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-zinc-500 sm:ml-3 sm:w-auto"
                   >
                     Cancel
+                  </button>
+                </div>
+              </DialogPanel>
+            </div>
+          </div>
+        </Dialog>
+
+        <Dialog
+          open={openModal}
+          onClose={setOpenModal}
+          className="relative z-10"
+        >
+          <DialogBackdrop
+            transition
+            className="fixed inset-0 bg-gray-500/75 transition-opacity"
+          />
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+              <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl">
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="sm:flex sm:items-start">
+                    <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-green-100 sm:mx-0 sm:size-10">
+                      <IoCheckmarkSharp className="size-6 text-green-600" />
+                    </div>
+                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <DialogTitle className="text-base font-semibold text-gray-900">
+                        Game Purchase Successful!
+                      </DialogTitle>
+                      <div className="mt-2">
+                        <p className="text-sm text-gray-500">
+                          Your game has been successfully purchased. You can now
+                          access the game and start playing.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <button
+                    type="button"
+                    onClick={() => setOpenModal(false)}
+                    className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-green-500 sm:ml-3 sm:w-auto"
+                  >
+                    Go to Game
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setOpenModal(false)} // Close the modal directly
+                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs"
+                  >
+                    Close
                   </button>
                 </div>
               </DialogPanel>

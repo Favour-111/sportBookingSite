@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { TbBrandGoogleAnalytics, TbSmartHome } from "react-icons/tb";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import { FiUser } from "react-icons/fi";
@@ -11,7 +11,7 @@ import { IoClose } from "react-icons/io5";
 const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation(); // Get the current route
-
+  const navigate = useNavigate();
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
@@ -108,11 +108,11 @@ const Sidebar = () => {
               isActive("/logout") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/logout" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <div>
                 <CiLogout />
               </div>
-              Log out
+              Go back
             </Link>
           </li>
         </ul>
@@ -221,12 +221,17 @@ const Sidebar = () => {
               isActive("/logout") ? "bg-[#f5f5f5]" : ""
             }`}
           >
-            <Link to="/logout" className="p-2 flex items-center gap-2">
+            <button
+              onClick={() => {
+                navigate("/");
+              }}
+              className="p-2 flex items-center gap-2"
+            >
               <div>
                 <CiLogout />
               </div>
-              Log out
-            </Link>
+              Go back
+            </button>
           </li>
         </ul>
       </div>

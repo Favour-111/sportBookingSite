@@ -65,7 +65,7 @@ const NavBar = ({ setOpen }) => {
             )}
           </div>
         </div> */}
-        <div className="hidden md:flex items-center justify-between py-1 px-10 border-b-1 backdrop-blur-xl bg-[#ffffff1b] border-gray-200 dark:border-gray-600  dark:bg-[#1c233085] ">
+        <div className="hidden md:flex items-center justify-between py-1 px-10  backdrop-blur-xl  border-gray-200 dark:border-gray-600  dark:bg-[#1c233085] ">
           <Link to="/" className="flex items-center gap-2">
             <img
               src="https://github.com/Favour-111/my-asset/blob/main/image.jpg?raw=true"
@@ -78,6 +78,16 @@ const NavBar = ({ setOpen }) => {
           </Link>
           <div>
             <ul className="flex items-center gap-4 ">
+              {compareUser?.role === "admin" && (
+                <li>
+                  <Link
+                    to={`/management/${compareUser._id}`}
+                    className="text-[var(--default)] dark:text-[#d3d3d3] dark:hover:text-[white] text-sm hover:text-[var(--Primary)] duration-200"
+                  >
+                    Management
+                  </Link>
+                </li>
+              )}
               {!user && (
                 <li>
                   <Link
@@ -330,6 +340,16 @@ const NavBar = ({ setOpen }) => {
           } shadow-sm overflow-hidden transition-all duration-200 ease-in-out`}
         >
           <ul className="p-5 gap-1 flex flex-col">
+            {compareUser?.role === "admin" && (
+              <li className="h-8 w-[100%] ">
+                <Link
+                  to={`/management/${compareUser._id}`}
+                  className="w-[100%] text-[13px] dark:text-[#d3d3d3] text-[#787878]"
+                >
+                  Management
+                </Link>
+              </li>
+            )}
             {!user && (
               <li onClick={() => navigate("/")} className="h-8 w-[100%] ">
                 <Link className="w-[100%] text-[13px] dark:text-[#d3d3d3] text-[#787878]">

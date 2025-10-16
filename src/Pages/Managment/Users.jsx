@@ -84,6 +84,28 @@ const Users = () => {
       setOpenModal(false);
     }
   };
+  // Add this inside your `Users` component
+  const handleRoleChange = async (userId, newRole) => {
+    setLoading(true); // Set loading state while the update is being processed
+    try {
+      const response = await axios.put(
+        `${
+          import.meta.env.VITE_REACT_APP_API
+        }/api/auth/updateUserRole/${userId}`, // Make sure this route exists on your server
+        { role: newRole }
+      );
+
+      if (response.status === 200) {
+        toast.success("User role updated successfully");
+        fetchUser(); // Refresh the users list to show the updated roles
+      }
+    } catch (error) {
+      toast.error("Error updating user role");
+      console.error(error);
+    } finally {
+      setLoading(false); // Reset loading state
+    }
+  };
   return (
     <div
       className={`${isDarkMode ? "dark" : ""}flex  dark:bg-[var(--default)] `}
@@ -194,6 +216,9 @@ const Users = () => {
                         Email
                       </th>
                       <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
+                        Role
+                      </th>
+                      <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
                         Total Spent
                       </th>
                       <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
@@ -222,6 +247,9 @@ const Users = () => {
                             {user.email}
                           </td>
                           <td className="py-3 px-6 text-sm whitespace-nowrap">
+                            {user.role}
+                          </td>
+                          <td className="py-3 px-6 text-sm whitespace-nowrap">
                             ${user.totalMoneySpent}
                           </td>
 
@@ -247,6 +275,17 @@ const Users = () => {
                             >
                               Delete
                             </button>
+                            <select
+                              value={user.role} // Display current role
+                              onChange={(e) =>
+                                handleRoleChange(user._id, e.target.value)
+                              } // Trigger role update on change
+                              className="ml-4 text-cyan-500 outline-none hover:text-cyan-700"
+                            >
+                              <option value="customer">Customer</option>
+                              <option value="admin">Admin</option>
+                              {/* Add more roles if necessary */}
+                            </select>
                           </td>
                         </tr>
                         <Dialog

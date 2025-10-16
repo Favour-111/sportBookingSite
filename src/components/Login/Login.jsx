@@ -6,6 +6,7 @@ import axios from "axios";
 import { MdOutlineClose } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import { IoMdFingerPrint } from "react-icons/io";
 
 const InputField = ({ label, name, type, value, onChange, icon }) => (
   <div className="w-[100%]">
@@ -15,15 +16,15 @@ const InputField = ({ label, name, type, value, onChange, icon }) => (
     >
       {label}
     </label>
-    <div className="w-[100%] border-[1px] rounded dark:bg-transparent dark:border-[#d3d3d365] border-gray-200 mt-1 outline-none focus:border-[var(--Primary)] duration-200 dark:bg-slate-700 dark:text-white flex items-center gap-2 px-3">
-      <div>{icon}</div>
+    <div className="w-[100%] border-[1px] rounded-[10px] dark:bg-transparent dark:border-[#d3d3d365] border-gray-200 mt-1 outline-none focus:border-[var(--Primary)] duration-200 dark:bg-slate-700 dark:text-white flex items-center gap-2 px-3">
+      <div className="text-[#787878]">{icon}</div>
       <input
         placeholder={`Enter your ${label}`}
         type={type}
         name={name}
         value={value}
         onChange={onChange}
-        className="w-[100%] p-2 placeholder:text-sm rounded-[10px] border-0 bg-transparent outline-none"
+        className="w-[100%] p-2 placeholder:text-[12px] rounded-[10px] border-0 bg-transparent outline-none"
       />
     </div>
   </div>
@@ -176,23 +177,27 @@ const Login = ({ state }) => {
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#0000004e] bg-opacity-50 flex items-center justify-center z-50">
-        <div className="relative bg-white dark:bg-slate-800 p-6 rounded-lg shadow-lg w-[90vw] max-w-md flex items-center flex-col">
+        <div className="relative bg-white dark:bg-slate-800 p-6 rounded-[20px] shadow-lg w-[90vw] max-w-md flex flex-col">
+          <div className="border-2 border-[#f1f1f1] w-[fit-content] rounded-[11px] p-[1px]">
+            <div className="text-3xl bg-[var(--Primary)]  p-1 rounded-[10px] text-white">
+              <IoMdFingerPrint />
+            </div>
+          </div>
           <h1 className="text-2xl text-[var(--Primary)] font-[600]">
             SportsTips
           </h1>
           <p className="text-sm text-[#787878] dark:text-[#d3d3d3] font-[400] mt-2">
             Join the winning team - Get premium betting tips
           </p>
-
           {/* Button for switching between Login and Sign Up */}
           {!resetPass && (
-            <div className="w-full mt-5 rounded-[10px] flex bg-[#f8f7f7] dark:bg-[#202d43cc] gap-4 p-1">
+            <div className="w-full mt-5 rounded-[12px] flex bg-[#f8f7f7] dark:bg-[#202d43cc] gap-4 p-1">
               <button
                 onClick={() => {
                   setType("login");
                   resetForm();
                 }}
-                className={`text-sm p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
+                className={`text-[13px] p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
                   type === "login"
                     ? "dark:bg-[var(--default)] bg-[#e6e6e6]"
                     : ""
@@ -205,7 +210,7 @@ const Login = ({ state }) => {
                   setType("signUp");
                   resetForm();
                 }}
-                className={`text-sm p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
+                className={`text-[13px]  p-2 rounded-[10px] w-[50%] flex items-center justify-center dark:text-[#d3d3d3] ${
                   type === "signUp"
                     ? "dark:bg-[var(--default)] bg-[#e6e6e6]"
                     : ""
@@ -215,10 +220,9 @@ const Login = ({ state }) => {
               </button>
             </div>
           )}
-
-          {/* Telegram Login Button */}
+          {/* Telegram Login Button
           {!resetPass && (
-            <div className="w-[100%] mt-3">
+            <div className="w-[100%] mt-3 text-sm">
               <button className="flex justify-center items-center gap-4 w-[100%] mt-1 p-3 rounded-[10px] border-[#d3d3d3] dark:bg-[transparent] dark:text-[#d3d3d3] dark:border dark:border-[white] bg-[#f1f1f1]">
                 <div>
                   <FaTelegram />
@@ -226,17 +230,15 @@ const Login = ({ state }) => {
                 Login via Telegram
               </button>
             </div>
-          )}
-
+          )} */}
           {/* Separator */}
-          {!resetPass && (
+          {/* {!resetPass && (
             <div className="text-center mt-2 text-sm uppercase font-[300] dark:text-[#d3d3d3]">
               or
             </div>
-          )}
-
+          )} */}
           {/* Form Inputs */}
-          <div className="flex flex-col gap-3 w-[100%]">
+          <div className="flex flex-col gap-3 w-[100%] mt-4">
             {/* Only show these fields when resetPass is false */}
             {!resetPass && type === "signUp" && (
               <InputField
@@ -279,7 +281,6 @@ const Login = ({ state }) => {
               </div>
             )}
           </div>
-
           {/* Reset Password Form */}
           {resetPass && (
             <div className="flex flex-col gap-3 w-[100%] mt-4">
@@ -311,7 +312,6 @@ const Login = ({ state }) => {
               </button>
             </div>
           )}
-
           {/* Submit Button */}
           {!resetPass && (
             <button
@@ -335,14 +335,13 @@ const Login = ({ state }) => {
               </span>
             </button>
           )}
-
           {/* Close Buttons */}
-          <button
+          {/* <button
             className="mt-3 text-sm dark:text-[#d3d3d3] text-[#787878]"
             onClick={() => state(false)}
           >
             close
-          </button>
+          </button> */}
           <button
             className="absolute top-3 right-3 text-[#787878] dark:text-[#d3d3d3]"
             onClick={() => state(false)}
