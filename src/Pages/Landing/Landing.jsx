@@ -89,7 +89,7 @@ const Landing = () => {
 
             <p
               data-aos="fade-up"
-              className="text-[12px] flex items-center gap-2 dark:bg-zinc-600 dark:text-white bg-[#fff] p-2 px-4 rounded-full border-1 border-[#f1f1f1]"
+              className="flex items-center gap-2 text-sm dark:bg-zinc-600 dark:text-white bg-[#fff] p-2 px-4 rounded-full border-1 border-[#f1f1f1]"
             >
               <div>
                 <PiSoccerBallThin size={18} />
@@ -118,20 +118,23 @@ const Landing = () => {
                 </span>
               </span>
             </p>
-            <div className="flex flex-row   items-center gap-5 mt-8 ">
+            <div className="flex md:flex-row flex-col  items-center gap-5 mt-8 ">
               <button
                 onClick={() => !user && setForm(true)}
                 data-aos="fade-down"
-                className="text-sm flex items-center gap-2 justify-center hover:bg-amber-300 duration-1000 transition-all dark:shadow-none dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18]  bg-amber-200 shadow-amber-200 sm:py-[12px] sm:px-5 px-5 py-[12px] rounded-[5px] shadow-md hover:shadow-sm"
+                className="btn"
               >
-                Start Winning
+                Start Winning Now
               </button>
               <button
                 data-aos="fade-down"
                 onClick={() => !user && setForm(true)}
-                className="text-sm flex items-center gap-2 justify-center hover:bg-zinc-200 duration-1000 transition-all dark:shadow-none dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18]  bg-zinc-100 sm:py-[12px] sm:px-5 px-5 py-[12px] rounded-[5px] shadow-md hover:shadow-sm"
+                className="text-sm flex items-center gap-2 justify-center border dark:shadow-none bg:border-[#787878] dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18] border-zinc-300 bg-zinc-200  sm:py-[10px] sm:px-8 px-5 py-[9px]  rounded-[12px] shadow-md hover:shadow-lg hover:bg-zinc-500 duration-300 hover:text-[#fff] shadow-zinc-200"
               >
-                <div>Get started</div>
+                <div>Get started Now </div>
+                <div>
+                  <FaArrowRightLong />
+                </div>
               </button>
             </div>
           </div>
@@ -242,7 +245,7 @@ const Landing = () => {
             )}
           </div>
           {/* i am to put the featured games here */}
-          <div className="text-center mt-20">
+          <div className="text-center">
             <p
               data-aos="fade-up"
               className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-1"
