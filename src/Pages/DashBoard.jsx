@@ -11,12 +11,13 @@ import {
   IoCheckmarkCircleOutline,
   IoEyeOffOutline,
   IoEyeOutline,
+  IoRefreshOutline,
   IoWalletOutline,
 } from "react-icons/io5";
 import { TbShoppingCartStar } from "react-icons/tb";
 import { RiShoppingCart2Line } from "react-icons/ri";
 
-import { LuTrendingDown } from "react-icons/lu";
+import { LuRefreshCw, LuTrendingDown } from "react-icons/lu";
 
 import { FaCoins } from "react-icons/fa6";
 import { MdContentPasteSearch, MdOutlineTipsAndUpdates } from "react-icons/md";
@@ -139,12 +140,21 @@ const DashBoard = () => {
                   width={60}
                 />
                 <div className="flex items-center gap-4 mt-1 ">
-                  <div>
-                    {" "}
-                    <h1 className={`text-2xl font-[700] ${blur && "blur-sm"}`}>
-                      ${compareUser?.availableBalance.toLocaleString()}
-                    </h1>
-                  </div>
+                  {balLoader ? (
+                    <div className="animate-spin duration-1000">
+                      <LuRefreshCw size={20} />
+                    </div>
+                  ) : (
+                    <div>
+                      {" "}
+                      <h1
+                        className={`text-2xl font-[700] ${blur && "blur-sm"}`}
+                      >
+                        ${compareUser?.availableBalance.toLocaleString()}
+                      </h1>
+                    </div>
+                  )}
+
                   {blur ? (
                     <button onClick={() => SetBlur(false)}>
                       <IoEyeOutline className="" size={20} />
