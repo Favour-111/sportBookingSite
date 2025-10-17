@@ -89,7 +89,7 @@ const Landing = () => {
 
             <p
               data-aos="fade-up"
-              className="flex items-center gap-2 text-sm dark:bg-zinc-600 dark:text-white bg-[#fff] p-2 px-4 rounded-full border-1 border-[#f1f1f1]"
+              className="text-[12px] flex items-center gap-2 dark:bg-zinc-600 dark:text-white bg-[#fff] p-2 px-4 rounded-full border-1 border-[#f1f1f1]"
             >
               <div>
                 <PiSoccerBallThin size={18} />
@@ -118,27 +118,131 @@ const Landing = () => {
                 </span>
               </span>
             </p>
-            <div className="flex md:flex-row flex-col  items-center gap-5 mt-8 ">
+            <div className="flex flex-row   items-center gap-5 mt-8 ">
               <button
                 onClick={() => !user && setForm(true)}
                 data-aos="fade-down"
-                className="btn"
+                className="text-sm flex items-center gap-2 justify-center hover:bg-amber-300 duration-1000 text-white transition-all dark:shadow-none dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18]  bg-amber-200 shadow-amber-200 sm:py-[12px] sm:px-5 px-5 py-[12px] rounded-[5px] shadow-md hover:shadow-sm"
               >
-                Start Winning Now
+                Start Winning
               </button>
               <button
                 data-aos="fade-down"
                 onClick={() => !user && setForm(true)}
-                className="text-sm flex items-center gap-2 justify-center border dark:shadow-none bg:border-[#787878] dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18] border-zinc-300 bg-zinc-200  sm:py-[10px] sm:px-8 px-5 py-[9px]  rounded-[12px] shadow-md hover:shadow-lg hover:bg-zinc-500 duration-300 hover:text-[#fff] shadow-zinc-200"
+                className="text-sm flex items-center gap-2 justify-center hover:bg-zinc-200 duration-1000 transition-all dark:shadow-none dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18]  bg-zinc-100 sm:py-[12px] sm:px-5 px-5 py-[12px] rounded-[5px] shadow-md hover:shadow-sm"
               >
-                <div>Get started Now </div>
-                <div>
-                  <FaArrowRightLong />
-                </div>
+                <div>Get started</div>
               </button>
             </div>
           </div>
-          <div className="text-center">
+          <div className="mt-20  text-center flex flex-col items-center justify-center">
+            <p
+              data-aos="fade-up"
+              className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-2"
+            >
+              Games
+            </p>
+            <h1
+              data-aos="fade-up"
+              className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
+            >
+              Featured{" "}
+              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+                Premium Tips
+              </span>
+            </h1>
+            <p
+              data-aos="fade-up"
+              className="md:w-[50%] dark:text-[#d3d3d3] w-[100%] px-10 md:px-0 text-center text-sm text-[#787878] mt-2"
+            >
+              Check out our most popular recommendations with high success
+              rates. Join thousands of winning bettors today.
+            </p>
+            {gameLoad ? (
+              <div className="h-150 gap-2 flex flex-col items-center justify-center">
+                <div role="status">
+                  <svg
+                    aria-hidden="true"
+                    className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    viewBox="0 0 100 101"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                      fill="currentColor"
+                    />
+                    <path
+                      d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                      fill="currentFill"
+                    />
+                  </svg>
+                  <span className="sr-only">Loading...</span>
+                </div>
+                <div className="text-sm">Loading...</div>
+              </div>
+            ) : gameFilter.length <= 0 ? (
+              <div className="my-20 flex justify-center items-center flex-col gap-3">
+                <div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/2039/2039083.png"
+                    alt=""
+                    width={100}
+                  />
+                </div>
+                <div className="text-center text-20 text-gray-500">
+                  No Games available
+                </div>
+              </div>
+            ) : (
+              <div className="w-full ">
+                <div className="mt-10 w-[90%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
+                  {gameFilter
+                    .reverse()
+                    .slice(0, 6)
+                    .map((item) => {
+                      return (
+                        <div data-aos="fade-up" className="w-full max-w-sm">
+                          <Item item={item} setForm={setForm} />
+                        </div>
+                      );
+                    })}
+
+                  {/* <Link
+                  data-aos="fade-down"
+                  to="/recommendations"
+                  className="col-span-full mx-auto bg-[var(--Primary)] text-[12px] shadow shadow-amber-300 text-white px-5 py-2 rounded-[10px] flex items-center gap-2 hover:shadow-lg hover:shadow-amber-300 duration-200"
+                >
+                  View all Recommendation <GoArrowRight />
+                </Link> */}
+                  <div className="col-span-full" data-aos="fade-down">
+                    <button
+                      onClick={() => setForm(true)}
+                      class="cssbuttons-io-button"
+                    >
+                      View all Recommendation
+                      <div class="icon">
+                        <svg
+                          height="24"
+                          width="24"
+                          viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M0 0h24v24H0z" fill="none"></path>
+                          <path
+                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                            fill="currentColor"
+                          ></path>
+                        </svg>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          {/* i am to put the featured games here */}
+          <div className="text-center mt-20">
             <p
               data-aos="fade-up"
               className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-1"
@@ -204,113 +308,6 @@ const Landing = () => {
               </p>
             </div>
           </div>
-          <div className="mt-20  text-center flex flex-col items-center justify-center">
-            <p
-              data-aos="fade-up"
-              className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-2"
-            >
-              Games
-            </p>
-            <h1
-              data-aos="fade-up"
-              className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
-            >
-              Featured{" "}
-              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-                Premium Tips
-              </span>
-            </h1>
-            <p
-              data-aos="fade-up"
-              className="md:w-[50%] dark:text-[#d3d3d3] w-[100%] px-10 md:px-0 text-center text-sm text-[#787878] mt-2"
-            >
-              Check out our most popular recommendations with high success
-              rates. Join thousands of winning bettors today.
-            </p>
-          </div>
-          {/* i am to put the featured games here */}
-          {gameLoad ? (
-            <div className="h-150 gap-2 flex flex-col items-center justify-center">
-              <div role="status">
-                <svg
-                  aria-hidden="true"
-                  className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-                  viewBox="0 0 100 101"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                    fill="currentFill"
-                  />
-                </svg>
-                <span className="sr-only">Loading...</span>
-              </div>
-              <div className="text-sm">Loading...</div>
-            </div>
-          ) : gameFilter.length <= 0 ? (
-            <div className="flex justify-center items-center flex-col gap-3">
-              <div>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/512/2039/2039083.png"
-                  alt=""
-                  width={100}
-                />
-              </div>
-              <div className="text-center text-20 text-gray-500">
-                No Games available
-              </div>
-            </div>
-          ) : (
-            <div className="w-full ">
-              <div className="mt-10 w-[90%]  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5 place-items-center">
-                {gameFilter
-                  .reverse()
-                  .slice(0, 6)
-                  .map((item) => {
-                    return (
-                      <div data-aos="fade-up" className="w-full max-w-sm">
-                        <Item item={item} setForm={setForm} />
-                      </div>
-                    );
-                  })}
-
-                {/* <Link
-                  data-aos="fade-down"
-                  to="/recommendations"
-                  className="col-span-full mx-auto bg-[var(--Primary)] text-[12px] shadow shadow-amber-300 text-white px-5 py-2 rounded-[10px] flex items-center gap-2 hover:shadow-lg hover:shadow-amber-300 duration-200"
-                >
-                  View all Recommendation <GoArrowRight />
-                </Link> */}
-                <div className="col-span-full" data-aos="fade-down">
-                  <button
-                    onClick={() => setForm(true)}
-                    class="cssbuttons-io-button"
-                  >
-                    View all Recommendation
-                    <div class="icon">
-                      <svg
-                        height="24"
-                        width="24"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                        <path
-                          d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
-                          fill="currentColor"
-                        ></path>
-                      </svg>
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
           <div data-aos="fade-up" className="mt-20 text-center">
             <p className="text-[12px] dark:text-[#d3d3d3] text-[#787878] tracking-wider uppercase mb-1">
               Games

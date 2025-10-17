@@ -338,7 +338,7 @@ const DashBoard = () => {
                       </div>
                       <div className="text-sm">Loading...</div>
                     </div>
-                  ) : gameFilter.length === 0 ? (
+                  ) : gameFilter?.length === 0 ? (
                     <div className="h-100 w-full flex flex-col justify-center items-center gap-3">
                       <div>
                         <img
@@ -450,7 +450,9 @@ const DashBoard = () => {
                     </div>{" "}
                     Game Result
                   </h1>
-                  {compareUser?.betHistory?.length === 0 ? (
+                  {compareUser?.betHistory.filter(
+                    (item) => item?.status !== "Pending"
+                  ).length === 0 ? (
                     <div className="h-100 w-full flex flex-col justify-center items-center gap-3">
                       <div>
                         <img
