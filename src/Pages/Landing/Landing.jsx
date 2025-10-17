@@ -122,7 +122,7 @@ const Landing = () => {
               <button
                 onClick={() => !user && setForm(true)}
                 data-aos="fade-down"
-                className="text-sm flex items-center gap-2 justify-center hover:bg-amber-300 duration-1000 text-white transition-all dark:shadow-none dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18]  bg-amber-200 shadow-amber-200 sm:py-[12px] sm:px-5 px-5 py-[12px] rounded-[5px] shadow-md hover:shadow-sm"
+                className="text-sm flex items-center gap-2 justify-center hover:bg-amber-300 duration-1000 transition-all dark:shadow-none dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18]  bg-amber-200 shadow-amber-200 sm:py-[12px] sm:px-5 px-5 py-[12px] rounded-[5px] shadow-md hover:shadow-sm"
               >
                 Start Winning
               </button>
