@@ -245,7 +245,7 @@ const Landing = () => {
             )}
           </div>
           {/* i am to put the featured games here */}
-          <div className="text-center">
+          <div className="text-center mt-20">
             <p
               data-aos="fade-up"
               className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-1"
