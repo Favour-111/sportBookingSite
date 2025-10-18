@@ -113,18 +113,18 @@ const Landing = () => {
             </h1>
             <p
               data-aos="fade-up"
-              className="mt-5 dark:text-[#d3d3d3] text-center text-[14px] md:text-[16px] md:w-[53%] w-[90%]"
+              className="mt-5 dark:text-[#d3d3d3] text-center text-[14px] md:text-[16px] md:w-[53%] w-[85%]"
             >
               Get exclusive recommendations from professional analysts with{" "}
+              proven track records.{" "}
               <span>
-                proven track records.{" "}
                 <span className="text-[tomato] font-medium">
                   {" "}
                   Start winning today🏆.
                 </span>
               </span>
             </p>
-            <div className="flex flex-row  items-center gap-5 mt-8 ">
+            <div className="flex md:flex-row flex-col items-center gap-5 mt-8 ">
               <button
                 onClick={() => !user && setForm(true)}
                 data-aos="fade-down"
