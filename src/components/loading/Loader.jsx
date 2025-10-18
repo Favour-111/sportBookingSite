@@ -19,18 +19,16 @@ const LoadingScreen = () => {
             </div>
           </div>
         </div>
-        <video
-          src={vid}
-          loop
-          muted
-          playsInline
-          ref={(el) => {
-            if (el) {
-              el.oncanplay = () => el.play().catch(() => {});
-            }
-          }}
-          className="rounded-[50px] object-cover md:w-70 md:h-70 w-60 h-60"
-        />
+        <div to="/" className="flex items-center gap-2">
+          <img
+            src="https://github.com/Favour-111/my-asset/blob/main/image.jpg?raw=true"
+            alt=""
+            className="w-12 h-12 rounded-full object-contain"
+          />
+          <div className="font-[700] text-[38px] bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent animate-opacity-pulse">
+            SportsTips
+          </div>
+        </div>
         <div className="loading-text">
           {text.split("").map((letter, index) => (
             <span

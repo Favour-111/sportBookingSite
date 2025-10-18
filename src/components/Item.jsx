@@ -166,7 +166,7 @@ const Item = ({ item, setForm, setOpens }) => {
     <div>
       <div className="border-1 p-5 border-gray-100 dark:border-gray-600 rounded-[15px] w-[100%] h-[fit-content] flex flex-col gap-2 cursor-pointer hover:shadow-lg shadow-sm duration-200">
         <div className="flex justify-between">
-          <h1 className="font-[600] text-[18px] dark:text-[white] w-[80%]">
+          <h1 className="font-[600] text-[18px] text-start dark:text-[white] w-[80%]">
             {item?.tipTitle}
           </h1>
           <div className="text-green-700 dark:text-green-400 font-bold text-[20px]">
@@ -178,18 +178,13 @@ const Item = ({ item, setForm, setOpens }) => {
           {renderStars(item?.confidenceLevel || 0)}
         </div>
 
-        {!item?.purchasedBy.includes(user) ? (
-          <div className=" text-red-400 flex items-center gap-1">
-            <div>
-              <CiLock />
-            </div>
-            <div className="text-[12px] font-500">Buy game to unlock</div>
+        <div className=" text-red-400 flex items-center gap-1">
+          <div>
+            <CiLock />
           </div>
-        ) : (
-          <div className="text-sm font-[500] text-[tomato] ">
-            {item?.bettingType}
-          </div>
-        )}
+          <div className="text-[12px] font-500">Buy game to unlock</div>
+        </div>
+
         <div>
           <div className="flex items-center gap-1 text-sm text-green-500">
             <IoTrendingUp />
@@ -204,7 +199,7 @@ const Item = ({ item, setForm, setOpens }) => {
           >
             {remainingTime} : Minutes remaining
           </div>
-          <div className="text-[12px] text-[orangered] dark:text-[tomato] opacity-80 mt-2 dark:opacity-100">
+          <div className="text-start text-[12px] text-[orangered] dark:text-[tomato] opacity-80 mt-2 dark:opacity-100">
             Available on : {item?.bettingSites}
           </div>
         </div>

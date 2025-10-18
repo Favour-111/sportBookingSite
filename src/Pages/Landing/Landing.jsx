@@ -5,6 +5,7 @@ import { RiExchangeDollarFill } from "react-icons/ri";
 import { LuClock, LuLoader2 } from "react-icons/lu";
 import { GiReceiveMoney } from "react-icons/gi";
 import { BiSolidQuoteLeft } from "react-icons/bi";
+import { LiaTrophySolid } from "react-icons/lia";
 import {
   IoAnalytics,
   IoShieldHalfSharp,
@@ -86,8 +87,13 @@ const Landing = () => {
               loading="lazy"
               className="absolute opacity-25 right-[-10px] md:right-[0] top-0 w-40 md:w-60"
             />
+            <div className="border-2 border-[#00000023] rounded-[12px] p-[2px]">
+              <div className="bg-[var(--Primary)] p-3 rounded-[9px] text-white">
+                <LiaTrophySolid size={20} />
+              </div>
+            </div>
 
-            <p
+            {/* <p
               data-aos="fade-up"
               className="flex items-center gap-2 text-sm dark:bg-zinc-600 dark:text-white bg-[#fff] p-2 px-4 rounded-full border-1 border-[#f1f1f1]"
             >
@@ -95,7 +101,7 @@ const Landing = () => {
                 <PiSoccerBallThin size={18} />
               </div>{" "}
               <div>Best Sport Recommendation</div>
-            </p>
+            </p> */}
             <h1
               data-aos="fade-up"
               className="text-3xl md:w-[70%] w-[90%] dark:text-white sm:text-5xl md:text-6xl font-bold mt-5 text-center"
@@ -118,7 +124,7 @@ const Landing = () => {
                 </span>
               </span>
             </p>
-            <div className="flex md:flex-row flex-col  items-center gap-5 mt-8 ">
+            <div className="flex flex-row  items-center gap-5 mt-8 ">
               <button
                 onClick={() => !user && setForm(true)}
                 data-aos="fade-down"
@@ -129,7 +135,7 @@ const Landing = () => {
               <button
                 data-aos="fade-down"
                 onClick={() => !user && setForm(true)}
-                className="text-sm flex items-center gap-2 justify-center border dark:shadow-none bg:border-[#787878] dark:text-[#d3d3d3] dark:hover:shadow-none dark:bg-[#ffffff18] border-zinc-300 bg-zinc-200  sm:py-[10px] sm:px-8 px-5 py-[9px]  rounded-[12px] shadow-md hover:shadow-lg hover:bg-zinc-500 duration-300 hover:text-[#fff] shadow-zinc-200"
+                className="text-[12px] hover:opacity-50 dark:text-[#d3d3d3] dark:hover:text-[#fff] flex items-center gap-2 justify-center "
               >
                 <div>Get started Now </div>
                 <div>

@@ -34,7 +34,21 @@
     opacity: 1;
   }
 }
+@keyframes opacity-pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 
+.animate-opacity-pulse {
+  animation: opacity-pulse 3s ease-in-out infinite;
+}
 /* Wave loader */
 .wave-loader {
   position: absolute;
