@@ -60,11 +60,6 @@ const Settings = () => {
       toast.error("incorrect input");
     }
   };
-  const handleTelegramPay = (userId, amount) => {
-    const botUsername = "SportyPayBot"; // replace with your bot username
-    const telegramLink = `https://t.me/${botUsername}?start=pay_${userId}_${amount}`;
-    window.open(telegramLink, "_blank");
-  };
   return (
     <div>
       <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)] `}>
@@ -94,13 +89,6 @@ const Settings = () => {
                   ${compareUser?.availableBalance.toLocaleString()}
                 </p>
               </div>
-              <button
-                onClick={() => handleTelegramPay("user123", 5000)}
-                className="bg-blue-600 text-white px-4 py-2 rounded"
-              >
-                Pay via Telegram 💬
-              </button>
-
               <div>
                 <button
                   onClick={() => setOpen(true)}
@@ -143,7 +131,6 @@ const Settings = () => {
                   Password
                 </p>
               </div>
-
               <div>
                 <p className="text-[13px] text-[#787878] dark:text-[#f1f1f1]">
                   *****
