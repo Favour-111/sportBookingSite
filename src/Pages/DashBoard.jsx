@@ -246,7 +246,7 @@ const DashBoard = () => {
                           <div
                             className={`${
                               item.tipPrice < 0 ? "bg-red-100" : "bg-green-100"
-                            } p-2 rounded-[5px]`}
+                            } p-2 rounded-[5px] w-[fit]`}
                           >
                             <LuTrendingDown
                               className={`${

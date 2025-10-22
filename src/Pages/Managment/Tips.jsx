@@ -160,7 +160,6 @@ const Tips = () => {
         ...prev,
         status: newStatus, // Ensure this matches the updated field in the game model
       }));
-      alert("Game status updated successfully!");
     } catch (error) {
       console.error(error);
       alert("Failed to update status");
