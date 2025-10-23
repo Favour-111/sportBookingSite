@@ -61,42 +61,7 @@ const Settings = () => {
       toast.error("incorrect input");
     }
   };
-  const handlePayment = async () => {
-    try {
-      setLoad(true);
 
-      const res = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API}/api/payment/create-payment`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            amount: 10,
-            orderId: `ORDER-${Date.now()}`, // generate unique order ID
-          }),
-        }
-      );
-
-      if (!res.ok) {
-        throw new Error("Error making payment");
-      }
-
-      const data = await res.json();
-
-      // ✅ OxaPay returns { payment_url: "..." }
-      if (data?.payment_url) {
-        window.location.href = data.payment_url;
-      } else {
-        alert("Payment URL not found.");
-        console.log("Response data:", data);
-      }
-    } catch (error) {
-      console.error("Payment Error:", error);
-      alert("Something went wrong. Please try again.");
-    } finally {
-      setLoad(false);
-    }
-  };
   return (
     <div>
       <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)] `}>
@@ -174,13 +139,7 @@ const Settings = () => {
                 </p>
               </div>
             </div>
-            <button
-              onClick={handlePayment}
-              disabled={load}
-              className="bg-red-400 p-4 text-white rounded-md hover:bg-red-500 transition"
-            >
-              {load ? "Loading..." : "Pay Now"}
-            </button>
+
             <div className="mt-5  flex-col flex justify-between gap-3 py-4">
               <div>
                 <p className="text-[13px] text-[#494949] dark:text-[#d3d3d3]">
