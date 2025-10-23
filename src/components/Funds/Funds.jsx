@@ -9,6 +9,8 @@ import {
 } from "@headlessui/react";
 import { IoCheckmarkSharp } from "react-icons/io5";
 import { ShopContext } from "../shopContext";
+import toast from "react-hot-toast";
+import { TiWarning } from "react-icons/ti";
 
 const Funds = ({ open, setOpen, userToken }) => {
   const prices = [100, 250, 500, 1000, 2000, 3000, 5000];
@@ -20,6 +22,7 @@ const Funds = ({ open, setOpen, userToken }) => {
   const [loading, setLoading] = useState(false);
   const [modalShown, setModalOpen] = useState(false);
   const [polling, setPolling] = useState(false);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
 
   const userId = localStorage.getItem("userId");
 
@@ -41,7 +44,6 @@ const Funds = ({ open, setOpen, userToken }) => {
 
   const handleDeposit = async () => {
     const amount = selectedAmount || customAmount;
-
     if (!amount || amount < 10 || amount > 50000) {
       setError("Please select or enter an amount between $10 and $50,000.");
       return;
@@ -50,7 +52,6 @@ const Funds = ({ open, setOpen, userToken }) => {
     setLoading(true);
     try {
       const order_id = `deposit_${userId}_${Date.now()}`;
-
       const response = await axios.post(
         `${import.meta.env.VITE_REACT_APP_API}/api/payment/create-invoice`,
         {
@@ -68,6 +69,7 @@ const Funds = ({ open, setOpen, userToken }) => {
         setModalOpen(true);
         setOpen(false);
         setPolling(true); // start polling
+        setPaymentConfirmed(false);
       } else setError("Failed to get payment URL.");
     } catch (err) {
       console.error(err);
@@ -88,9 +90,13 @@ const Funds = ({ open, setOpen, userToken }) => {
           );
 
           if (res.data.availableBalance !== compareUser.availableBalance) {
-            fetchUser();
-            setModalOpen(false);
-            setPolling(false);
+            fetchUser(); // update context
+            setPaymentConfirmed(true); // show success in modal
+            setPolling(false); // stop polling
+            toast.success(`Balance updated: $${res.data.availableBalance}`);
+
+            // auto-close modal after 3 seconds
+            setTimeout(() => setModalOpen(false), 3000);
           }
         } catch (err) {
           console.error(err);
@@ -103,6 +109,7 @@ const Funds = ({ open, setOpen, userToken }) => {
 
   return (
     <div>
+      {/* Deposit selection modal */}
       {open && (
         <div className="fixed p-5 top-0 right-0 bottom-0 left-0 bg-[#00000050] z-10000 flex items-center justify-center">
           <div className="relative h-[fit-content] md:w-[400px] w-full bg-white dark:bg-[var(--default)] border dark:border-[#787878] rounded-[20px] p-5">
@@ -164,6 +171,7 @@ const Funds = ({ open, setOpen, userToken }) => {
         </div>
       )}
 
+      {/* Payment status modal */}
       <Dialog
         open={modalShown}
         onClose={() => setModalOpen(false)}
@@ -174,20 +182,33 @@ const Funds = ({ open, setOpen, userToken }) => {
           <div className="flex min-h-full items-center justify-center p-4 text-center">
             <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:w-full sm:max-w-lg">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 sm:mx-0">
-                    <IoCheckmarkSharp className="h-6 w-6 text-green-600" />
-                  </div>
+                <div className="sm:flex sm:items-start gap-4">
+                  {paymentConfirmed ? (
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 sm:mx-0">
+                      <IoCheckmarkSharp
+                        className={`h-6 w-6 ${
+                          paymentConfirmed
+                            ? "text-green-600"
+                            : "text-gray-400 animate-spin"
+                        }`}
+                      />
+                    </div>
+                  ) : (
+                    <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-amber-100 sm:mx-0 sm:size-10">
+                      <TiWarning color="orange" size={24} />
+                    </div>
+                  )}
+
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <DialogTitle
-                      as="h3"
-                      className="text-base font-semibold text-gray-900"
-                    >
-                      Payment Initiated
+                    <DialogTitle className="text-base font-semibold text-gray-900">
+                      {paymentConfirmed
+                        ? "Payment Successful!"
+                        : "Payment Initiated"}
                     </DialogTitle>
                     <p className="text-sm text-gray-500 mt-2">
-                      Your deposit payment is in progress. Complete it on the
-                      OxaPay page.
+                      {paymentConfirmed
+                        ? "Your balance has been updated."
+                        : "Complete your payment on the OxaPay page. Waiting for confirmation..."}
                     </p>
                   </div>
                 </div>
