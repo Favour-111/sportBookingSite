@@ -22,6 +22,7 @@ const StarIcon = ({ filled }) => (
 
 const Item = ({ item, setForm, setOpens }) => {
   const [open, setOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [remainingTime, setRemainingTime] = useState(null);
   const [loader, setLoader] = useState(null);
@@ -166,6 +167,7 @@ const Item = ({ item, setForm, setOpens }) => {
       toast.error("An error occurred while purchasing the game");
     } finally {
       setLoader(null);
+      setConfirmOpen(false);
       // Optionally, close the modal if it's open in case of error
       setOpenModal(true); // Open the success modal if needed
     }
@@ -199,14 +201,12 @@ const Item = ({ item, setForm, setOpens }) => {
         <div className="flex gap-1 ">
           {renderStars(item?.confidenceLevel || 0)}
         </div>
-
         <div className=" text-red-400 flex items-center gap-1">
           <div>
             <CiLock />
           </div>
           <div className="text-[12px] font-500">Buy game to unlock</div>
         </div>
-
         <div>
           <div className="flex items-center gap-1 text-sm text-green-500">
             <IoTrendingUp />
@@ -225,7 +225,6 @@ const Item = ({ item, setForm, setOpens }) => {
             Available on : {item?.bettingSites}
           </div>
         </div>
-
         {totalValue ? (
           <>
             <div className="mt-2 flex items-center justify-between">
@@ -249,7 +248,6 @@ const Item = ({ item, setForm, setOpens }) => {
             </div>
           </>
         ) : null}
-
         {!item?.purchasedBy.includes(user) && totalValue === currentValue ? (
           <button
             className=" mt-2 w-[100%] bg-red-100 rounded flex items-center gap-2 py-2 justify-center"
@@ -264,40 +262,137 @@ const Item = ({ item, setForm, setOpens }) => {
             {!item?.purchasedBy.includes(user) ? (
               <button
                 className="buy-btn"
-                onClick={handleBuyBet}
+                onClick={() => setConfirmOpen(true)} // open confirmation modal
                 disabled={loader}
               >
                 {!loader && (
                   <MdOutlineAddShoppingCart className="dark:text-white" />
                 )}
-
                 <div className="dark:text-white">
-                  {loader && (
-                    <svg
-                      aria-hidden="true"
-                      role="status"
-                      class="inline w-4 h-4 me-3 text-amber-100 animate-spin dark:text-amber-100"
-                      viewBox="0 0 100 101"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-                        fill="currentColor"
-                      />
-                      <path
-                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-                        fill="#f7b822"
-                      />
-                    </svg>
-                  )}
                   {loader ? "Loading...." : "Buy Bet Now"}
                 </div>
               </button>
-            ) : null}
+            ) : // <button
+            //   className="buy-btn"
+            //   onClick={handleBuyBet}
+            //   disabled={loader}
+            // >
+            //   {!loader && (
+            //     <MdOutlineAddShoppingCart className="dark:text-white" />
+            //   )}
+
+            //   <div className="dark:text-white">
+            //     {loader && (
+            //       <svg
+            //         aria-hidden="true"
+            //         role="status"
+            //         class="inline w-4 h-4 me-3 text-amber-100 animate-spin dark:text-amber-100"
+            //         viewBox="0 0 100 101"
+            //         fill="none"
+            //         xmlns="http://www.w3.org/2000/svg"
+            //       >
+            //         <path
+            //           d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+            //           fill="currentColor"
+            //         />
+            //         <path
+            //           d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+            //           fill="#f7b822"
+            //         />
+            //       </svg>
+            //     )}
+            //     {loader ? "Loading...." : "Buy Bet Now"}
+            //   </div>
+            // </button>
+            null}
           </div>
         )}
-
+        {/* // Confirmation modal */}
+        <Dialog
+          open={confirmOpen}
+          onClose={() => setConfirmOpen(false)}
+          className="relative z-10"
+        >
+          <DialogBackdrop className="fixed inset-0 bg-gray-500/75" />
+          <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <DialogPanel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl sm:w-full sm:max-w-md">
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                  <div className="sm:flex sm:items-start">
+                    <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100 sm:mx-0">
+                      <CiWarning className="h-6 w-6 text-yellow-600" />
+                    </div>
+                    <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                      <DialogTitle className="text-base font-semibold text-gray-900">
+                        Confirm Purchase
+                      </DialogTitle>
+                      <p className="text-sm text-gray-500 mt-2">
+                        Are you sure you want to buy this bet:{" "}
+                        <div className="font-semibold mt-1">
+                          {item?.tipTitle}
+                        </div>{" "}
+                        <div className="mt-1">
+                          <span className="font-[700] ">Price</span> : $
+                          {item?.tipPrice}?
+                        </div>
+                        <div className="flex items-center gap-1 mt-1">
+                          <div className="font-[700] ">Odds : </div>
+                          <div className="flex items-center gap-1">
+                            {item.oddRatio}
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-1 mt-1">
+                          <div className="font-[700] ">Confidence Level:</div>
+                          <div className="flex items-center gap-1">
+                            {renderStars(item?.confidenceLevel || 0)}
+                          </div>
+                        </div>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                  <button
+                    type="button"
+                    className="inline-flex w-full justify-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-green-500 sm:ml-3 sm:w-auto"
+                    onClick={() => {
+                      // setConfirmOpen(false);
+                      handleBuyBet(); // run actual purchase
+                    }}
+                  >
+                    {loader && (
+                      <svg
+                        aria-hidden="true"
+                        role="status"
+                        class="inline w-4 h-4 me-3 text-white-100 animate-spin dark:text-amber-100"
+                        viewBox="0 0 100 101"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                          fill="#000"
+                        />
+                      </svg>
+                    )}
+                    {loader ? "Buying Bet" : " Yes,Buy Bet now"}
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex w-full justify-center rounded-md bg-zinc-300 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-zinc-500 sm:ml-3 sm:w-auto"
+                    onClick={() => setConfirmOpen(false)}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </DialogPanel>
+            </div>
+          </div>
+        </Dialog>
         <Dialog open={open} onClose={setOpen} className="relative z-10">
           <DialogBackdrop
             transition
@@ -346,7 +441,6 @@ const Item = ({ item, setForm, setOpens }) => {
             </div>
           </div>
         </Dialog>
-
         <Dialog
           open={openModal}
           onClose={setOpenModal}
