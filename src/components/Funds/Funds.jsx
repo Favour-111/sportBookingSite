@@ -159,8 +159,8 @@ const Funds = ({ open, setOpen, userToken }) => {
               {loading
                 ? "Processing..."
                 : `Deposit $${
-                    selectedAmount.toLocaleString() ||
-                    customAmount.toLocaleString() ||
+                    selectedAmount?.toLocaleString() ||
+                    customAmount?.toLocaleString() ||
                     0
                   }`}
             </button>
