@@ -256,10 +256,8 @@ const Item = ({ item, setForm, setOpens }) => {
             onClick={() => toast.error("this game has been sold out")}
             disabled={balLoader}
           >
-            <MdCancel className="dark:text-white text-red-600" />{" "}
-            <div className="dark:text-white text-red-500 text-[12px]">
-              Game is Sold out
-            </div>
+            <MdCancel className=" text-red-600" />{" "}
+            <div className=" text-red-500 text-[12px]">Game is Sold out</div>
           </button>
         ) : (
           <div className="flex items-center justify-between mt-3">

@@ -112,7 +112,7 @@ const Funds = ({ open, setOpen, userToken }) => {
       {/* Deposit selection modal */}
       {open && (
         <div className="fixed p-5 top-0 right-0 bottom-0 left-0 bg-[#00000050] z-10000 flex items-center justify-center">
-          <div className="relative h-[fit-content] md:w-[400px] w-full bg-white dark:bg-[var(--default)] border dark:border-[#787878] rounded-[20px] p-5">
+          <div className="relative h-[fit-content] md:w-[400px] w-full bg-white dark:bg-[var(--default)] dark:border  dark:border-[#787878] rounded-[20px] p-5">
             <h1 className="font-[600] dark:text-[#d3d3d3]">
               Quick selection amount
             </h1>
@@ -120,14 +120,14 @@ const Funds = ({ open, setOpen, userToken }) => {
               {prices.map((item) => (
                 <div
                   key={item}
-                  className={`hover:bg-[#f1f1f1] dark:hover:bg-[#1b273c] duration-100 border-[#d3d3d3] dark:text-[#d3d3d3] text-[#787878] font-[400] text-[12px] border p-1.5 px-6 rounded-[28px] cursor-pointer ${
+                  className={`hover:bg-[#f1f1f1] dark:hover:bg-[#1b273c] dark:border-[#787878] duration-100 border-[#d3d3d3] dark:text-[#787878] text-[#787878] font-[500] text-[11px] border py-1 px-2 rounded-[28px] cursor-pointer ${
                     selectedAmount === item
                       ? "bg-[#e6e6e6] dark:bg-[#1b273c]"
                       : ""
                   }`}
                   onClick={() => handleQuickSelect(item)}
                 >
-                  $ {item}
+                  $ {item.toLocaleString()}
                 </div>
               ))}
             </div>
@@ -139,7 +139,7 @@ const Funds = ({ open, setOpen, userToken }) => {
                 value={customAmount}
                 onChange={handleCustomAmountChange}
                 placeholder="Input custom amount"
-                className="border dark:placeholder:text-[#787878] border-[#f1f1f1] p-2 w-full mt-2 rounded-[6px] placeholder:text-sm outline-none text-sm"
+                className="border dark:placeholder:text-[#787878] border-[#f1f1f1] dark:border-[#787878] dark:text-[#d3d3d3] text-[12px] p-2 w-full mt-2 rounded-[6px] placeholder:text-[12px] outline-none "
               />
               <p className="mt-3 text-[12px] text-[#787878] dark:text-[#d3d3d3]">
                 Min: $10 - Max: $50,000
@@ -150,7 +150,7 @@ const Funds = ({ open, setOpen, userToken }) => {
             <button
               onClick={handleDeposit}
               disabled={(!selectedAmount && !customAmount) || loading}
-              className={`p-2.5 text-white text-sm bg-[var(--Primary)] mt-3 w-full rounded-[10px] shadow ${
+              className={`p-2.5 text-white text-[13px] bg-[var(--Primary)] mt-3 w-full rounded-[10px] shadow ${
                 (!selectedAmount && !customAmount) || loading
                   ? "opacity-65"
                   : "opacity-100"
@@ -158,7 +158,11 @@ const Funds = ({ open, setOpen, userToken }) => {
             >
               {loading
                 ? "Processing..."
-                : `Deposit $${selectedAmount || customAmount || 0}`}
+                : `Deposit $${
+                    selectedAmount.toLocaleString() ||
+                    customAmount.toLocaleString() ||
+                    0
+                  }`}
             </button>
 
             <button

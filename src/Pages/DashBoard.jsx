@@ -237,7 +237,7 @@ const DashBoard = () => {
                     .slice(0, 4)
                     .map((item) => (
                       <div
-                        className={`bg-[#f7f7f7] rounded-[10px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ${
+                        className={`bg-[#f6f6f6] rounded-[15px] dark:bg-[#1b273c] py-4 px-3 flex gap-4 items-center justify-between ${
                           item.tipPrice < 0 ? "bg-red-100" : ""
                         }`}
                         key={item._id} // Make sure to add a unique key for each item
