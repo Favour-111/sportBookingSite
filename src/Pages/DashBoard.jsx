@@ -677,22 +677,15 @@ const DashBoard = () => {
                             </p>
                           )}
                         </div>
-                        <div className="mt-2 flex items-center gap-1">
-                          <p className="text-sm font-[600] text-gray-500">
-                            Odd Ratio:{" "}
-                          </p>
-                          <p className="text-sm text-gray-500">
-                            {items?.tipOdd}
-                          </p>
-                        </div>
+
                         <div className="mt-2 flex items-center gap-1">
                           <p className="text-sm font-[600] text-gray-500">
                             Full Content:{" "}
                           </p>
+                          <p className="text-sm font-[700] text-green-600">
+                            {items?.gameContent}
+                          </p>
                         </div>
-                        <p className="text-sm mt-2 font-[700] text-green-600">
-                          {items?.gameContent}
-                        </p>
 
                         {/* Other important instructions */}
                         <p className="mt-3 text-sm font-[600] text-gray-500 whitespace-nowrap">
