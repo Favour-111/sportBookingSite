@@ -271,6 +271,9 @@ const Users = () => {
                         Role
                       </th>
                       <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
+                        Total Bal
+                      </th>
+                      <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
                         Total Spent
                       </th>
                       <th className="py-3 px-6 text-left text-sm font-semibold text-gray-700">
@@ -300,6 +303,10 @@ const Users = () => {
                           </td>
                           <td className="py-3 px-6 text-sm whitespace-nowrap">
                             {user.role}
+                          </td>
+
+                          <td className="py-3 px-6 text-sm whitespace-nowrap">
+                            ${user?.availableBalance.toLocaleString()}
                           </td>
                           <td className="py-3 px-6 text-sm whitespace-nowrap">
                             $

@@ -456,7 +456,9 @@ const DashBoard = () => {
                       </div>
                       {/* //  .filter((item) => item?.status === "Pending") */}
                       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                        {compareUser?.betHistory
+                        {compareUser?.betHistory &&
+                        compareUser.betHistory
+                          .slice() // clone the array before reversing (to avoid mutating state)
                           .reverse()
                           .filter((item) => {
                             if (Gamefilter === "All") return true;
@@ -467,87 +469,116 @@ const DashBoard = () => {
                             if (Gamefilter === "Miss")
                               return item.status === "Miss❌";
                             return true;
-                          })
-                          .map((item) => (
-                            <div
-                              className="flex flex-col gap-3 mt-5"
-                              key={item._id}
-                            >
-                              <div className="rounded-[15px]  shadow  dark:border-zinc-600 dark:bg-[#1b2336] overflow-hidden">
-                                <div className="p-4">
-                                  <div className="flex items-center justify-between">
-                                    <h1 className="font-[500] dark:text-[#f1f1f1]">
-                                      {item.gameName}
-                                    </h1>
-                                    <div className="flex items-center gap-2">
-                                      <button
-                                        onClick={() => {
-                                          setOpenModal(true);
-                                          setItems(item);
-                                        }}
-                                        className="rounded-full duration-200  hover:opacity-80 bg-[#f6f6f6] dark:bg-[var(--default)] h-10 w-10 flex items-center justify-center"
-                                      >
-                                        <PiEyeLight
-                                          size={18}
-                                          className="dark:text-white"
-                                        />
-                                      </button>
-                                      <button
-                                        onClick={() => setImageModal(item)}
-                                        className="rounded-full duration-200  hover:opacity-80 bg-[#f6f6f6] dark:bg-[var(--default)] h-10 w-10 flex items-center justify-center"
-                                      >
-                                        <CiImageOn className="dark:text-white" />
-                                      </button>
+                          }).length === 0 ? (
+                          // 👇 show message if no results
+                          <div className="flex flex-col gap-3 items-center justify-center col-span-full mt-5">
+                            <img
+                              src="https://cdni.iconscout.com/illustration/premium/thumb/sorry-item-not-found-illustration-svg-download-png-2809510.png"
+                              alt=""
+                              loading="lazy"
+                              width={200}
+                            />
+                            <div className=" text-center text-gray-500 dark:text-gray-300 py-10">
+                              No games found for this filter.
+                            </div>
+                          </div>
+                        ) : (
+                          // 👇 otherwise, map the items
+                          compareUser?.betHistory
+                            .slice()
+                            .reverse()
+                            .filter((item) => {
+                              if (Gamefilter === "All") return true;
+                              if (Gamefilter === "Pending")
+                                return !["Hit✅", "Miss❌"].includes(
+                                  item.status
+                                );
+                              if (Gamefilter === "Wins")
+                                return item.status === "Hit✅";
+                              if (Gamefilter === "Miss")
+                                return item.status === "Miss❌";
+                              return true;
+                            })
+                            .map((item) => (
+                              <div
+                                className="flex flex-col gap-3 mt-5"
+                                key={item._id}
+                              >
+                                <div className="rounded-[15px] shadow dark:border-zinc-600 dark:bg-[#1b2336] overflow-hidden">
+                                  <div className="p-4">
+                                    <div className="flex items-center justify-between">
+                                      <h1 className="font-[500] dark:text-[#f1f1f1]">
+                                        {item.gameName}
+                                      </h1>
+                                      <div className="flex items-center gap-2">
+                                        <button
+                                          onClick={() => {
+                                            setOpenModal(true);
+                                            setItems(item);
+                                          }}
+                                          className="rounded-full duration-200 hover:opacity-80 bg-[#f6f6f6] dark:bg-[var(--default)] h-10 w-10 flex items-center justify-center"
+                                        >
+                                          <PiEyeLight
+                                            size={18}
+                                            className="dark:text-white"
+                                          />
+                                        </button>
+                                        <button
+                                          onClick={() => setImageModal(item)}
+                                          className="rounded-full duration-200 hover:opacity-80 bg-[#f6f6f6] dark:bg-[var(--default)] h-10 w-10 flex items-center justify-center"
+                                        >
+                                          <CiImageOn className="dark:text-white" />
+                                        </button>
+                                      </div>
                                     </div>
-                                  </div>
 
-                                  <div>
-                                    {item.status === "Hit✅" ? (
-                                      <div className="w-[fit-content] mt-1 text-[11px] font-[500] flex items-center gap-1 text-green-600 dark:bg-[#222a3a] bg-green-100 rounded-full px-2 py-[4px]">
-                                        <div>
+                                    <div>
+                                      {item.status === "Hit✅" ? (
+                                        <div className="w-[fit-content] mt-1 text-[11px] font-[500] flex items-center gap-1 text-green-600 dark:bg-[#222a3a] bg-green-100 rounded-full px-2 py-[4px]">
                                           <IoCheckmarkCircleOutline className="text-green-600" />
+                                          Bet Won! 🏆
                                         </div>
-                                        Bet Won! 🏆
+                                      ) : item.status === "Miss❌" ? (
+                                        <div className="w-[fit-content] mt-1 text-[11px] font-[400] flex items-center gap-1 text-red-600 dark:bg-[#222a3a] bg-red-100 rounded-full px-2 py-[4px]">
+                                          Bet Lost ❌{" "}
+                                          <GiCancel className="text-red-400" />
+                                        </div>
+                                      ) : (
+                                        <div className="w-[fit-content] mt-1 text-[11px] font-[400] flex items-center gap-1 text-orange-600 dark:bg-[#222a3a] bg-orange-100 rounded-full px-2 py-[4px]">
+                                          Pending Result{" "}
+                                          <BiHourglass className="text-orange-500" />
+                                        </div>
+                                      )}
+                                    </div>
+
+                                    <div className="flex items-center gap-10 mt-1">
+                                      <h1 className="text-[12px] font-[400] my-2 text-green-500">
+                                        Odd Ratio: {item.tipOdd}
+                                      </h1>
+                                      <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
+                                        Price :
+                                        <span className="font-[600] text-[14px] text-black dark:text-white">
+                                          ${item.tipPrice}
+                                        </span>
                                       </div>
-                                    ) : item.status === "Miss❌" ? (
-                                      <div className="w-[fit-content] mt-1 text-[11px] font-[400] flex items-center gap-1 text-red-600 dark:bg-[#222a3a] bg-red-100 rounded-full px-2 py-[4px]">
-                                        <div></div> Bet Lost ❌
-                                        <GiCancel className="text-red-400" />
-                                      </div>
-                                    ) : (
-                                      <div className="w-[fit-content] mt-1 text-[11px] font-[400] flex items-center gap-1 text-orange-600 dark:bg-[#222a3a] bg-orange-100 rounded-full px-2 py-[4px]">
-                                        <div></div> Pending Result
-                                        <BiHourglass className="text-orange-500" />
+                                    </div>
+
+                                    <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[12px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-1">
+                                      {item.gameContent}
+                                    </div>
+
+                                    {item.status === "Hit✅" && (
+                                      <div className="flex items-center gap-2 justify-center bg-green-50 text-center font-[500] p-3 rounded-[10px] text-[12px] text-green-600 dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-2">
+                                        <GiMoneyStack size={20} />
+                                        $250 converted to $
+                                        {(250 * item.tipOdd).toLocaleString()}
                                       </div>
                                     )}
                                   </div>
-                                  <div className="flex items-center gap-10 mt-1">
-                                    <h1 className="text-[12px] font-[400] my-2 text-green-500">
-                                      Odd Ratio:{item.tipOdd}
-                                    </h1>
-                                    <div className="text-[12px] font-[500] flex items-center gap-2 text-[#787878] dark:text-[#d3d3d3]">
-                                      Price :
-                                      <span className="font-[600] text-[14px] text-[black] dark:text-[white]">
-                                        ${item.tipPrice}
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[12px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-1">
-                                    {item.gameContent}
-                                  </div>
-                                  {item.status === "Hit✅" && (
-                                    <div className="flex items-center gap-2 justify-center bg-green-50 text-center font-[500] p-3 rounded-[10px] text-[12px] text-green-600 dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-2">
-                                      <div>
-                                        <GiMoneyStack size={20} />
-                                      </div>
-                                      $250 converted to $
-                                      {(250 * item.tipOdd).toLocaleString()}
-                                    </div>
-                                  )}
                                 </div>
                               </div>
-                            </div>
-                          ))}
+                            ))
+                        )}
                       </div>
                     </div>
                   )}

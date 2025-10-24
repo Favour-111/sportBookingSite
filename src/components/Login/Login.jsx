@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import { FaTelegram } from "react-icons/fa6";
-import { IoLockClosed, IoMailOutline } from "react-icons/io5";
+import {
+  IoLockClosed,
+  IoMailOutline,
+  IoMailUnreadOutline,
+} from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
 import axios from "axios";
 import { MdOutlineClose } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { IoMdFingerPrint } from "react-icons/io";
+import { CiLock } from "react-icons/ci";
 
 const InputField = ({ label, name, type, value, onChange, icon }) => (
   <div className="w-[100%]">
-    <label
-      htmlFor={name}
-      className="text-sm text-[#787878] dark:text-[#d3d3d3]"
-    >
-      {label}
-    </label>
-    <div className="w-[100%] border-[1px] rounded-[10px] dark:bg-transparent dark:border-[#d3d3d365] border-gray-200 mt-1 outline-none focus:border-[var(--Primary)] duration-200 dark:bg-slate-700 dark:text-white flex items-center gap-2 px-3">
+    <div className="w-[100%] bg-[#f6f5f8] py-2 rounded-[15px] dark:bg-[var(--default)]  border-gray-200 mt-1 outline-none  duration-200  dark:text-white flex items-center gap-2 px-3">
       <div className="text-[#787878]">{icon}</div>
       <input
         placeholder={`Enter your ${label}`}
@@ -24,7 +23,7 @@ const InputField = ({ label, name, type, value, onChange, icon }) => (
         name={name}
         value={value}
         onChange={onChange}
-        className="w-[100%] p-2 placeholder:text-[12px] rounded-[10px] border-0 bg-transparent outline-none"
+        className="w-[100%] p-2 dark:bg placeholder:text-[12px] rounded-[10px] border-0 outline-none"
       />
     </div>
   </div>
@@ -177,20 +176,29 @@ const Login = ({ state }) => {
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#0000004e] bg-opacity-50 flex items-center justify-center z-50">
-        <div className="relative bg-white dark:bg-slate-800 p-6 rounded-[20px] shadow-lg w-[90vw] max-w-md flex flex-col">
-          <div className="border-2 border-[#f1f1f1] w-[fit-content] rounded-[11px] p-[1px]">
-            <div className="text-3xl bg-[var(--Primary)]  p-1 rounded-[10px] text-white">
-              <IoMdFingerPrint />
-            </div>
-          </div>
-          <h1 className="text-2xl text-[var(--Primary)] font-[600]">
-            SportsTips
-          </h1>
-          <p className="text-sm text-[#787878] dark:text-[#d3d3d3] font-[400] mt-2">
-            Join the winning team - Get premium betting tips
-          </p>
+        <div className="relative bg-white dark:bg-slate-800 px-8 py-7 rounded-[20px] shadow-lg w-[90vw] max-w-md flex flex-col">
+          {!resetPass && ( // 👈 hide on reset password screen
+            <>
+              {(type === "login" || type === "signUp") && (
+                <h1 className="flex dark:text-[#d3d3d3] items-center gap-2 text-2xl text-[var(--default)] font-[700]">
+                  Welcome to Sports Tips
+                  <div>
+                    <img
+                      src="https://icons.iconarchive.com/icons/microsoft/fluentui-emoji-3d/512/Waving-Hand-3d-Default-icon.png"
+                      alt=""
+                      width={40}
+                    />
+                  </div>
+                </h1>
+              )}
+              <p className="text-[13px] text-[#939393] dark:text-[#d3d3d3] font-[300] mt-1">
+                Join the winning team Get premium betting tips
+              </p>
+            </>
+          )}
+
           {/* Button for switching between Login and Sign Up */}
-          {!resetPass && (
+          {/* {!resetPass && (
             <div className="w-full mt-5 rounded-[12px] flex bg-[#f8f7f7] dark:bg-[#202d43cc] gap-4 p-1">
               <button
                 onClick={() => {
@@ -219,7 +227,7 @@ const Login = ({ state }) => {
                 Register
               </button>
             </div>
-          )}
+          )} */}
           {/* Telegram Login Button
           {!resetPass && (
             <div className="w-[100%] mt-3 text-sm">
@@ -238,7 +246,38 @@ const Login = ({ state }) => {
             </div>
           )} */}
           {/* Form Inputs */}
-          <div className="flex flex-col gap-3 w-[100%] mt-4">
+          {!resetPass && (
+            <>
+              <div className="grid gap-3 mt-3 grid-cols-2">
+                <button
+                  onClick={() =>
+                    toast.error("this feature is currently unavailable")
+                  }
+                  className="dark:bg-[var(--default)] dark:hover-opacity-70 dark:hover:bg-[var(--default)] hover:bg-[#f1f1f1] duration-200 bg-[#f6f6f6] rounded-[15px] py-5 flex items-center justify-center"
+                >
+                  <img
+                    src="https://pngimg.com/d/google_PNG19635.png"
+                    width={30}
+                    alt=""
+                  />
+                </button>
+                <button
+                  onClick={() =>
+                    toast.error("this feature is currently unavailable")
+                  }
+                  className="dark:bg-[var(--default)] dark:hover-opacity-70 dark:hover:bg-[var(--default)] hover:bg-[#f1f1f1] duration-200 bg-[#f6f6f6] rounded-[15px] py-5 flex items-center justify-center"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/2048px-Telegram_logo.svg.png"
+                    width={25}
+                    alt=""
+                  />
+                </button>
+              </div>
+              <div className="my-3 text-[#d3d3d3] text-sm text-center">Or</div>
+            </>
+          )}
+          <div className="flex flex-col gap-3 w-[100%]">
             {/* Only show these fields when resetPass is false */}
             {!resetPass && type === "signUp" && (
               <InputField
@@ -257,7 +296,7 @@ const Login = ({ state }) => {
                 type="text"
                 value={form.email}
                 onChange={handleInput}
-                icon={<IoMailOutline />}
+                icon={<IoMailUnreadOutline />}
               />
             )}
             {!resetPass && (
@@ -267,7 +306,7 @@ const Login = ({ state }) => {
                 type="password"
                 value={form.password}
                 onChange={handleInput}
-                icon={<IoLockClosed />}
+                icon={<CiLock />}
               />
             )}
             {type === "login" && !resetPass && (
@@ -283,8 +322,13 @@ const Login = ({ state }) => {
           </div>
           {/* Reset Password Form */}
           {resetPass && (
-            <div className="flex flex-col gap-3 w-[100%] mt-4">
-              <h1 className="text-[16px] font-[600] text-[#2e2d2d] dark:text-[#d3d3d3]">
+            <div className="flex flex-col gap-3 w-[100%] ">
+              <div className="border-2 border-[#f1f1f1] w-[fit-content] rounded-[11px] p-[1px]">
+                <div className="text-3xl bg-[var(--Primary)]  p-1 rounded-[10px] text-white">
+                  <IoMdFingerPrint />
+                </div>
+              </div>
+              <h1 className="text-2xl font-[700] text-[#2e2d2d] dark:text-[#d3d3d3]">
                 Forgot your password?
               </h1>
               <p className="w-[90%] text-sm text-[#787878] dark:text-[#d3d3d3]">
@@ -300,7 +344,7 @@ const Login = ({ state }) => {
               />
               <button
                 onClick={resetPassword}
-                className="p-2 shadow shadow-amber-400 bg-[var(--Primary)] rounded-[10px] text-white w-[100%] mt-5 font-[500] text-sm"
+                className="p-3 shadow shadow-amber-400 bg-[var(--Primary)] rounded-[10px] text-white w-[100%] mt-5 font-[500] text-sm"
               >
                 {loading ? "Sending..." : "Reset Password"}
               </button>
@@ -351,10 +395,32 @@ const Login = ({ state }) => {
                   ? "loading....."
                   : type === "login"
                   ? "Login"
-                  : "Sign up"}
+                  : "Start Winning"}
               </span>
             </button>
           )}
+          {type === "login" ? (
+            <div className="text-center font-[400] mt-3 text-[13px] text-[#939393]">
+              New to SportsTips ?{" "}
+              <button
+                onClick={() => setType("signUp")}
+                className="text-blue-500 font-[600]"
+              >
+                SignUp
+              </button>
+            </div>
+          ) : (
+            <div className="text-center font-[400] mt-3 text-[13px] text-[#939393]">
+              i already have an account ?{" "}
+              <button
+                onClick={() => setType("login")}
+                className="text-blue-500 font-[600]"
+              >
+                login
+              </button>
+            </div>
+          )}
+
           {/* Close Buttons */}
           {/* <button
             className="mt-3 text-sm dark:text-[#d3d3d3] text-[#787878]"
