@@ -80,8 +80,18 @@ const Landing = () => {
                   betting recommendations all designed to help you win more.
                 </div>
                 <div className="button-group">
-                  <button className="Read-More">Start winning Now</button>
-                  <button className="contact-button">Get Started</button>
+                  <button
+                    className="Read-More"
+                    onClick={() => !user && setForm(true)}
+                  >
+                    Start winning Now
+                  </button>
+                  <button
+                    className="contact-button"
+                    onClick={() => !user && setForm(true)}
+                  >
+                    Get Started
+                  </button>
                 </div>
                 <div className="trusted-text">
                   <div>

@@ -242,196 +242,7 @@
     font-weight: bold;
   }
 }
-.home-banner-container {
-  .container1 {
-    .container-headersm {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 600;
-      font-style: normal;
-    }
-    .container-headerBG {
-      font-size: 40px;
-      text-transform: capitalize;
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 600;
-      width: 450px;
-      margin-top: 20px;
-      font-style: normal;
-    }
-    .container-content {
-      width: 300px;
-      font-size: 15px;
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      width: 400px;
-      margin-top: 20px;
-      font-style: normal;
-    }
-    .button-group {
-      display: flex;
-      align-items: center;
-      margin-top: 30px;
-      gap: 20px;
-    }
-    .Read-More {
-      background-color: #111c54;
-      color: white;
-      border: none;
-      font-size: 13px;
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      border-radius: 5px;
-      padding: 10px 25px;
-      transition: 250ms;
-    }
 
-    .contact-button {
-      background-color: transparent;
-      color: #111c54;
-      border: 1px solid #111c54;
-      font-size: 13px;
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      border-radius: 5px;
-      padding: 10px 25px;
-      transition: 250ms;
-    }
-    .Read-More:hover {
-      background-color: #0d1643;
-    }
-    .contact-button:hover {
-      color: white;
-      background-color: #111c54;
-    }
-    .trusted-text {
-      margin-top: 20px;
-      display: flex;
-      font-family: "Inter", sans-serif;
-      font-optical-sizing: auto;
-      font-weight: 400;
-      align-items: center;
-      font-size: 12px;
-      gap: 4px;
-      color: #787878;
-    }
-  }
-  .image-container-content {
-    position: relative;
-    img {
-      width: 600px;
-      height: 400px;
-      border-radius: 20px;
-      object-fit: contain;
-      position: relative;
-      z-index: 2;
-    }
-    .blob1 {
-      width: 150px;
-      height: 150px;
-      border-radius: 100px;
-      opacity: 0.2;
-      position: absolute;
-      top: -180px;
-      left: -70px;
-      img {
-        width: 190px;
-      }
-    }
-    .blob2 {
-      width: 150px;
-      height: 150px;
-      border-radius: 100px;
-      opacity: 0.2;
-      position: absolute;
-      bottom: 50px;
-      right: 70px;
-      img {
-        width: 190px;
-      }
-    }
-  }
-  .text-on-image {
-    font-family: "Inter", sans-serif;
-    width: 230px;
-    background-color: white;
-    position: absolute;
-    bottom: -20px;
-    z-index: 3;
-    padding: 15px 20px;
-    border-radius: 20px;
-    left: -30px;
-
-    /* Bouncing animation */
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  .text-on-image .text-head {
-    color: #787878;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .text-on-image .text1 {
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-
-  .text-on-image .percentage {
-    background-color: #d4ffe0;
-    color: #45b863;
-    font-size: 12px;
-    padding: 2px 10px;
-    width: fit-content !important;
-    border-radius: 20px;
-    font-weight: bold;
-  }
-  .text-on-image2 {
-    font-family: "Inter", sans-serif;
-    width: 250px;
-    background-color: white;
-    position: absolute;
-    top: 70px;
-    z-index: 3;
-    padding: 15px 20px;
-    border-radius: 20px;
-    right: -5px;
-
-    /* Bouncing animation */
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  .text-on-image2 .text-head {
-    color: #787878;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-
-  .text-on-image2 .text1 {
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: capitalize;
-  }
-
-  .text-on-image2 .percentage {
-    background-color: #d4ffe0;
-    color: #45b863;
-    font-size: 12px;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-weight: bold;
-  }
-}
 /* Add this to your global CSS or component-specific CSS */
 @keyframes blink {
   0% {
@@ -481,6 +292,7 @@
   .text-on-image {
     width: 180px !important;
     padding: 15px !important;
+    right: -5px !important;
   }
   .text-on-image .text-head {
     font-size: 10px;
@@ -491,6 +303,7 @@
   .text-on-image2 {
     width: 190px !important;
     padding: 15px !important;
+    right: -5px !important;
   }
   .text-on-image2 .text-head {
     font-size: 10px;

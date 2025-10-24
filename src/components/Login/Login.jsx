@@ -256,7 +256,7 @@ const Login = ({ state }) => {
                   className="dark:bg-[var(--default)] dark:hover-opacity-70 dark:hover:bg-[var(--default)] hover:bg-[#f1f1f1] duration-200 bg-[#f6f6f6] rounded-[15px] py-5 flex items-center justify-center"
                 >
                   <img
-                    src="https://pngimg.com/d/google_PNG19635.png"
+                    src="https://cdn4.iconfinder.com/data/icons/logos-brands-7/512/google_logo-google_icongoogle-512.png"
                     width={30}
                     alt=""
                   />
