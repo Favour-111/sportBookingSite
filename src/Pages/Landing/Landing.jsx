@@ -235,70 +235,72 @@ const Landing = () => {
             )}
           </div>
           {/* i am to put the featured games here */}
-          <div className="text-center mt-20">
-            <p
-              data-aos="fade-up"
-              className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-1"
-            >
-              Quick Overview
-            </p>
-            <h1
-              data-aos="fade-up"
-              className="text-2xl md:text-4xl font-bold dark:text-[#f1f1f1]"
-            >
-              How{" "}
-              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-                SportsTips
-              </span>{" "}
-              Works
-            </h1>
-            <p
-              data-aos="fade-up"
-              className="md:px-0 px-10 dark:text-[#f1f1f1] md:text-sm text-[#787878] mt-1"
-            >
-              Get started with premium sports betting tips in just 3 simple
-              steps
-            </p>
-          </div>
-          <div
-            data-aos="fade-up"
-            className=" md:px-10 px-6 w-full flex-wrap flex items-center justify-between gap-y-5 mt-10"
-          >
-            <div className="md:w-[32%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600 shadow-lg rounded-[20px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer">
-              <div className="w-15 h-15 bg-amber-100 shadow-sm shadow-amber-100 text-white flex items-center justify-center rounded-full">
-                <RiExchangeDollarFill size={25} className="text-amber-600 " />
-              </div>
-              <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
-                Sign up & add funds
+          <div className="dark:bg-slate-800 bg-[#f8f9fa] mt-20 md:px-[40px] py-20 px-[5px]">
+            <div className="text-center ">
+              <p
+                data-aos="fade-up"
+                className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-1"
+              >
+                Quick Overview
+              </p>
+              <h1
+                data-aos="fade-up"
+                className="text-2xl md:text-4xl font-bold dark:text-[#f1f1f1]"
+              >
+                How{" "}
+                <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+                  SportsTips
+                </span>{" "}
+                Works
               </h1>
-              <p className="text-sm text-[#787878] dark:text-[#d3d3d3] w-[80%] text-center">
-                Create your account and add funds to your wallet securely. Get
-                ₹25 welcome bonus!
+              <p
+                data-aos="fade-up"
+                className="md:px-0 px-10 dark:text-[#f1f1f1] md:text-sm text-[#787878] mt-1"
+              >
+                Get started with premium sports betting tips in just 3 simple
+                steps
               </p>
             </div>
-            <div className="md:w-[32%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600 shadow-lg rounded-[20px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer">
-              <div className="w-15 h-15 bg-[#ff63472a] shadow-sm shadow-red-100 text-white flex items-center justify-center rounded-full">
-                <IoAnalytics size={25} className="text-[tomato]" />
+            <div
+              data-aos="fade-up"
+              className=" md:px-10 px-2 w-full grid sm:grid-cols-2 grid-cols-1 justify-between md:gap-y-5 gap-y-0 mt-10"
+            >
+              <div className=" md:w-[80%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600  rounded-[20px] flex flex-col  justify-center gap-3  duration-200 cursor-pointer">
+                <div className="w-13 h-13 bg-[#e3e5ea] text-white flex items-center justify-center rounded-full">
+                  <RiExchangeDollarFill size={25} className="text-[#212529] " />
+                </div>
+                <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
+                  Sign up & add funds
+                </h1>
+                <p className="text-sm text-[#787878] dark:text-[#d3d3d3] md:w-[80%] w-[100%] ">
+                  Create your account and add funds to your wallet securely. Get
+                  ₹25 welcome bonus!
+                </p>
               </div>
-              <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase color-[var(--Default)]">
-                Browse Menu Tips
-              </h1>
-              <p className="text-sm text-[#787878] dark:text-[#d3d3d3] w-[80%] text-center">
-                Explore our curated recommendations from professional analysts
-                with proven track records.
-              </p>
-            </div>
-            <div className="md:w-[32%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600 shadow-lg rounded-[20px] flex flex-col items-center justify-center gap-3 hover:shadow-lg duration-200 cursor-pointer">
-              <div className="w-15 h-15 bg-emerald-100 shadow-sm shadow-emerald-100 text-white flex items-center justify-center rounded-full">
-                <IoTrophyOutline size={25} className="text-emerald-800" />
+              <div className=" md:w-[80%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600  rounded-[20px] flex flex-col  justify-center gap-3  duration-200 cursor-pointer">
+                <div className="w-13 h-13 bg-[#e3e5ea] text-white flex items-center justify-center rounded-full">
+                  <IoAnalytics size={25} className="text-[#212529] " />
+                </div>
+                <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
+                  Browse Menu Tips
+                </h1>
+                <p className="text-sm text-[#787878] dark:text-[#d3d3d3] md:w-[80%] w-[100%] ">
+                  Explore our curated recommendations from professional analysts
+                  with proven track records.
+                </p>
               </div>
-              <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase color-[var(--Default)]">
-                Place Bets & Win
-              </h1>
-              <p className="text-sm text-[#787878] dark:text-[#d3d3d3] w-[80%] text-center">
-                Follow our expert analysis and place your bets with confidence.
-                Track your success!
-              </p>
+              <div className="md:w-[80%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600  rounded-[20px] flex flex-col  justify-center gap-3  duration-200 cursor-pointer">
+                <div className="w-13 h-13 bg-[#e3e5ea] text-white flex items-center justify-center rounded-full">
+                  <IoTrophyOutline size={25} className="text-[#212529] " />
+                </div>
+                <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
+                  Place Bets & Win
+                </h1>
+                <p className="text-sm text-[#787878] dark:text-[#d3d3d3] md:w-[80%] w-[100%] ">
+                  Follow our expert analysis and place your bets with
+                  confidence. Track your success!
+                </p>
+              </div>
             </div>
           </div>
           <div data-aos="fade-up" className="mt-20 text-center">
