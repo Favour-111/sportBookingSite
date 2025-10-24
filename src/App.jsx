@@ -21,6 +21,7 @@ import Tips from "./Pages/Managment/Tips";
 import Users from "./Pages/Managment/Users";
 import BroadCast from "./Pages/Managment/BroadCast";
 import UpdateDialog from "./components/UpdateDialog";
+import BackToTop from "./components/BackToTop";
 function App() {
   const user = localStorage.getItem("userId");
 
@@ -59,6 +60,7 @@ function MainAppRoutes({ user }) {
         <Route path="/settings/:id" element={<Settings />} />
         <Route path={user ? "" : "/"} element={<DashBoard />} />
       </Routes>
+      <BackToTop />
     </>
   );
 }

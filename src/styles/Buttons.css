@@ -142,7 +142,7 @@
 
 .wrapper .icon {
   position: relative;
-  background: #fff;
+  background: #8ec5ff;
   border-radius: 50%;
   margin: 10px;
   width: 50px;
@@ -212,7 +212,7 @@
 .wrapper .instagram:hover,
 .wrapper .instagram:hover .tooltip,
 .wrapper .instagram:hover .tooltip::before {
-  background: #f5b700;
+  background: #1877f2;
   color: #fff;
 }
 /* From Uiverse.io by zjssun */

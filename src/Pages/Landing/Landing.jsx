@@ -389,7 +389,6 @@ const Landing = () => {
             <Footer />
           </div>
           <PopUP />
-          <BackToTop />
           {form && <Login state={setForm} />}
         </div>
       )}{" "}

@@ -60,8 +60,8 @@ const Item = ({ item, setForm, setOpens }) => {
           const seconds = Math.floor((timeLeft % 60000) / 1000);
           setRemainingTime(`${minutes}m ${seconds}s`);
 
-          // Check if there are 10 minutes or less remaining
-          if (minutes <= 10) {
+          // Check if there are 15 minutes or less remaining
+          if (minutes <= 15) {
             setIsBlinking(true); // Start blinking effect
           } else {
             setIsBlinking(false); // Stop blinking
@@ -215,7 +215,7 @@ const Item = ({ item, setForm, setOpens }) => {
         </div>
         <div>
           <div
-            className={`bg-[#f1f1f1] p-2 rounded-[10px] text-[11px] text-[#787878] ${
+            className={`bg-green-50 p-2 rounded-[10px] text-[11px] text-green-500 ${
               isBlinking ? "blinking" : ""
             }`}
           >
@@ -471,6 +471,9 @@ const Item = ({ item, setForm, setOpens }) => {
                       </div>
 
                       {/* Display relevant details */}
+                      <div className="mt-2 flex items-center gap-1">
+                        <p className="text-2xl">🏆</p>
+                      </div>
                       <div className="mt-2 flex items-center gap-1">
                         <p className="text-sm font-[600] text-gray-500">
                           Tip Price:{" "}
