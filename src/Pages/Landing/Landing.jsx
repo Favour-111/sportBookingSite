@@ -66,7 +66,10 @@ const Landing = () => {
       ) : (
         <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)]`}>
           <NavBar />
-          <div>
+          <div
+            className="  bg-[radial-gradient(circle_at_40%_10%,rgba(255,215,100,0.15),transparent_70%)]
+  dark:bg-[radial-gradient(circle_at_40%_10%,rgba(255,255,255,0.08),transparent_10%)]"
+          >
             <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden px-6 sm:px-20 pt-15 md:pt-40">
               <div data-aos="fade-left" className="container1 sm:mt-2 mt-20">
                 <div className="container-headersm dark:text-[#d3d3d3]">
