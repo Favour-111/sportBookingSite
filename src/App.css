@@ -404,7 +404,7 @@
     z-index: 3;
     padding: 15px 20px;
     border-radius: 20px;
-    right: -30px;
+    right: -5px;
 
     /* Bouncing animation */
     animation: bounce 2s ease-in-out infinite;
@@ -473,7 +473,7 @@
 @media screen and (max-width: 635px) {
   .home-banner-container {
     /* margin-top: 10px; */
-    padding: 30px !important;
+    /* padding: 30px !important; */
     .container-headerBG {
       font-size: 25px !important;
     }

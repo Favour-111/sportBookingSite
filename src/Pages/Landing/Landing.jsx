@@ -67,15 +67,15 @@ const Landing = () => {
         <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)]`}>
           <NavBar />
           <div>
-            <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden p-20 pt-40">
+            <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden px-6 sm:px-20 pt-15 md:pt-40">
               <div data-aos="fade-left" className="container1 sm:mt-2 mt-20">
                 <div className="container-headersm dark:text-[#d3d3d3]">
                   our service
                 </div>
-                <div className="container-headerBG dark:text-[#d3d3d3]">
+                <div className="container-headerBG text-[#111c54] dark:text-[#d3d3d3]">
                   Join the winning community of smart bettors
                 </div>
-                <div className="container-content dark:text-[#f6f6f6]">
+                <div className="container-content text-[#111c54] dark:text-[#f6f6f6]">
                   Get exclusive tips, real-time game analysis, and expert
                   betting recommendations all designed to help you win more.
                 </div>
@@ -94,7 +94,7 @@ const Landing = () => {
                 <img src={image} alt="" />
                 <div className="text-on-image2 shadow">
                   <div className="text-head">Trusted</div>
-                  <div className="d-flex align-items-center justify-content-between mt-1">
+                  <div className="flex items-center justify-between mt-1">
                     <div className="text1">Betting Tips</div>
                     <div className="percentage">100%</div>
                   </div>
