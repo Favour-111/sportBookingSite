@@ -4,6 +4,9 @@ import NavBar from "../../components/NavBar/NavBar";
 import { RiExchangeDollarFill } from "react-icons/ri";
 import { LuClock, LuLoader2 } from "react-icons/lu";
 import { GiReceiveMoney } from "react-icons/gi";
+import { HiOutlineShieldCheck } from "react-icons/hi";
+import image from "../../assets/Bitcoin-bro.png";
+import backimg from "../../assets/—Pngtree—creative vector dotted line dotted_6030768.png";
 import { BiSolidQuoteLeft } from "react-icons/bi";
 import { LiaTrophySolid } from "react-icons/lia";
 import {
@@ -63,85 +66,53 @@ const Landing = () => {
       ) : (
         <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)]`}>
           <NavBar />
-          <div
-            className="w-full relative overflow-hidden h-[95vh] md:h-[100vh] flex flex-col items-center justify-center
-  bg-[radial-gradient(circle_at_40%_10%,rgba(255,215,100,0.15),transparent_70%)]
-  dark:bg-[radial-gradient(circle_at_40%_10%,rgba(255,255,255,0.08),transparent_10%)]"
-          >
-            <img
-              data-aos="fade-left"
-              data-aos-once="true"
-              style={{ opacity: 0.25 }}
-              src="https://png.pngtree.com/png-vector/20250708/ourmid/pngtree-orange-basketball-png-image_16721120.webp"
-              alt=""
-              loading="lazy"
-              className="absolute left-[-40px] md:left-[-60px] bottom-0 w-40 md:w-60"
-            />
-
-            <img
-              data-aos="fade-right"
-              data-aos-once="true"
-              style={{ opacity: 0.25 }}
-              src="https://static.vecteezy.com/system/resources/thumbnails/035/733/654/small_2x/ai-generated-american-football-ball-isolated-on-transparent-background-png.png"
-              alr=""
-              loading="lazy"
-              className="absolute opacity-25 right-[-10px] md:right-[0] top-0 w-40 md:w-60"
-            />
-            <div className="border-2 border-[#00000023] rounded-[12px] p-[2px]">
-              <div className="bg-[var(--Primary)] p-3 rounded-[9px] text-white">
-                <LiaTrophySolid size={20} />
-              </div>
-            </div>
-
-            {/* <p
-              data-aos="fade-up"
-              className="flex items-center gap-2 text-sm dark:bg-zinc-600 dark:text-white bg-[#fff] p-2 px-4 rounded-full border-1 border-[#f1f1f1]"
-            >
-              <div>
-                <PiSoccerBallThin size={18} />
-              </div>{" "}
-              <div>Best Sport Recommendation</div>
-            </p> */}
-            <h1
-              data-aos="fade-up"
-              className="text-3xl md:w-[70%] w-[90%] dark:text-white sm:text-5xl md:text-6xl font-bold mt-5 text-center"
-            >
-              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-                Premium Sports Betting
-              </span>{" "}
-              <span className="text-[var(--Primary)]">Intelligence.</span>
-            </h1>
-            <p
-              data-aos="fade-up"
-              className="mt-5 dark:text-[#d3d3d3] text-center text-[14px] md:text-[16px] md:w-[53%] w-[85%]"
-            >
-              Get exclusive recommendations from professional analysts with{" "}
-              proven track records.{" "}
-              <span>
-                <span className="text-[tomato] font-medium">
-                  {" "}
-                  Start winning today🏆.
-                </span>
-              </span>
-            </p>
-            <div className="flex md:flex-row flex-col items-center gap-5 mt-8 ">
-              <button
-                onClick={() => !user && setForm(true)}
-                data-aos="fade-down"
-                className="btn"
-              >
-                Start Winning Now
-              </button>
-              <button
-                data-aos="fade-down"
-                onClick={() => !user && setForm(true)}
-                className="text-[12px] hover:opacity-50 dark:text-[#d3d3d3] dark:hover:text-[#fff] flex items-center gap-2 justify-center "
-              >
-                <div>Get started Now </div>
-                <div>
-                  <FaArrowRightLong />
+          <div>
+            <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden p-20 pt-40">
+              <div data-aos="fade-left" className="container1 sm:mt-2 mt-20">
+                <div className="container-headersm dark:text-[#d3d3d3]">
+                  our service
                 </div>
-              </button>
+                <div className="container-headerBG dark:text-[#d3d3d3]">
+                  Join the winning community of smart bettors
+                </div>
+                <div className="container-content dark:text-[#f6f6f6]">
+                  Get exclusive tips, real-time game analysis, and expert
+                  betting recommendations all designed to help you win more.
+                </div>
+                <div className="button-group">
+                  <button className="Read-More">Start winning Now</button>
+                  <button className="contact-button">Get Started</button>
+                </div>
+                <div className="trusted-text">
+                  <div>
+                    <HiOutlineShieldCheck className="mb-1" color="green" />
+                  </div>
+                  <div>Trusted Betting Recommendations</div>
+                </div>
+              </div>
+              <div data-aos="fade-right" className="image-container-content">
+                <img src={image} alt="" />
+                <div className="text-on-image2 shadow">
+                  <div className="text-head">Trusted</div>
+                  <div className="d-flex align-items-center justify-content-between mt-1">
+                    <div className="text1">Betting Tips</div>
+                    <div className="percentage">100%</div>
+                  </div>
+                </div>
+                {/* <div className="text-on-image2 shadow">
+                <div className="text-head">Trusted</div>
+                <div className="d-flex align-items-center justify-content-between mt-1">
+                  <div className="text1">Fast Payment</div>
+                  <div className="percentage">100%</div>
+                </div>
+              </div> */}
+                <div className="blob1">
+                  <img src={backimg} alt="" />
+                </div>
+                <div className="blob2">
+                  <img src={backimg} alt="" />
+                </div>
+              </div>
             </div>
           </div>
           <div className="mt-20  text-center flex flex-col items-center justify-center">
