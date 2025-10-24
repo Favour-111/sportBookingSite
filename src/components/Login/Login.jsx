@@ -176,11 +176,11 @@ const Login = ({ state }) => {
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#0000004e] bg-opacity-50 flex items-center justify-center z-50">
-        <div className="relative bg-white dark:bg-slate-800 px-8 py-7 rounded-[20px] shadow-lg w-[90vw] max-w-md flex flex-col">
+        <div className="relative bg-white dark:bg-slate-800 px-6 sm:px-8 py-7 rounded-[20px] shadow-lg w-[90vw] max-w-md flex flex-col">
           {!resetPass && ( // 👈 hide on reset password screen
             <>
               {(type === "login" || type === "signUp") && (
-                <h1 className="flex dark:text-[#d3d3d3] items-center gap-2 text-2xl text-[var(--default)] font-[700]">
+                <h1 className="flex dark:text-[#d3d3d3] items-center gap-2 text-[20px] sm:text-2xl text-[var(--default)] font-[700]">
                   Welcome to Sports Tips
                   <div>
                     <img
