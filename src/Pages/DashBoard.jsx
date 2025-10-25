@@ -151,7 +151,7 @@ const DashBoard = () => {
                     ${compareUser?.availableBalance.toLocaleString()}
                   </h1>
                 </div>
-                <button
+                {/* <button
                   onClick={() => generatePDF(compareUser, total)}
                   className="flex items-center gap-1 p-[3px] w-[fit-content] pr-3 bg-green-50 rounded-full"
                 >
@@ -161,7 +161,7 @@ const DashBoard = () => {
                   <div className="text-[11px] text-green-800">
                     Download Stats
                   </div>
-                </button>
+                </button> */}
               </div>
 
               <div className="flex items-center gap-5 sm:gap-4 mt-2">
