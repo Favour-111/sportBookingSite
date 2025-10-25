@@ -44,10 +44,10 @@ const Tips = () => {
   const [selectedMessage, setSelectedMessage] = useState(null);
 
   const handleViewClick = (message) => {
-    setSelectedMessage(message); // Set the selected message
-    setOpenModal(true); // Open the modal
+    setSelectedMessage(message);
+    setStatus(message.status || "Pending"); // sync status to the selected game
+    setOpenModal(true);
   };
-
   const { isDarkMode, games, gameLoad, fetchAllGames, allUser } =
     useContext(ShopContext);
   const handleInput = (e) => {
@@ -118,7 +118,7 @@ const Tips = () => {
   const deleteGame = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/games/${id}`
+        `${import.meta.env.VITE_REACT_APP_API}/api/games/${id}`
       );
       toast.success(response.data.message); // Display success message
       fetchAllGames();
@@ -128,6 +128,7 @@ const Tips = () => {
     }
   };
   const [status, setStatus] = useState(selectedMessage?.status);
+
   const handleStatusChange = async (e) => {
     const newStatus = e.target.value;
     console.log("Selected Status:", newStatus); // Debugging log
@@ -370,207 +371,221 @@ const Tips = () => {
                           </tr>
                         </thead>
                         <tbody>
-                          {games.map((user) => (
-                            <tr
-                              key={user.id}
-                              className="border-b border-b-[#f1f1f1] hover:bg-gray-50"
-                            >
-                              <td className="py-3 px-6 text-[15px] text-gray-800 font-[600] whitespace-nowrap">
-                                {user.tipTitle}
-                              </td>
-                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
-                                ${user.tipPrice.toLocaleString()}
-                              </td>
-                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
-                                {user.oddRatio}
-                              </td>
-                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
-                                {user.duration}: min
-                              </td>
-                              <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
-                                <button
-                                  onClick={() => handleViewClick(user)} // Open the modal with user info
-                                  className="mr-4 text-blue-500 hover:text-blue-700"
-                                >
-                                  View
-                                </button>
-                                <button
-                                  onClick={
-                                    () =>
-                                      toggleActiveStatus(user._id, user.active) // Toggle the active status for this tip
-                                  }
-                                  className={
-                                    user.active
-                                      ? "mr-4 text-red-500 hover:text-red-700"
-                                      : "mr-4 text-green-500 hover:text-green-700"
-                                  }
-                                >
-                                  {user.active ? "Hide" : "Show"}{" "}
-                                  {/* Display the appropriate label */}
-                                </button>
-                                <button
-                                  onClick={() => deleteGame(user._id)} // Delete the game
-                                  className="ml-4 text-red-500 hover:text-red-700"
-                                >
-                                  Delete
-                                </button>
-                              </td>
-
-                              {/* Modal */}
-                              <Dialog
-                                open={openModal}
-                                onClose={() => setOpenModal(false)}
-                                className="relative z-10"
+                          {games
+                            .slice()
+                            .reverse()
+                            .map((user) => (
+                              <tr
+                                key={user.id}
+                                className="border-b border-b-[#f1f1f1] hover:bg-gray-50"
                               >
-                                <DialogBackdrop
-                                  transition
-                                  className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
-                                />
-                                <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-                                  <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                                    <DialogPanel
-                                      transition
-                                      className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
-                                    >
-                                      <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                                        <div className="sm:flex sm:items-start">
-                                          <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:size-10">
-                                            <FiMessageSquare color="blue" />
-                                          </div>
-                                          <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                            <DialogTitle
-                                              as="h3"
-                                              className="text-base font-semibold text-gray-900"
-                                            >
-                                              Message Details
-                                            </DialogTitle>
-                                            <div className="mt-2">
-                                              {/* Displaying selected message content */}
-                                              {selectedMessage && (
-                                                <div>
-                                                  <p className="text-sm text-gray-500">
-                                                    <strong>Tip Status:</strong>{" "}
-                                                    {selectedMessage?.status}
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>
-                                                      Status Edit:
-                                                    </strong>{" "}
-                                                    <select
-                                                      className="p-1 rounded border border-[#d3d3d3]"
-                                                      value={status} // This should bind the select value to the state
-                                                      onChange={(e) =>
-                                                        handleStatusChange(e)
-                                                      } // Update on change
-                                                    >
-                                                      <option value="Pending">
-                                                        Pending⏳
-                                                      </option>
-                                                      <option value="Hit✅">
-                                                        Hit✅
-                                                      </option>
-                                                      <option value="Miss❌">
-                                                        Miss❌
-                                                      </option>
-                                                    </select>
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>Tip Title:</strong>{" "}
-                                                    {selectedMessage.tipTitle}
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>Tip Price:</strong>{" "}
-                                                    {selectedMessage.tipPrice}
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>
-                                                      Tip ImageLink:
-                                                    </strong>{" "}
-                                                    {selectedMessage.image}
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>odd Ratio:</strong>{" "}
-                                                    {selectedMessage.oddRatio}
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>
-                                                      Betting Sites:
-                                                    </strong>{" "}
-                                                    {
-                                                      selectedMessage.bettingSites
-                                                    }
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>
-                                                      Confidence Level:
-                                                    </strong>{" "}
-                                                    {
-                                                      selectedMessage.confidenceLevel
-                                                    }
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>
-                                                      Content after Purchase:
-                                                    </strong>{" "}
-                                                    {
-                                                      selectedMessage.contentAfterPurchase
-                                                    }
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>duration:</strong>{" "}
-                                                    {selectedMessage.duration}
-                                                  </p>
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>
-                                                      purchase Limit:
-                                                    </strong>{" "}
-                                                    {
-                                                      selectedMessage.purchaseLimit
-                                                    }
-                                                  </p>
+                                <td className="py-3 px-6 text-[15px] text-gray-800 font-[600] whitespace-nowrap">
+                                  {user.tipTitle}
+                                </td>
+                                <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                  ${user.tipPrice.toLocaleString()}
+                                </td>
+                                <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                  {user.oddRatio}
+                                </td>
+                                <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                  {user.duration}: min
+                                </td>
+                                <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
+                                  <button
+                                    onClick={() => handleViewClick(user)} // Open the modal with user info
+                                    className="mr-4 text-blue-500 hover:text-blue-700"
+                                  >
+                                    View
+                                  </button>
+                                  <button
+                                    onClick={
+                                      () =>
+                                        toggleActiveStatus(
+                                          user._id,
+                                          user.active
+                                        ) // Toggle the active status for this tip
+                                    }
+                                    className={
+                                      user.active
+                                        ? "mr-4 text-red-500 hover:text-red-700"
+                                        : "mr-4 text-green-500 hover:text-green-700"
+                                    }
+                                  >
+                                    {user.active ? "Hide" : "Show"}{" "}
+                                    {/* Display the appropriate label */}
+                                  </button>
+                                  <button
+                                    onClick={() => deleteGame(user._id)} // Delete the game
+                                    className="ml-4 text-red-500 hover:text-red-700"
+                                  >
+                                    Delete
+                                  </button>
+                                </td>
 
-                                                  <p className="text-sm mt-3 text-gray-500">
-                                                    <strong>
-                                                      Purchase By:
-                                                    </strong>{" "}
-                                                    {selectedMessage.purchasedBy
-                                                      .length > 0
-                                                      ? selectedMessage.purchasedBy
-                                                          .map((userId) => {
-                                                            const user =
-                                                              allUser.find(
-                                                                (item) =>
-                                                                  item._id ===
-                                                                  userId
-                                                              );
-                                                            return user
-                                                              ? user.userName
-                                                              : "Unknown User"; // Fallback if user not found
-                                                          })
-                                                          .join(", ") // Join all usernames if there are multiple
-                                                      : "No users"}
-                                                  </p>
-                                                </div>
-                                              )}
+                                {/* Modal */}
+                                <Dialog
+                                  open={openModal}
+                                  onClose={() => setOpenModal(false)}
+                                  className="relative z-10"
+                                >
+                                  <DialogBackdrop
+                                    transition
+                                    className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
+                                  />
+                                  <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
+                                    <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                                      <DialogPanel
+                                        transition
+                                        className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in sm:my-8 sm:w-full sm:max-w-lg data-closed:sm:translate-y-0 data-closed:sm:scale-95"
+                                      >
+                                        <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                                          <div className="sm:flex sm:items-start">
+                                            <div className="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 sm:mx-0 sm:size-10">
+                                              <FiMessageSquare color="blue" />
+                                            </div>
+                                            <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                                              <DialogTitle
+                                                as="h3"
+                                                className="text-base font-semibold text-gray-900"
+                                              >
+                                                Message Details
+                                              </DialogTitle>
+                                              <div className="mt-2">
+                                                {/* Displaying selected message content */}
+                                                {selectedMessage && (
+                                                  <div>
+                                                    <p className="text-sm text-gray-500">
+                                                      <strong>
+                                                        Tip Status:
+                                                      </strong>{" "}
+                                                      {selectedMessage?.status}
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Status Edit:
+                                                      </strong>{" "}
+                                                      <select
+                                                        className="p-1 rounded border border-[#d3d3d3]"
+                                                        value={status} // This should bind the select value to the state
+                                                        onChange={(e) =>
+                                                          handleStatusChange(e)
+                                                        } // Update on change
+                                                      >
+                                                        <option value="Pending">
+                                                          Pending⏳
+                                                        </option>
+                                                        <option value="Hit✅">
+                                                          Hit✅
+                                                        </option>
+                                                        <option value="Miss❌">
+                                                          Miss❌
+                                                        </option>
+                                                      </select>
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Tip Title:
+                                                      </strong>{" "}
+                                                      {selectedMessage.tipTitle}
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Tip Price:
+                                                      </strong>{" "}
+                                                      {selectedMessage.tipPrice}
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Tip ImageLink:
+                                                      </strong>{" "}
+                                                      {selectedMessage.image}
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        odd Ratio:
+                                                      </strong>{" "}
+                                                      {selectedMessage.oddRatio}
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Betting Sites:
+                                                      </strong>{" "}
+                                                      {
+                                                        selectedMessage.bettingSites
+                                                      }
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Confidence Level:
+                                                      </strong>{" "}
+                                                      {
+                                                        selectedMessage.confidenceLevel
+                                                      }
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Content after Purchase:
+                                                      </strong>{" "}
+                                                      {
+                                                        selectedMessage.contentAfterPurchase
+                                                      }
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>duration:</strong>{" "}
+                                                      {selectedMessage.duration}
+                                                    </p>
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        purchase Limit:
+                                                      </strong>{" "}
+                                                      {
+                                                        selectedMessage.purchaseLimit
+                                                      }
+                                                    </p>
+
+                                                    <p className="text-sm mt-3 text-gray-500">
+                                                      <strong>
+                                                        Purchase By:
+                                                      </strong>{" "}
+                                                      {selectedMessage
+                                                        .purchasedBy.length > 0
+                                                        ? selectedMessage.purchasedBy
+                                                            .map((userId) => {
+                                                              const user =
+                                                                allUser.find(
+                                                                  (item) =>
+                                                                    item._id ===
+                                                                    userId
+                                                                );
+                                                              return user
+                                                                ? user.userName
+                                                                : "Unknown User"; // Fallback if user not found
+                                                            })
+                                                            .join(", ") // Join all usernames if there are multiple
+                                                        : "No users"}
+                                                    </p>
+                                                  </div>
+                                                )}
+                                              </div>
                                             </div>
                                           </div>
                                         </div>
-                                      </div>
-                                      <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                                        <button
-                                          type="button"
-                                          onClick={() => setOpenModal(false)}
-                                          className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
-                                        >
-                                          Close
-                                        </button>
-                                      </div>
-                                    </DialogPanel>
+                                        <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                                          <button
+                                            type="button"
+                                            onClick={() => setOpenModal(false)}
+                                            className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
+                                          >
+                                            Close
+                                          </button>
+                                        </div>
+                                      </DialogPanel>
+                                    </div>
                                   </div>
-                                </div>
-                              </Dialog>
-                            </tr>
-                          ))}
+                                </Dialog>
+                              </tr>
+                            ))}
                         </tbody>
                       </table>
                     </div>

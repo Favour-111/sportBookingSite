@@ -381,13 +381,16 @@ const Item = ({ item, setForm, setOpens }) => {
                     )}
                     {loader ? "Buying Bet" : " Yes,Buy Bet now"}
                   </button>
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-zinc-300 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-zinc-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setConfirmOpen(false)}
-                  >
-                    Cancel
-                  </button>
+                  {!loader &
+                  (
+                    <button
+                      type="button"
+                      className="inline-flex w-full justify-center rounded-md bg-zinc-300 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-zinc-500 sm:ml-3 sm:w-auto"
+                      onClick={() => setConfirmOpen(false)}
+                    >
+                      Cancel
+                    </button>
+                  )}
                 </div>
               </DialogPanel>
             </div>

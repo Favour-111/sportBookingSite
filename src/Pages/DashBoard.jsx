@@ -62,6 +62,8 @@ const DashBoard = () => {
     fetchUser,
     mainLoading,
   } = useContext(ShopContext);
+  console.log(games);
+
   const [blur, SetBlur] = useState(false);
   const [Gamefilter, setFilter] = useState("All");
   const total = compareUser?.betHistory.reduce((acc, item) => {
@@ -631,9 +633,8 @@ const DashBoard = () => {
                       Game Result
                     </h1>
                   </h1>
-                  {compareUser?.betHistory.filter(
-                    (item) => item?.status !== "Pending"
-                  ).length === 0 ? (
+                  {games.filter((item) => item?.status !== "Pending").length ===
+                  0 ? (
                     <div className="h-100 w-full flex flex-col justify-center items-center gap-3">
                       <div>
                         <img
@@ -648,7 +649,7 @@ const DashBoard = () => {
                     </div>
                   ) : (
                     <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mt-5">
-                      {compareUser?.betHistory
+                      {games
                         .filter((item) => item?.status !== "Pending")
                         .reverse()
                         .map((item) => (
@@ -660,7 +661,7 @@ const DashBoard = () => {
                               <div className="p-4">
                                 <div className="flex items-center justify-between">
                                   <h1 className="font-[500] dark:text-[#f1f1f1]">
-                                    {item.gameName}
+                                    {item.tipTitle}
                                   </h1>
                                   <div className="flex items-center gap-2">
                                     <button
@@ -711,7 +712,7 @@ const DashBoard = () => {
                                 </div>
 
                                 <div className="bg-[#f1f1f1] p-3 rounded-[10px] text-[13px] text-[#787878] dark:text-[#d3d3d3] dark:bg-[#222a3a] ">
-                                  {item.gameContent}
+                                  {item.contentAfterPurchase}
                                 </div>
                                 {item.status === "Hit✅" && (
                                   <div className="flex items-center gap-2 justify-center bg-green-50 text-center font-[500] p-3 rounded-[10px] text-[12px] text-green-600 dark:text-[#d3d3d3] dark:bg-[#222a3a] mt-2">
