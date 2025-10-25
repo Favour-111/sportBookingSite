@@ -135,35 +135,39 @@ const Tips = () => {
 
     setStatus(newStatus);
 
-    if (!selectedMessage) return;
+    if (!selectedMessage) {
+      return;
+    } else if (selectedMessage.active) {
+      toast.error("game is still active deactivate game before setting status");
+    } else {
+      try {
+        const response = await fetch(
+          `${import.meta.env.VITE_REACT_APP_API}/api/games/updategameStatus/${
+            selectedMessage._id
+          }`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ gameStatus: newStatus }), // Ensure this matches the backend's expected field
+          }
+        );
 
-    try {
-      const response = await fetch(
-        `${import.meta.env.VITE_REACT_APP_API}/api/games/updategameStatus/${
-          selectedMessage._id
-        }`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ gameStatus: newStatus }), // Ensure this matches the backend's expected field
-        }
-      );
+        const data = await response.json();
+        console.log("Backend Response:", data); // Debugging log
 
-      const data = await response.json();
-      console.log("Backend Response:", data); // Debugging log
+        if (!response.ok) throw new Error("Failed to update Game status");
 
-      if (!response.ok) throw new Error("Failed to update Game status");
-
-      // Update selectedMessage state to reflect the new status
-      setSelectedMessage((prev) => ({
-        ...prev,
-        status: newStatus, // Ensure this matches the updated field in the game model
-      }));
-    } catch (error) {
-      console.error(error);
-      alert("Failed to update status");
+        // Update selectedMessage state to reflect the new status
+        setSelectedMessage((prev) => ({
+          ...prev,
+          status: newStatus, // Ensure this matches the updated field in the game model
+        }));
+      } catch (error) {
+        console.error(error);
+        alert("Failed to update status");
+      }
     }
   };
 
@@ -380,6 +384,11 @@ const Tips = () => {
                                 className="border-b border-b-[#f1f1f1] hover:bg-gray-50"
                               >
                                 <td className="py-3 px-6 text-[15px] text-gray-800 font-[600] whitespace-nowrap">
+                                  {user.status === "Hit✅"
+                                    ? "✅"
+                                    : user.status === "Miss❌"
+                                    ? "❌"
+                                    : "⏳"}{" "}
                                   {user.tipTitle}
                                 </td>
                                 <td className="py-3 px-6 text-sm text-gray-800 whitespace-nowrap">
@@ -574,7 +583,10 @@ const Tips = () => {
                                         <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                                           <button
                                             type="button"
-                                            onClick={() => setOpenModal(false)}
+                                            onClick={() => {
+                                              setOpenModal(false);
+                                              fetchAllGames();
+                                            }}
                                             className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-red-500 sm:ml-3 sm:w-auto"
                                           >
                                             Close
