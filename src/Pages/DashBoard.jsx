@@ -720,7 +720,7 @@ const DashBoard = () => {
                                       <GiMoneyStack size={20} />
                                     </div>
                                     $250 converted to $
-                                    {(250 * item.tipOdd).toLocaleString()}
+                                    {(250 * item.oddRatio).toLocaleString()}
                                   </div>
                                 )}
                               </div>
