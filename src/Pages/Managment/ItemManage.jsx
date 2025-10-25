@@ -64,7 +64,7 @@ const ItemManage = ({ item }) => {
       </div>
       <div>
         <div className="bg-[#f1f1f1] p-2 rounded-[10px] text-[13px] text-[#787878]">
-          {item.duration}:00 hours remaining
+          {item.duration} Miniutes remaining
         </div>
         <div className="text-[12px] text-[orangered] dark:text-[tomato] opacity-80 mt-2 dark:opacity-100">
           Available on : {item.bettingSites}

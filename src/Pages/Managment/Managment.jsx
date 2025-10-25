@@ -154,13 +154,16 @@ const Managment = () => {
               </div>
             ) : (
               <div className="mt-5 grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-6">
-                {games.map((item) => {
-                  return (
-                    <div key={item._id}>
-                      <ItemManage item={item} />
-                    </div>
-                  );
-                })}
+                {games
+                  .slice()
+                  .reverse()
+                  .map((item) => {
+                    return (
+                      <div key={item._id}>
+                        <ItemManage item={item} />
+                      </div>
+                    );
+                  })}
               </div>
             )}
           </div>
