@@ -644,7 +644,7 @@ const DashBoard = () => {
                         />
                       </div>
                       <div className="text-center py-4 text-gray-500 dark:text-[#d3d3d3]">
-                        No purchased items. Buy tips to view history.
+                        No Game Status Update yet
                       </div>
                     </div>
                   ) : (
