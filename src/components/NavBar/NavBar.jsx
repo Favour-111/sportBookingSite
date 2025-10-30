@@ -186,7 +186,7 @@ const NavBar = ({ setOpen }) => {
                     </div>
                     <div className="text-[12px]">Settings</div>
                   </Link>
-                  {user?.telegramId ? (
+                  {compareUser?.telegramId !== "" ? (
                     <div className="text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2">
                       <BiLink />
                       Telegram Connected
@@ -339,7 +339,7 @@ const NavBar = ({ setOpen }) => {
                     </div>
                     <div className="text-[12px]">Settings</div>
                   </Link>
-                  {user?.telegramId ? (
+                  {compareUser?.telegramId !== "" ? (
                     <div className="text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2">
                       <BiLink />
                       Telegram Connected
