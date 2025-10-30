@@ -54,7 +54,7 @@ const Landing = () => {
     setLogin({ ...login, [name]: value });
   };
   const submitForm = () => {
-    console.log(login);
+    // console.log(login);
   };
   localStorage.setItem("modalShown", true);
   const mode = localStorage.getItem("darkMode");

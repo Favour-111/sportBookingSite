@@ -63,7 +63,6 @@ const DashBoard = () => {
     fetchUser,
     mainLoading,
   } = useContext(ShopContext);
-  console.log(games);
 
   const [blur, SetBlur] = useState(false);
   const [Gamefilter, setFilter] = useState("All");
@@ -268,7 +267,7 @@ const DashBoard = () => {
 
               <div
                 className={`flex overflow-hidden flex-col gap-3 mt-3 ${
-                  ViewOpen ? "max-h-100" : "max-h-0"
+                  ViewOpen ? "max-h-250" : "max-h-0"
                 } duration-300 `}
               >
                 {compareUser?.betHistory.length > 0 ? (

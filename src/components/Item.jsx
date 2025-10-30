@@ -87,7 +87,6 @@ const Item = ({ item, setForm, setOpens }) => {
       );
       toast(`${item.tipTitle} has ben deactivated`);
       fetchAllGames();
-      console.log("Game deactivated after time expiration");
     } catch (error) {
       console.error("Error deactivating game:", error);
     }
@@ -152,7 +151,6 @@ const Item = ({ item, setForm, setOpens }) => {
         );
 
         if (updateHistoryResponse.status === 200) {
-          console.log("Bet added to history");
         } else {
           toast.error("Failed to update bet history");
         }

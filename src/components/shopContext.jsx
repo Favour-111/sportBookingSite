@@ -31,11 +31,11 @@ export const ShopProvider = ({ children }) => {
     setSocket(newSocket);
 
     newSocket.on("connect", () => {
-      console.log("🟢 Connected to socket:", newSocket.id);
+      // console.log("🟢 Connected to socket:", newSocket.id);
     });
 
     newSocket.on("disconnect", () => {
-      console.log("🔴 Disconnected from socket");
+      // console.log("🔴 Disconnected from socket");
     });
 
     return () => {
@@ -146,9 +146,6 @@ export const ShopProvider = ({ children }) => {
       const updatedGame = games?.find((g) => g?._id === Number(gameId));
 
       if (gameStatus === "Hit✅") {
-        console.log(updatedGame);
-        console.log(gameFilter);
-
         setModalMessage(
           `🎯 Great news! ${
             updatedGame?.tipTitle || "Check History Now,a game"

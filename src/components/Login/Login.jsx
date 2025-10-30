@@ -7,6 +7,8 @@ import {
 } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
 import axios from "axios";
+import { useGoogleLogin } from "@react-oauth/google";
+// import jwtDecode from "jwt-decode";
 import { MdOutlineClose } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -173,6 +175,27 @@ const Login = ({ state }) => {
     }
   };
 
+  const loginBtn = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        // Decode JWT to get user info
+        const decoded = jwtDecode(tokenResponse.credential);
+        console.log("Google user:", decoded);
+
+        // Optionally send token to backend
+        const res = await axios.post("http://localhost:5000/api/auth/google", {
+          token: tokenResponse.credential,
+        });
+
+        toast.success("Login successful!");
+        localStorage.setItem("token", res.data.token);
+      } catch (error) {
+        toast.error("Something went wrong");
+      }
+    },
+    onError: () => toast.error("Login failed"),
+  });
+
   return (
     <div>
       <div className="fixed top-0 left-0 right-0 bottom-0 bg-[#0000004e] bg-opacity-50 flex items-center justify-center z-50">
@@ -250,15 +273,13 @@ const Login = ({ state }) => {
             <>
               <div className="grid gap-3 mt-3 grid-cols-2">
                 <button
-                  onClick={() =>
-                    toast.error("this feature is currently unavailable")
-                  }
+                  onClick={() => loginBtn()}
                   className="dark:bg-[var(--default)] dark:hover-opacity-70 dark:hover:bg-[var(--default)] hover:bg-[#f1f1f1] duration-200 bg-[#f6f6f6] rounded-[15px] py-5 flex items-center justify-center"
                 >
                   <img
-                    src="https://cdn4.iconfinder.com/data/icons/logos-brands-7/512/google_logo-google_icongoogle-512.png"
-                    width={30}
-                    alt=""
+                    src="https://png.pngtree.com/png-vector/20230817/ourmid/pngtree-google-internet-icon-vector-png-image_9183287.png"
+                    width={25}
+                    alt="Google"
                   />
                 </button>
                 <button

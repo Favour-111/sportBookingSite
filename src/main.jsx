@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import "./util/i18n.js"; // 👈 Import this line
+import { GoogleOAuthProvider } from "@react-oauth/google";
 // Theme initialization: prefer saved value, otherwise system preference
 (function initTheme() {
   try {
@@ -67,12 +68,18 @@ const ThemeProvider = ({ children }) => {
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider>
-        {({ toggleTheme, isDarkMode }) => (
-          <App toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
-        )}
-      </ThemeProvider>
-    </BrowserRouter>
+    <GoogleOAuthProvider
+      clientId={
+        "172929669773-uudqhgvejm3qq213n0spnei9ru0voq9v.apps.googleusercontent.com"
+      }
+    >
+      <BrowserRouter>
+        <ThemeProvider>
+          {({ toggleTheme, isDarkMode }) => (
+            <App toggleTheme={toggleTheme} isDarkMode={isDarkMode} />
+          )}
+        </ThemeProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   </StrictMode>
 );

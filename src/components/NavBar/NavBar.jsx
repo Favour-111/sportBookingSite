@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { IoSunny } from "react-icons/io5";
-import { BiExit, BiMoon, BiPlus, BiWallet } from "react-icons/bi";
+import { BiExit, BiLink, BiMoon, BiPlus, BiWallet } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { ShopContext } from "../shopContext";
 import { AiOutlineClose } from "react-icons/ai";
@@ -10,6 +10,8 @@ import { RiUser3Line } from "react-icons/ri";
 import { FiSettings, FiUser } from "react-icons/fi";
 import { useTranslation } from "react-i18next";
 import { FaAngleDown } from "react-icons/fa6";
+import toast from "react-hot-toast";
+import axios from "axios";
 const NavBar = ({ setOpen }) => {
   const { t, i18n } = useTranslation();
   // Consume the dark mode context
@@ -184,6 +186,35 @@ const NavBar = ({ setOpen }) => {
                     </div>
                     <div className="text-[12px]">Settings</div>
                   </Link>
+                  {user?.telegramId ? (
+                    <div className="text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2">
+                      <BiLink />
+                      Telegram Connected
+                    </div>
+                  ) : (
+                    <button
+                      className="dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-2 dark:text-[#d3d3d3] px-3 hover:bg-[#f1f1f1] duration-200"
+                      onClick={async () => {
+                        try {
+                          const res = await axios.post(
+                            `${
+                              import.meta.env.VITE_REACT_APP_API
+                            }/api/auth/connect/telegram`,
+                            { userId: localStorage.getItem("userId") }
+                          );
+                          window.open(res.data.deepLink, "_blank");
+                        } catch (err) {
+                          toast.error("Failed to generate Telegram link");
+                        }
+                      }}
+                    >
+                      <div>
+                        <BiLink />
+                      </div>
+                      <div className="text-[12px]">Connect to Telegram</div>
+                    </button>
+                  )}
+
                   <button
                     onClick={() => {
                       localStorage.clear();
@@ -299,7 +330,6 @@ const NavBar = ({ setOpen }) => {
                     </div>
                     Add Funds
                   </button>
-
                   <Link
                     to={`settings/${user}`}
                     className=" dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-2 dark:text-[#d3d3d3] px-3 hover:bg-[#f1f1f1] duration-200"
@@ -309,6 +339,35 @@ const NavBar = ({ setOpen }) => {
                     </div>
                     <div className="text-[12px]">Settings</div>
                   </Link>
+                  {user?.telegramId ? (
+                    <div className="text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2">
+                      <BiLink />
+                      Telegram Connected
+                    </div>
+                  ) : (
+                    <button
+                      className="dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-2 dark:text-[#d3d3d3] px-3 hover:bg-[#f1f1f1] duration-200"
+                      onClick={async () => {
+                        try {
+                          const res = await axios.post(
+                            `${
+                              import.meta.env.VITE_REACT_APP_API
+                            }/api/auth/connect/telegram`,
+                            { userId: localStorage.getItem("userId") }
+                          );
+                          window.open(res.data.deepLink, "_blank");
+                        } catch (err) {
+                          toast.error("Failed to generate Telegram link");
+                        }
+                      }}
+                    >
+                      <div>
+                        <BiLink />
+                      </div>
+                      <div className="text-[12px]">Connect to Telegram</div>
+                    </button>
+                  )}
+
                   <button
                     onClick={() => {
                       localStorage.clear();

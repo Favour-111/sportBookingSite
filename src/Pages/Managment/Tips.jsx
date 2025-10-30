@@ -91,7 +91,6 @@ const Tips = () => {
       setLoading(false);
     }
   };
-  console.log(games);
 
   // Handle toggling the active status of a specific tip
   const toggleActiveStatus = async (itemId, currentStatus) => {
@@ -131,7 +130,7 @@ const Tips = () => {
 
   const handleStatusChange = async (e) => {
     const newStatus = e.target.value;
-    console.log("Selected Status:", newStatus); // Debugging log
+    // console.log("Selected Status:", newStatus); // Debugging log
 
     setStatus(newStatus);
 
@@ -155,7 +154,7 @@ const Tips = () => {
         );
 
         const data = await response.json();
-        console.log("Backend Response:", data); // Debugging log
+        // console.log("Backend Response:", data); // Debugging log
 
         if (!response.ok) throw new Error("Failed to update Game status");
 

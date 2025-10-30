@@ -22,6 +22,7 @@ import Users from "./Pages/Managment/Users";
 import BroadCast from "./Pages/Managment/BroadCast";
 import UpdateDialog from "./components/UpdateDialog";
 import BackToTop from "./components/BackToTop";
+import AuthSuccess from "./Pages/AuthSuccess";
 function App() {
   const user = localStorage.getItem("userId");
 
@@ -53,6 +54,8 @@ function MainAppRoutes({ user }) {
         <Route path="/tips-management" element={<Tips />} />
         <Route path="/users" element={<Users />} />
         <Route path="/broadcast-message" element={<BroadCast />} />
+        <Route path="/auth/success" element={<AuthSuccess />} />
+
         <Route
           path="/api/auth/reset-password/:id/:token"
           element={<ResetPass />}

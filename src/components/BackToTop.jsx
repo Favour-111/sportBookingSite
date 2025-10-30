@@ -5,12 +5,21 @@ import { FaTelegramPlane } from "react-icons/fa";
 const BackToTop = () => {
   return (
     <div className="fixed bottom-1 right-1">
-      <ul class="wrapper">
+      <button
+        onClick={() =>
+          window.open(
+            "https://t.me/Addictedgames2025",
+            "_blank",
+            "noopener,noreferrer"
+          )
+        }
+        class="wrapper"
+      >
         <li class="icon instagram ">
           <span class="tooltip">Telegram</span>
           <FaTelegramPlane size={20} />
         </li>
-      </ul>
+      </button>
     </div>
   );
 };
