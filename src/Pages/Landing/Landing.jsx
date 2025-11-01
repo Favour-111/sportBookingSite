@@ -29,6 +29,7 @@ import Login from "../../components/Login/Login";
 import LoadingScreen from "../../components/loading/Loader";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { PiSoccerBallThin } from "react-icons/pi";
+import FAQ from "../../components/FaqPage";
 const Landing = () => {
   const { isDarkMode, user, games, gameFilter, gameLoad } =
     useContext(ShopContext);
@@ -303,71 +304,8 @@ const Landing = () => {
               </div>
             </div>
           </div>
-          <div data-aos="fade-up" className="mt-20 text-center">
-            <p className="text-[12px] dark:text-[#d3d3d3] text-[#787878] tracking-wider uppercase mb-1">
-              Games
-            </p>
-            <h1
-              data-aos="fade-up"
-              className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
-            >
-              Why Choose{" "}
-              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-                SportsTips?
-              </span>
-            </h1>
-          </div>
-          <div
-            data-aos="fade-up"
-            className="mt-10 md:mt-15 flex-wrap flex gap-y-10 items-center justify-center "
-          >
-            <div className="px-13 md:px-0 w-[100%] sm:w-[50%] md:w-[23%] text-center flex flex-col justify-center items-center gap-2  cursor-pointer">
-              <div className="bg-green-100 p-2 rounded-2xl">
-                <VscGraphLine className="text-emerald-700" size={40} />
-              </div>
-              <h1 className="text-[15px] font-[600] uppercase dark:text-[#f1f1f1]">
-                Expert Analytics
-              </h1>
-              <p className="text-[15px] text-[#787878] dark:text-[#d3d3d3]">
-                Professional analysts with years of experience in sports betting
-              </p>
-            </div>
-            <div className="px-13 md:px-0 w-[100%] sm:w-[50%] md:w-[23%] text-center flex flex-col justify-center items-center gap-2  cursor-pointer">
-              <div className="bg-blue-100 p-2 rounded-2xl">
-                <IoShieldHalfSharp className="text-blue-500" size={40} />
-              </div>
-              <h1 className="text-[14px] font-medium uppercase dark:text-[#f1f1f1]">
-                Secure Platform
-              </h1>
-              <p className="text-sm text-[#787878] dark:text-[#d3d3d3]">
-                Bank-grade security with encrypted transactions and data
-                protection
-              </p>
-            </div>
-            <div className="px-13 md:px-0 w-[100%] sm:w-[50%] md:w-[23%] text-center flex flex-col justify-center items-center gap-2  cursor-pointer">
-              <div className="bg-amber-100 p-2 rounded-2xl">
-                <LuClock className="text-[var(--Primary)]" size={40} />
-              </div>
-              <h1 className="text-[14px] font-medium uppercase dark:text-[#f1f1f1]">
-                Real-time Updates
-              </h1>
-              <p className="text-sm text-[#787878] dark:text-[#d3d3d3]">
-                Get instant notifications for new tips and live match updates
-              </p>
-            </div>
-            <div className="px-13 md:px-0 w-[100%] sm:w-[50%] md:w-[23%] text-center flex flex-col justify-center items-center gap-2  cursor-pointer">
-              <div className="bg-amber-100 p-2 rounded-2xl">
-                <GiReceiveMoney className=" text-amber-600" size={40} />
-              </div>
-              <h1 className="text-[14px] font-medium uppercase dark:text-[#f1f1f1]">
-                High Success Rate
-              </h1>
-              <p className="text-sm text-[#787878] dark:text-[#d3d3d3]">
-                Proven track record with 78% average success rate across all
-                sports
-              </p>
-            </div>
-          </div>{" "}
+
+          <FAQ />
           <div>
             <Testimonial />
           </div>
