@@ -5,8 +5,11 @@ import { ShopContext } from "../components/shopContext";
 import NavBar from "../components/NavBar/NavBar";
 import Footer from "../components/Footer/Footer";
 import BackToTop from "../components/BackToTop";
+import image from "../assets/female-student-listening-webinar-online.png";
+import backimg from "../assets/—Pngtree—creative vector dotted line dotted_6030768.png";
 import Login from "../components/Login/Login";
 import { useState } from "react";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 
 const Recommendation = () => {
   const [form, setForm] = useState(false);
@@ -15,22 +18,72 @@ const Recommendation = () => {
     <div className={`${isDarkMode ? "dark" : ""} dark:bg-[var(--default)]`}>
       <NavBar />
       <div>
-        <div class="bg-[url('https://www.mancity.com/meta/media/0hae1zok/tf308376-f-1920x1080-6d627c1.jpg?width=2560')] h-80 bg-cover bg-top">
-          <div className="w-full h-full bg-black/60 flex flex-col items-center justify-center">
-            <p
-              data-aos="fade-down"
-              className="text-3xl text-center text-[#f1f1f1] md:text-5xl font-bold"
-            >
-              Get Hot Betting <br />
-              <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-                Recommendation
-              </span>
-            </p>
+        <div
+          className="bg-[radial-gradient(circle_at_40%_10%,rgba(255,215,100,0.15),transparent_70%)]
+    dark:bg-[radial-gradient(circle_at_40%_10%,rgba(255,255,255,0.08),transparent_10%)]"
+        >
+          <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden px-6 sm:px-20 pt-15 md:pt-40">
+            <div data-aos="fade-left" className="container1 sm:mt-2 mt-20">
+              <div className="container-headersm dark:text-[#d3d3d3]">
+                Sports Recommendations
+              </div>
+
+              <div className="container-headerBG text-[#111c54] dark:text-[#d3d3d3]">
+                Expert Betting Tips & Game Insights
+              </div>
+
+              <div className="container-content text-[#111c54] dark:text-[#f6f6f6]">
+                Stay ahead of the game with real-time predictions, expert
+                analysis, and data-backed recommendations designed to help you
+                make smarter bets and maximize your wins.
+              </div>
+
+              <div className="trusted-text">
+                <div>
+                  <IoMdCheckmarkCircleOutline color="green" />
+                </div>
+                <div> Expert-Backed Predictions </div>
+              </div>
+              <div className="trusted-text">
+                <div>
+                  <IoMdCheckmarkCircleOutline color="green" />
+                </div>
+                <div> Real-Time Game Insights </div>
+              </div>
+              <div className="trusted-text">
+                <div>
+                  <IoMdCheckmarkCircleOutline color="green" />
+                </div>
+                <div> Proven Winning Strategies </div>
+              </div>
+            </div>
+
+            <div data-aos="fade-right" className="image-container-content">
+              <img
+                src="https://cdni.iconscout.com/illustration/premium/thumb/man-earning-online-money-illustration-svg-download-png-2621084.png"
+                alt="Sports insights"
+              />
+              <div className="text-on-image2 shadow">
+                <div className="text-head">Accurate</div>
+                <div className="flex items-center justify-between mt-1">
+                  <div className="text1">Game Predictions</div>
+                  <div className="percentage">98%</div>
+                </div>
+              </div>
+
+              <div className="blob1">
+                <img src={backimg} alt="" />
+              </div>
+              <div className="blob2">
+                <img src={backimg} alt="" />
+              </div>
+            </div>
           </div>
         </div>
+
         <div
           data-aos="fade-up"
-          className=" text-center flex flex-col items-center justify-center"
+          className=" text-center flex flex-col items-center mt-20 justify-center"
         >
           <p className="text-[12px] mt-10 dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-2">
             Games
@@ -74,7 +127,7 @@ const Recommendation = () => {
             <div className="text-sm">Loading...</div>
           </div>
         ) : gameFilter.length <= 0 ? (
-          <div className="flex justify-center items-center flex-col gap-3">
+          <div className="flex mt-20 justify-center items-center flex-col gap-3">
             <div>
               <img
                 src="https://cdn-icons-png.flaticon.com/512/2039/2039083.png"
