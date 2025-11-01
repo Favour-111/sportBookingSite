@@ -186,8 +186,15 @@ const NavBar = ({ setOpen }) => {
                     </div>
                     <div className="text-[12px]">Settings</div>
                   </Link>
-                  {compareUser?.telegramId !== "" ? (
-                    <div className="text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2">
+                  {compareUser?.telegramId ? (
+                    <div
+                      className="cursor-pointer text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2 cursor-pointer hover:bg-green-100 duration-200"
+                      onClick={() => {
+                        const botUsername = "SportTipsPayBot"; // no @
+                        const telegramUrl = `https://t.me/${botUsername}`;
+                        window.open(telegramUrl, "_blank");
+                      }}
+                    >
                       <BiLink />
                       Telegram Connected
                     </div>
@@ -208,9 +215,7 @@ const NavBar = ({ setOpen }) => {
                         }
                       }}
                     >
-                      <div>
-                        <BiLink />
-                      </div>
+                      <BiLink />
                       <div className="text-[12px]">Connect to Telegram</div>
                     </button>
                   )}
@@ -340,7 +345,14 @@ const NavBar = ({ setOpen }) => {
                     <div className="text-[12px]">Settings</div>
                   </Link>
                   {compareUser?.telegramId !== "" ? (
-                    <div className="text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2">
+                    <div
+                      onClick={() => {
+                        const botUsername = "SportTipsPayBot"; // no @
+                        const telegramUrl = `https://t.me/${botUsername}`;
+                        window.open(telegramUrl, "_blank");
+                      }}
+                      className="cursor-pointer text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2"
+                    >
                       <BiLink />
                       Telegram Connected
                     </div>

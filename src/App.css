@@ -303,6 +303,7 @@
   .text-on-image2 {
     width: 190px !important;
     padding: 15px !important;
+    top: -23px !important;
     right: -5px !important;
   }
   .text-on-image2 .text-head {
