@@ -33,12 +33,14 @@ const Footer = () => {
             Send Now
           </button>
         </div>
-        <button className="bg-[var(--Primary)] gap-2 shadow-sm hover:opacity-70 flex items-center justify-self-center mt-5 px-4 py-2.5 rounded-[7px] text-sm text-white">
-          <div>
-            <GoTrophy />
-          </div>{" "}
-          <div>Start Winning Today</div>
-        </button>
+        <div className="flex items-center justify-center">
+          <button className="bg-[var(--Primary)] gap-2 shadow-sm hover:opacity-70 flex items-center  mt-5 px-4 py-2.5 rounded-[7px] text-sm text-white">
+            <div>
+              <GoTrophy />
+            </div>{" "}
+            <div>Start Winning Today</div>
+          </button>
+        </div>
       </div>
       <div className="h-[1px]  w-full bg-[#e5e5e5] "></div>
       <div className="bg-[#f6f6f6] dark:text-[#d3d3d3]  dark:bg-[#1c2330] flex flex-col md:flex-row justify-between md:px-10 px-5 gap-y-10 py-10 ">
