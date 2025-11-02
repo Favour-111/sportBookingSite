@@ -17,20 +17,20 @@ const Footer = () => {
             <IoMailUnreadOutline className="text-[var(--Primary)] text-center text-[50px]" />
           </div>
           <h1 className="font-[700] dark:text-white text-[25px]">
-            Subscribe to out News Letter{" "}
+            הצטרפו למועדון החברים
           </h1>
           <div className="text-[#787878] text-sm">
-            Subscribe to our news letter to get latest betting updates
+            קבלו עדכונים ישר למייל
           </div>
         </div>
         <div className="flex items-center justify-between bg-white p-1 rounded-[25px]">
           <input
             type="text"
-            placeholder="input mail"
+            placeholder="הכניסו כתובת מייל"
             className="px-3 placeholder:text-sm outline-none"
           />
           <button className="bg-[tomato] px-4 py-2.5 rounded-[20px] text-[11px] whitespace-nowrap text-white">
-            Send Now
+            שלח
           </button>
         </div>
         <div className="flex items-center justify-center">
@@ -38,7 +38,7 @@ const Footer = () => {
             <div>
               <GoTrophy />
             </div>{" "}
-            <div>Start Winning Today</div>
+            <div>בואו נתחיל להרוויח!</div>
           </button>
         </div>
       </div>
@@ -54,15 +54,14 @@ const Footer = () => {
             />
           </div>
           <p className="text-sm text-[#787878] mt-3 dark:text-[#d3d3d3] ">
-            Premium sports betting recommendations from professional analysts at
-            SportsTips.
+            הפלטפורמה המובילה לטיפים והמלצות בהימורי ספורט.
           </p>
         </div>
 
         <div className="md:w-[33%] w-[100%] ">
-          <h1 className="font-[600]">Supports</h1>
+          <h1 className="font-[600]">תמיכה</h1>
           <ul className="text-sm dark:text-[#d3d3d3]  text-[#787878] mt-2 flex flex-col gap-2">
-            <li>Help Us</li>
+            <li>מרכז עזרה</li>
             <li>
               <button
                 onClick={() =>
@@ -78,18 +77,18 @@ const Footer = () => {
                   {" "}
                   <BiLogoTelegram />
                 </div>
-                <div>Contact Us</div>
+                <div>דברו איתנו</div>
               </button>
             </li>
-            <li>Term Of Service</li>
-            <li>Privacy Policy</li>
+            <li>תנאי שימוש</li>
+            <li>פרטיות</li>
           </ul>
         </div>
       </div>
       <div className="h-[.5px] w-full dark:bg-[#e5e5e5] bg-[#e5e5e5]"></div>
       <div className="bg-[#f1f1f1] dark:text-[#d3d3d3]  dark:bg-[#1c2330] p-5 text-center text-sm text-[#787878]">
         <a target="blank" href="https://favour-111.github.io/my-portfolio/">
-          © 2024 SportsTips. All rights reserved by Horbah's Tech.
+          © 2024 SportTips כל הזכויות שמורות | פותח ע״י Horbah's Tech
         </a>
       </div>
       {form && <Login state={setForm} />}

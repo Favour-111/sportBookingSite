@@ -38,14 +38,14 @@ const Funds = ({ open, setOpen, userToken }) => {
     setSelectedAmount("");
 
     if (value < 10 || value > 50000)
-      setError("Amount must be between $10 and $50,000");
+      setError("הסכום חייב להיות מעל 50$");
     else setError("");
   };
 
   const handleDeposit = async () => {
     const amount = selectedAmount || customAmount;
     if (!amount || amount < 10 || amount > 50000) {
-      setError("Please select or enter an amount between $10 and $50,000.");
+      setError("אנא בחרו סכום בין $10 ל-$50,000");
       return;
     }
 
@@ -57,7 +57,7 @@ const Funds = ({ open, setOpen, userToken }) => {
         {
           amount,
           order_id,
-          description: `Deposit by ${compareUser.userName}`,
+          description: `הפקדה של ${compareUser.userName}`,
           email: compareUser.email,
         },
         { headers: { Authorization: `Bearer ${userToken}` } }
@@ -68,18 +68,18 @@ const Funds = ({ open, setOpen, userToken }) => {
         window.open(payment_url, "_blank");
         setModalOpen(true);
         setOpen(false);
-        setPolling(true); // start polling
+        setPolling(true); // התחלת בדיקה
         setPaymentConfirmed(false);
-      } else setError("Failed to get payment URL.");
+      } else setError("שגיאה בקבלת כתובת התשלום");
     } catch (err) {
       console.error(err);
-      setError("Failed to initiate payment.");
+      setError("התשלום נכשל. אנא נסו שוב");
     } finally {
       setLoading(false);
     }
   };
 
-  // Poll backend every 5s for balance update
+  // בדיקת עדכון יתרה כל 5 שניות
   useEffect(() => {
     if (polling) {
       const interval = setInterval(async () => {
@@ -90,12 +90,12 @@ const Funds = ({ open, setOpen, userToken }) => {
           );
 
           if (res.data.availableBalance !== compareUser.availableBalance) {
-            fetchUser(); // update context
-            setPaymentConfirmed(true); // show success in modal
-            setPolling(false); // stop polling
-            toast.success(`Balance updated: $${res.data.availableBalance}`);
+            fetchUser(); // עדכון context
+            setPaymentConfirmed(true); // הצגת הצלחה במודל
+            setPolling(false); // עצירת בדיקה
+            toast.success(`היתרה עודכנה: $${res.data.availableBalance}`);
 
-            // auto-close modal after 3 seconds
+            // סגירה אוטומטית אחרי 3 שניות
             setTimeout(() => setModalOpen(false), 3000);
           }
         } catch (err) {
@@ -109,12 +109,12 @@ const Funds = ({ open, setOpen, userToken }) => {
 
   return (
     <div>
-      {/* Deposit selection modal */}
+      {/* מודל בחירת סכום להפקדה */}
       {open && (
         <div className="fixed p-5 top-0 right-0 bottom-0 left-0 bg-[#00000050] z-10000 flex items-center justify-center">
           <div className="relative h-[fit-content] md:w-[400px] w-full bg-white dark:bg-[var(--default)] dark:border  dark:border-[#787878] rounded-[20px] p-5">
             <h1 className="font-[600] dark:text-[#d3d3d3]">
-              Quick selection amount
+              בחירה מהירה
             </h1>
             <div className="w-[90%] flex flex-wrap gap-x-2 gap-y-3 mt-4">
               {prices.map((item) => (
@@ -133,16 +133,16 @@ const Funds = ({ open, setOpen, userToken }) => {
             </div>
 
             <div className="mt-3">
-              <h1 className="font-[600] dark:text-[#d3d3d3]">Custom Amount</h1>
+              <h1 className="font-[600] dark:text-[#d3d3d3]">סכום מותאם אישית</h1>
               <input
                 type="number"
                 value={customAmount}
                 onChange={handleCustomAmountChange}
-                placeholder="Input custom amount"
+                placeholder="הכניסו סכום"
                 className="border dark:placeholder:text-[#787878] border-[#f1f1f1] dark:border-[#787878] dark:text-[#d3d3d3] text-[12px] p-2 w-full mt-2 rounded-[6px] placeholder:text-[12px] outline-none "
               />
               <p className="mt-3 text-[12px] text-[#787878] dark:text-[#d3d3d3]">
-                Min: $10 - Max: $50,000
+                מינימום: $50 | 
               </p>
               {error && <p className="text-red-500 text-[12px]">{error}</p>}
             </div>
@@ -157,8 +157,8 @@ const Funds = ({ open, setOpen, userToken }) => {
               }`}
             >
               {loading
-                ? "Processing..."
-                : `Deposit $${
+                ? "מעבד..."
+                : `הפקדת $${
                     selectedAmount?.toLocaleString() ||
                     customAmount?.toLocaleString() ||
                     0
@@ -175,7 +175,7 @@ const Funds = ({ open, setOpen, userToken }) => {
         </div>
       )}
 
-      {/* Payment status modal */}
+      {/* מודל סטטוס תשלום */}
       <Dialog
         open={modalShown}
         onClose={() => setModalOpen(false)}
@@ -206,13 +206,13 @@ const Funds = ({ open, setOpen, userToken }) => {
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <DialogTitle className="text-base font-semibold text-gray-900">
                       {paymentConfirmed
-                        ? "Payment Successful!"
-                        : "Payment Initiated"}
+                        ? "התשלום הושלם בהצלחה!"
+                        : "התשלום בתהליך"}
                     </DialogTitle>
                     <p className="text-sm text-gray-500 mt-2">
                       {paymentConfirmed
-                        ? "Your balance has been updated."
-                        : "Complete your payment on the OxaPay page. Waiting for confirmation..."}
+                        ? "היתרה שלכם עודכנה בהצלחה."
+                        : "השלימו את התשלום בחלון OxaPay. ממתינים לאישור..."}
                     </p>
                   </div>
                 </div>

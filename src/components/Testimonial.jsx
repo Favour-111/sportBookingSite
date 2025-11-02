@@ -1,6 +1,6 @@
 import React from "react";
 import testimonials from "../data/testimonials";
-import { BiSolidQuoteLeft } from "react-icons/bi";
+import { BiSolidQuoteLeft, BiUser } from "react-icons/bi";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -40,24 +40,25 @@ const Testimonial = () => {
   return (
     <div>
       {" "}
-      <div className="text-center  mt-20">
+      <div className="text-center mt-20">
         <p
           data-aos="fade-up"
           className="text-[12px] dark:text-[#d3d3d3] text-[#787878] tracking-wider uppercase mb-2"
         >
-          Testimonial
+          המלצות
         </p>
         <h1
           data-aos="fade-up"
           className="text-2xl md:text-4xl font-bold dark:text-[#fff]"
         >
-          Trusted by <span className="text-[tomato]">10,000+ </span> Bettors
+          נבחר על ידי <span className="text-[tomato]">10,000+ </span> מהמרים
+          מרוצים
         </h1>
         <p
           data-aos="fade-up"
           className="md:px-0 px-6 text-sm dark:text-[#d3d3d3] text-[#787878] mt-2"
         >
-          See what our community is saying about SportsTips premium tips
+          קראו מה הקהילה שלנו אומרת על הטיפים הפרימיום של SportsTips
         </p>
       </div>
       <div data-aos="fade-up" className="hidden md:block mt-10 px-1 md:px-20">
@@ -74,12 +75,8 @@ const Testimonial = () => {
                   </div>
                   <div className="h-px w-full bg-gray-100 dark:bg-gray-400 mt-5"></div>
                   <div className="flex items-center gap-3 mt-3">
-                    <div>
-                      <img
-                        src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
-                        alt=""
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
+                    <div className="h-10 w-10 bg-[#f6f6f6] rounded-full flex items-center justify-center">
+                      <BiUser />
                     </div>
                     <div>
                       <div className="text-sm font-semibold dark:text-[white]">
@@ -110,12 +107,8 @@ const Testimonial = () => {
                   </div>
                   <div className="h-px w-full bg-gray-100 dark:bg-gray-400 mt-5"></div>
                   <div className="flex items-center gap-3 mt-3">
-                    <div>
-                      <img
-                        src="https://plus.unsplash.com/premium_photo-1689568126014-06fea9d5d341?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
-                        alt=""
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
+                    <div className="h-10 w-10 bg-[#f6f6f6] rounded-full flex items-center justify-center">
+                      <BiUser />
                     </div>
                     <div>
                       <div className="text-sm font-semibold dark:text-[white]">

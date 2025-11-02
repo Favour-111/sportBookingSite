@@ -24,22 +24,20 @@ const FAQ = () => {
 
   return (
     <div className="max-w-3xl mt-20 mx-auto px-5 py-10">
-      {/* Header */}
+      {/* כותרת */}
       <div className="text-center mb-10">
         <h1 className="dark:text-white text-3xl md:text-4xl font-bold text-[var(--Default)]">
-          🏆 Frequently Asked{" "}
+          🏆 שאלות{" "}
           <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-            Questions
+            נפוצות
           </span>
         </h1>
         <p className="text-gray-600 text-[14px] dark:text-gray-300 mt-2">
-          Got questions? We’ve got answers learn everything about using
-          SportsTips, managing your account, and making the most of our expert
-          predictions.
+          יש שאלות? יש תשובות! כל מה שרציתם לדעת על עלינו במקום אחד.
         </p>
       </div>
 
-      {/* Accordion */}
+      {/* אקורדיון */}
       <div className="space-y-3">
         {faqData.map((faq, index) => (
           <div

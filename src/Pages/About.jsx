@@ -36,50 +36,49 @@ const About = () => {
         <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden px-6 sm:px-20 pt-15 md:pt-40">
           <div data-aos="fade-left" className="container1 sm:mt-2 mt-20">
             <div className="container-headersm dark:text-[#d3d3d3]">
-              About Us
+              קצת עלינו
             </div>
             <div className="container-headerBG text-[#111c54] dark:text-[#d3d3d3]">
-              About SportsTips Your trusted guide to smarter betting
+              Sport Tips - השוץף שלכם למהר ולהרוויח
             </div>
 
             <div className="container-content text-[#111c54] dark:text-[#f6f6f6]">
-              SportsTips is your trusted source for expert sports insights,
-              match analysis, and winning strategies. We’re dedicated to helping
-              fans and bettors make smarter, more confident decisions.
+              אנחנו ב-SportsTips הופכים הימורי ספורט למדע מדויק. עם צוות מומחים, 
+              ניתוחים מעמיקים ואסטרטגיות מנצחות - אנחנו כאן כדי להעלות את הסיכויים שלכם.
             </div>
 
             <div className="trusted-text">
               <div>
                 <IoMdCheckmarkCircleOutline color="green" />
               </div>
-              <div>Reliable</div>
+              <div>אמינות מוכחת</div>
             </div>
             <div className="trusted-text">
               <div>
                 <IoMdCheckmarkCircleOutline color="green" />
               </div>
-              <div> Transparent </div>
+              <div>שקיפות מלאה</div>
             </div>
             <div className="trusted-text">
               <div>
                 <IoMdCheckmarkCircleOutline color="green" />
               </div>
-              <div> Insight-Driven</div>
+              <div>מבוסס נתונים</div>
             </div>
           </div>
           <div data-aos="fade-right" className="image-container-content">
             <img src={image} alt="" />
             <div className="text-on-image2 shadow">
-              <div className="text-head">Trusted</div>
+              <div className="text-head">אמינות</div>
               <div className="flex items-center justify-between mt-1">
-                <div className="text1">Betting Tips</div>
+                <div className="text1">טיפים להימורים</div>
                 <div className="percentage">100%</div>
               </div>
             </div>
             {/* <div className="text-on-image2 shadow">
-                      <div className="text-head">Trusted</div>
+                      <div className="text-head">אמינות</div>
                       <div className="d-flex align-items-center justify-content-between mt-1">
-                        <div className="text1">Fast Payment</div>
+                        <div className="text1">תשלום מהיר</div>
                         <div className="percentage">100%</div>
                       </div>
                     </div> */}
@@ -97,36 +96,35 @@ const About = () => {
           data-aos="fade-up"
           className="text-[12px] dark:text-[#d3d3d3] text-[#787878] tracking-wider uppercase mb-1"
         >
-          OUR SERVICE
+          השירותים שלנו
         </p>
         <h1
           data-aos="fade-down"
           className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
         >
-          Who{" "}
+          מי{" "}
           <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-            we are
+            אנחנו
           </span>
         </h1>
       </div>
       <div className="md:flex block space-y-7 gap-10 md:px-25 px-7 mt-10 md:mt-15">
         <div className="md:w-[48%] w-[100%]">
           <h1 className="font-bold text-[#111c54] dark:text-[#d3d3d3] text-[25px] sm:text-[35px] w-[100%] md:w-[60%]">
-            Empowering Bettors with Smart Insights
+            נותנים לכם את הכוח לנצח
           </h1>
           <p className="md:w-[80%] w-[100%] text-[#787878] mt-5">
-            At SportsTips, we believe betting should be about strategy, not
-            luck. Our mission is to provide data-driven insights, expert
-            recommendations, and real-time analysis to help you make informed
-            decisions and maximize your winnings. Whether you're a beginner or a
-            pro, we’re here to guide you every step of the way.
+            אנחנו מאמינים שהימורים זה לא עניין של מזל - זה עניין של ידע 
+            המטרה שלנו? להפוך אתכם למהמרים חכמים יותר עם תובנות מבוססות נתונים, 
+            המלצות מקצועיות וליווי צמוד. לא משנה אם אתם רק מתחילים או כבר מנוסים - 
+            אנחנו כאן בשבילכם.
           </p>
           <div className="flex items-center gap-1 mt-10">
             <div>
               <IoShieldHalfSharp color="green" />
             </div>
             <div className="text-[#787878] text-[12px]">
-              100% trusted betting recommendations site
+              פלטפורמת משחקי מכורים
             </div>
           </div>
         </div>
@@ -143,13 +141,13 @@ const About = () => {
           data-aos="fade-up"
           className="text-[12px] dark:text-[#d3d3d3] text-[#787878] tracking-wider uppercase mb-1"
         >
-          Games
+          התחום שלנו
         </p>
         <h1
           data-aos="fade-down"
           className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
         >
-          Why Choose{" "}
+          למה דווקא{" "}
           <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
             SportsTips?
           </span>
@@ -164,10 +162,10 @@ const About = () => {
             <VscGraphLine className="text-emerald-700" size={40} />
           </div>
           <h1 className="text-[15px] font-[600] uppercase dark:text-[#f1f1f1]">
-            Expert Analytics
+            ניתוחי על
           </h1>
           <p className="text-[15px] text-[#787878] dark:text-[#d3d3d3]">
-            Professional analysts with years of experience in sports betting
+            צוות מנוסה עם רקורד מוכח בעולם ההימורים
           </p>
         </div>
         <div
@@ -178,10 +176,10 @@ const About = () => {
             <IoShieldHalfSharp className="text-blue-500" size={40} />
           </div>
           <h1 className="text-[14px] font-medium uppercase dark:text-[#f1f1f1]">
-            Secure Platform
+            אבטחה מקסימלית
           </h1>
           <p className="text-sm text-[#787878] dark:text-[#d3d3d3]">
-            Bank-grade security with encrypted transactions and data protection
+            הגנה ברמה הגבוהה ביותר על המידע והכסף שלכם
           </p>
         </div>
         <div
@@ -192,10 +190,10 @@ const About = () => {
             <LuClock className="text-[var(--Primary)]" size={40} />
           </div>
           <h1 className="text-[14px] font-medium uppercase dark:text-[#f1f1f1]">
-            Real-time Updates
+            עדכונים חיים
           </h1>
           <p className="text-sm text-[#787878] dark:text-[#d3d3d3]">
-            Get instant notifications for new tips and live match updates
+            התראות מיידיות על המלצות חמים ומשחקים בזמן אמת
           </p>
         </div>
         <div
@@ -206,10 +204,10 @@ const About = () => {
             <GiReceiveMoney className=" text-amber-600" size={40} />
           </div>
           <h1 className="text-[14px] font-medium uppercase dark:text-[#f1f1f1]">
-            High Success Rate
+            אחוזי זכייה גבוהים
           </h1>
           <p className="text-sm text-[#787878] dark:text-[#d3d3d3]">
-            Proven track record with 78% average success rate across all sports
+            85% הצלחה בממוצע - מספרים שמדברים
           </p>
         </div>
       </div>{" "}
@@ -219,18 +217,18 @@ const About = () => {
             <LuUsers className="text-[50px] text-[var(--Primary)]" />
           </div>
           <div className="font-[800] text-[30px] dark:text-white sm:text-[40px]">
-            1000+
+            100+
           </div>
-          <h1 className="text-sm text-[#787878]">Happy Customers</h1>
+          <h1 className="text-sm text-[#787878]">לקוחות מרוצים</h1>
         </div>
         <div className="text-center flex flex-col items-center">
           <div>
             <MdSupportAgent className="text-[50px] text-[var(--Primary)]" />
           </div>
           <div className="font-[800] text-[30px] dark:text-white sm:text-[40px]">
-            24/7
+            24/6
           </div>
-          <h1 className="text-sm text-[#787878]"> Support</h1>
+          <h1 className="text-sm text-[#787878]">תמיכה</h1>
         </div>
         <div className="text-center flex flex-col items-center">
           <div>
@@ -242,7 +240,7 @@ const About = () => {
               <FaStar color="tomato" />
             </span>
           </div>
-          <h1 className="text-sm text-[#787878]">Customer Rating</h1>
+          <h1 className="text-sm text-[#787878]">דירוג לקוחות</h1>
         </div>
       </div>
       <div className="text-center mt-20">
@@ -250,23 +248,23 @@ const About = () => {
           data-aos="fade-up"
           className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-1"
         >
-          Quick Overview
+          מדריך מהיר
         </p>
         <h1
           data-aos="fade-up"
           className="text-2xl md:text-4xl font-bold dark:text-[#f1f1f1]"
         >
-          How{" "}
+          איך{" "}
           <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
             SportsTips
           </span>{" "}
-          Works
+          עובד
         </h1>
         <p
           data-aos="fade-down"
           className="md:px-0 px-10 dark:text-[#f1f1f1] md:text-sm text-[#787878] mt-1"
         >
-          Get started with premium sports betting tips in just 3 simple steps
+          שלושה צעדים פשוטים להתחיל להרוויח
         </p>
       </div>
       <div className=" md:px-10 px-6 w-full flex-wrap flex items-center justify-between gap-y-5 mt-10">
@@ -278,11 +276,10 @@ const About = () => {
             <RiExchangeDollarFill size={25} className="text-amber-600" />
           </div>
           <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
-            Sign up & add funds
+            נרשמים וטוענים
           </h1>
           <p className="text-sm text-[#787878] dark:text-[#d3d3d3] w-[80%] text-center">
-            Create your account and add funds to your wallet securely. Get ₹25
-            welcome bonus!
+            פותחים חשבון, מוסיפים תקציב ומקבלים בונוס הצטרפות של 100%!
           </p>
         </div>
         <div
@@ -293,11 +290,10 @@ const About = () => {
             <IoAnalytics size={25} className="text-[tomato]" />
           </div>
           <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase color-[var(--Default)]">
-            Browse Menu Tips
+            בוחרים טיפים
           </h1>
           <p className="text-sm text-[#787878] dark:text-[#d3d3d3] w-[80%] text-center">
-            Explore our curated recommendations from professional analysts with
-            proven track records.
+            גולשים בין ההמלצות של האנליסטים המובילים שלנו
           </p>
         </div>
         <div
@@ -308,11 +304,10 @@ const About = () => {
             <IoTrophyOutline size={25} className="text-emerald-800" />
           </div>
           <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase color-[var(--Default)]">
-            Place Bets & Win
+            מהמרים ומנצחים
           </h1>
           <p className="text-sm text-[#787878] dark:text-[#d3d3d3] w-[80%] text-center">
-            Follow our expert analysis and place your bets with confidence.
-            Track your success!
+            פועלים לפי הניתוחים שלנו ומתחילים לראות תוצאות!
           </p>
         </div>
       </div>
