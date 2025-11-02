@@ -28,6 +28,7 @@ import { BiPlus, BiRefresh } from "react-icons/bi";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { FiDownload, FiUser } from "react-icons/fi";
+
 const Settings = () => {
   const [page, setPage] = useState("live");
   const [open, setOpen] = useState(false);
@@ -36,7 +37,7 @@ const Settings = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [load, setLoad] = useState(false);
-  //function for deleting a user
+
   const text = "delete this account";
   const deleteUser = async () => {
     if (password === text.toLocaleLowerCase()) {
@@ -47,10 +48,10 @@ const Settings = () => {
         );
         if (response) {
           localStorage.clear();
-          toast.success("account deleted");
+          toast.success("החשבון נמחק בהצלחה");
           window.location.replace("/");
         } else {
-          toast.error("error deleting account");
+          toast.error("שגיאה במחיקת החשבון");
         }
       } catch (error) {
         console.log(error);
@@ -58,7 +59,7 @@ const Settings = () => {
         setLoading(false);
       }
     } else {
-      toast.error("incorrect input");
+      toast.error("הקלט שגוי");
     }
   };
 
@@ -79,13 +80,13 @@ const Settings = () => {
                 <p className="text-[13px] dark:text-[#f1f1f1] text-[#787878]">
                   {compareUser?.email}
                 </p>
-                <div></div>
               </div>
             </div>
+
             <div className="border-b border-b-[#f6f6f6] dark:border-b-[#f1f1f129] flex items-center justify-between gap-2 py-3">
               <div>
                 <p className="text-[13px] text-[#787878] dark:text-[#d3d3d3]">
-                  Available Balance
+                  יתרה זמינה
                 </p>
                 <p className="text-[14px] font-[500] dark:text-[#f1f1f1] text-[#030303]">
                   ${compareUser?.availableBalance.toLocaleString()}
@@ -99,14 +100,15 @@ const Settings = () => {
                   <div className="bg-[#f1f1f1] h-9 w-9 flex items-center justify-center rounded-full">
                     <FiDownload />
                   </div>
-                  <div className="text-sm ">Deposit</div>
+                  <div className="text-sm">טעינת יתרה</div>
                 </button>
               </div>
             </div>
+
             <div className="border-b border-b-[#f6f6f6] dark:border-b-[#f1f1f129] flex items-center justify-between gap-2 py-4">
               <div>
                 <p className="text-[13px] text-[#494949] dark:text-[#d3d3d3]">
-                  Full name
+                  שם מלא
                 </p>
               </div>
               <div>
@@ -115,10 +117,11 @@ const Settings = () => {
                 </p>
               </div>
             </div>
+
             <div className="border-b border-b-[#f6f6f6] dark:border-b-[#f1f1f129] flex items-center justify-between gap-2 py-4">
               <div>
                 <p className="text-[13px] text-[#494949] dark:text-[#d3d3d3]">
-                  Email
+                  אימייל
                 </p>
               </div>
               <div>
@@ -127,10 +130,11 @@ const Settings = () => {
                 </p>
               </div>
             </div>
+
             <div className="border-b border-b-[#f6f6f6] dark:border-b-[#f1f1f129] flex items-center justify-between gap-2 py-4">
               <div>
                 <p className="text-[13px] text-[#494949] dark:text-[#d3d3d3]">
-                  Password
+                  סיסמה
                 </p>
               </div>
               <div>
@@ -140,54 +144,53 @@ const Settings = () => {
               </div>
             </div>
 
-            <div className="mt-5  flex-col flex justify-between gap-3 py-4">
+            <div className="mt-5 flex-col flex justify-between gap-3 py-4">
               <div>
                 <p className="text-[13px] text-[#494949] dark:text-[#d3d3d3]">
-                  {" "}
-                  i want to delete this account
+                  למחיקת החשבון
                 </p>
               </div>
               <div>
                 <p className="text-[13px] text-[#787878] dark:text-[#f1f1f1]">
-                  {" "}
-                  This account contains $
-                  {compareUser?.availableBalance.toLocaleString()} and{" "}
-                  {compareUser?.betHistory.length} bought games. Deleting your
-                  account will remove all bought games and balance.
+                  החשבון שלך מכיל $
+                  {compareUser?.availableBalance.toLocaleString()} ו-
+                  {compareUser?.betHistory.length} משחקים שנרכשו מחיקת החשבון
+                  תסיר לצמיתות את כל המשחקים והיתרה
                 </p>
               </div>
               <button
                 onClick={() => setOpenDel(true)}
-                className="my-3 w-[fit-content] mb-8 rounded-[10px] border text-[12px] font-[500]  border-red-600 p-2 px-4 text-red-500 hover:bg-red-500 duration-200 hover:text-[#fff]"
+                className="my-3 w-[fit-content] mb-8 rounded-[10px] border text-[12px] font-[500] border-red-600 p-2 px-4 text-red-500 hover:bg-red-500 duration-200 hover:text-[#fff]"
               >
-                I want to delete my account
+                מחק את החשבון שלי
               </button>
             </div>
           </div>
         </div>
+
         {openDel && (
-          <div className="bg-[#00000059] p-5 flex items-center justify-center fixed top-0 left-0 right-0 bottom-0 z-10000 ">
+          <div className="bg-[#00000059] p-5 flex items-center justify-center fixed top-0 left-0 right-0 bottom-0 z-10000">
             <div className="relative dark:bg-[var(--default)] dark:border-[#787878] border dark:border-none border-[white] bg-white rounded-[15px] sm:w-[400px] w-[100%] p-4">
               <h1 className="font-[600] fs-[15px] dark:text-[#d3d3d3] text-[#2f2f2f]">
-                Confirm account deletion
+                אשר מחיקת חשבון
               </h1>
               <p className="font-[400] mt-3 text-[14px] dark:text-[#f1f1f1] text-[#787878]">
-                input <span className="font-[800]">delete this account</span> to
-                delete account.
+                הקלד <span className="font-[800]">delete this account</span> כדי
+                לאשר מחיקה
               </p>
               <div className="mt-4">
                 <label
                   htmlFor=""
                   className="font-[400] mt-3 text-[14px] dark:text-[#d3d3d3] text-[#787878]"
                 >
-                  Password
+                  סיסמה
                 </label>
                 <br />
                 <input
                   name="password"
                   onChange={(e) => setPassword(e.target.value)}
                   type="text"
-                  placeholder="input delete this account"
+                  placeholder="הקלד delete this account"
                   className="p-2 px-3 rounded-[10px] mt-3 w-[100%] border dark:placeholder:text-[#d3d3d3] dark:text-[#d3d3d3] border-[#d3d3d3] text-sm placeholder:text-[12px]"
                 />
               </div>
@@ -197,7 +200,7 @@ const Settings = () => {
                   onClick={() => setOpenDel(false)}
                   className="bg-[#f1f1f1] p-2 px-4 hover:opacity-70 text-black text-sm rounded-[10px]"
                 >
-                  Discard
+                  ביטול
                 </button>
                 <button
                   disabled={loading}
@@ -206,7 +209,7 @@ const Settings = () => {
                     loading ? "opacity-60" : ""
                   }`}
                 >
-                  {loading ? "loading...." : "Drop"}
+                  {loading ? "טוען..." : "מחק"}
                 </button>
               </div>
               <button

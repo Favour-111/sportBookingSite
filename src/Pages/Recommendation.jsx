@@ -25,48 +25,47 @@ const Recommendation = () => {
           <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden px-6 sm:px-20 pt-15 md:pt-40">
             <div data-aos="fade-left" className="container1 sm:mt-2 mt-20">
               <div className="container-headersm dark:text-[#d3d3d3]">
-                Sports Recommendations
+                המלצות ספורט
               </div>
 
               <div className="container-headerBG text-[#111c54] dark:text-[#d3d3d3]">
-                Expert Betting Tips & Game Insights
+                משחקים מכורים עם אחוזי פגיעה גבוהים
               </div>
 
               <div className="container-content text-[#111c54] dark:text-[#f6f6f6]">
-                Stay ahead of the game with real-time predictions, expert
-                analysis, and data-backed recommendations designed to help you
-                make smarter bets and maximize your wins.
+                הישארו צעד אחד לפני כולם, משחקים מכורים ממקורות אמינים שיעזרו
+                לכם להמר ולהגדיל את הסיכויים לפגיעה
               </div>
 
               <div className="trusted-text">
                 <div>
                   <IoMdCheckmarkCircleOutline color="green" />
                 </div>
-                <div> Expert-Backed Predictions </div>
+                <div> מקורות אמינים ומבוססים </div>
               </div>
               <div className="trusted-text">
                 <div>
                   <IoMdCheckmarkCircleOutline color="green" />
                 </div>
-                <div> Real-Time Game Insights </div>
+                <div> התראות בזמן אמת</div>
               </div>
               <div className="trusted-text">
                 <div>
                   <IoMdCheckmarkCircleOutline color="green" />
                 </div>
-                <div> Proven Winning Strategies </div>
+                <div> הסטוריית משחקים שקופה</div>
               </div>
             </div>
 
             <div data-aos="fade-right" className="image-container-content">
               <img
                 src="https://cdni.iconscout.com/illustration/premium/thumb/man-earning-online-money-illustration-svg-download-png-2621084.png"
-                alt="Sports insights"
+                alt="תובנות ספורט"
               />
               <div className="text-on-image2 shadow">
-                <div className="text-head">Accurate</div>
+                <div className="text-head">מדויק</div>
                 <div className="flex items-center justify-between mt-1">
-                  <div className="text1">Game Predictions</div>
+                  <div className="text1"> אחוזי פגיעה גבוהים</div>
                   <div className="percentage">98%</div>
                 </div>
               </div>
@@ -86,20 +85,20 @@ const Recommendation = () => {
           className=" text-center flex flex-col items-center mt-20 justify-center"
         >
           <p className="text-[12px] mt-10 dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-2">
-            Games
+            משחקים
           </p>
           <h1
             data-aos="fade-up"
             className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
           >
-            Featured{" "}
+            מובחרות{" "}
             <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-              Premium Tips
+              משחקים מכורים
             </span>
           </h1>
           <p className="md:w-[50%] dark:text-[#d3d3d3] w-[100%] px-10 md:px-0 text-center text-sm text-[#787878] mt-2">
-            Check out All our recommendations with high success rates. Join
-            thousands of winning bettors today.
+            בדקו את כל ההמלצות שלנו עם אחוזי הצלחה גבוהים. הצטרפו למנויים שלנו
+            והתחילו להרוויח כבר היום
           </p>
         </div>
         {/* i am to put the featured games here */}
@@ -122,9 +121,9 @@ const Recommendation = () => {
                   fill="currentFill"
                 />
               </svg>
-              <span className="sr-only">Loading...</span>
+              <span className="sr-only">טעינה...</span>
             </div>
-            <div className="text-sm">Loading...</div>
+            <div className="text-sm">טעינה...</div>
           </div>
         ) : gameFilter.length <= 0 ? (
           <div className="flex mt-20 justify-center items-center flex-col gap-3">
@@ -136,7 +135,7 @@ const Recommendation = () => {
               />
             </div>
             <div className="text-center text-20 text-gray-500">
-              No Games available
+              אין משחקים זמינים כרגע
             </div>
           </div>
         ) : (
@@ -153,19 +152,12 @@ const Recommendation = () => {
                   );
                 })}
 
-              {/* <Link
-                  data-aos="fade-down"
-                  to="/recommendations"
-                  className="col-span-full mx-auto bg-[var(--Primary)] text-[12px] shadow shadow-amber-300 text-white px-5 py-2 rounded-[10px] flex items-center gap-2 hover:shadow-lg hover:shadow-amber-300 duration-200"
-                >
-                  View all Recommendation <GoArrowRight />
-                </Link> */}
               <div className="col-span-full" data-aos="fade-down">
                 <button
                   onClick={() => setForm(true)}
                   class="cssbuttons-io-button"
                 >
-                  View all Recommendation
+                  הצג את כל ההמלצות
                   <div class="icon">
                     <svg
                       height="24"

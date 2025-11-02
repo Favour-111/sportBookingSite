@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/slick-fix.css";
+
 const Testimonial = () => {
   const settings = {
     dots: true,
@@ -40,25 +41,24 @@ const Testimonial = () => {
   return (
     <div>
       {" "}
-      <div className="text-center mt-20">
+      <div className="text-center  mt-20">
         <p
           data-aos="fade-up"
           className="text-[12px] dark:text-[#d3d3d3] text-[#787878] tracking-wider uppercase mb-2"
         >
-          המלצות
+          חוות דעת
         </p>
         <h1
           data-aos="fade-up"
           className="text-2xl md:text-4xl font-bold dark:text-[#fff]"
         >
-          נבחר על ידי <span className="text-[tomato]">10,000+ </span> מהמרים
-          מרוצים
+          נבחר על ידי <span className="text-[tomato]">100+</span> משתמשים מרוצים
         </h1>
         <p
           data-aos="fade-up"
           className="md:px-0 px-6 text-sm dark:text-[#d3d3d3] text-[#787878] mt-2"
         >
-          קראו מה הקהילה שלנו אומרת על הטיפים הפרימיום של SportsTips
+          גלו מה הקהילה שלנו חושבת על ההמלצות שלנו
         </p>
       </div>
       <div data-aos="fade-up" className="hidden md:block mt-10 px-1 md:px-20">

@@ -38,7 +38,7 @@ const NavBar = ({ setOpen }) => {
       <div className="fixed top-0 left-0 right-0 z-50">
         {/* <div className="w-[100%] bg-amber-50  px-10 flex items-center justify-between">
           <div className="text-[13px] text-[#787878]">
-            Get 100% discount on first deposit
+            קבל 100% בונוס על ההפקדה הראשונה
           </div>
           <div className="relative">
             <h1
@@ -86,7 +86,7 @@ const NavBar = ({ setOpen }) => {
                     to={`/management/${compareUser._id}`}
                     className="text-[var(--default)] dark:text-[#d3d3d3] dark:hover:text-[white] text-sm hover:text-[var(--Primary)] duration-200"
                   >
-                    Management
+                    ניהול
                   </Link>
                 </li>
               )}
@@ -96,7 +96,7 @@ const NavBar = ({ setOpen }) => {
                     to="/"
                     className="text-[var(--default)] dark:text-[#d3d3d3] dark:hover:text-[white] text-sm hover:text-[var(--Primary)] duration-200"
                   >
-                    Home
+                    בית
                   </Link>
                 </li>
               )}
@@ -106,7 +106,7 @@ const NavBar = ({ setOpen }) => {
                     to="/"
                     className="text-[var(--default)] dark:text-[#d3d3d3] dark:hover:text-[white] text-sm hover:text-[var(--Primary)] duration-200"
                   >
-                    Dashboard
+                    דשבורד משתמש
                   </Link>
                 </li>
               )}
@@ -116,7 +116,7 @@ const NavBar = ({ setOpen }) => {
                   to="/recommendations"
                   className="text-[var(--default)] dark:text-[#d3d3d3] dark:hover:text-[white] text-sm hover:text-[var(--Primary)] duration-200"
                 >
-                  Recommendations
+                  המלצות
                 </Link>
               </li>
 
@@ -125,14 +125,14 @@ const NavBar = ({ setOpen }) => {
                   to="/about"
                   className="text-[var(--default)] dark:text-[#d3d3d3] dark:hover:text-[white] text-sm hover:text-[var(--Primary)] duration-200"
                 >
-                  About
+                  אודות
                 </Link>
               </li>
             </ul>
           </div>
           <div className="flex items-center gap-5">
             {/* <div className="text-[16px] font-[500] dark:text-emerald-300 text-emerald-600 ">
-            Bal : <span className=" font-[600]">$300</span>
+            יתרה : <span className=" font-[600]">$300</span>
           </div> */}
             {!user ? (
               <button
@@ -143,7 +143,7 @@ const NavBar = ({ setOpen }) => {
                 className="custom-btn "
                 // className="bg-[var(--Primary)] mt-2 shadow-sm shadow-amber-300 text-white px-4 py-2.5 rounded-[10px] text-sm"
               >
-                Login
+                התחברות
               </button>
             ) : (
               <div className="relative">
@@ -165,7 +165,7 @@ const NavBar = ({ setOpen }) => {
                       <BiWallet />
                     </div>
                     <div className="text-sm">
-                      Balance:${compareUser?.availableBalance.toLocaleString()}
+                      יתרה: ${compareUser?.availableBalance.toLocaleString()}
                     </div>
                   </button>
                   <button
@@ -175,7 +175,7 @@ const NavBar = ({ setOpen }) => {
                     <div>
                       <BiPlus />
                     </div>
-                    Add Funds
+                    הוסף כספים
                   </button>
                   <Link
                     to={`settings/${user}`}
@@ -184,19 +184,19 @@ const NavBar = ({ setOpen }) => {
                     <div>
                       <FiSettings />
                     </div>
-                    <div className="text-[12px]">Settings</div>
+                    <div className="text-sm">הגדרות</div>
                   </Link>
-                  {compareUser?.telegramId ? (
+                  {compareUser?.telegramId !== "" ? (
                     <div
-                      className="cursor-pointer text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2 cursor-pointer hover:bg-green-100 duration-200"
                       onClick={() => {
-                        const botUsername = "spoiqunbot"; // no @
+                        const botUsername = "SportTipsPayBot"; // no @
                         const telegramUrl = `https://t.me/${botUsername}`;
                         window.open(telegramUrl, "_blank");
                       }}
+                      className="cursor-pointer text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2"
                     >
                       <BiLink />
-                      Telegram Connected
+                      טלגרם מחובר
                     </div>
                   ) : (
                     <button
@@ -211,12 +211,14 @@ const NavBar = ({ setOpen }) => {
                           );
                           window.open(res.data.deepLink, "_blank");
                         } catch (err) {
-                          toast.error("Failed to generate Telegram link");
+                          toast.error("שגיאה ביצירת קישור לטלגרם");
                         }
                       }}
                     >
-                      <BiLink />
-                      <div className="text-[12px]">Connect to Telegram</div>
+                      <div>
+                        <BiLink />
+                      </div>
+                      <div className="text-sm">חבר לטלגרם</div>
                     </button>
                   )}
 
@@ -230,20 +232,27 @@ const NavBar = ({ setOpen }) => {
                     <div>
                       <BiExit />
                     </div>
-                    <div className="text-sm">LogOut</div>
+                    <div className="text-sm">התנתקות</div>
                   </button>
                 </div>
               </div>
             )}
-
-            <div className="flex gap-2 items-center">
+            <div
+              className={`${
+                !isDarkMode ? "bg-gray-300" : "bg-[#e27c2c]"
+              } p-1 rounded-full flex items-center gap-1`}
+            >
               <IoSunny
                 size={14}
-                className="text-[#787878] dark:text-[#d3d3d3]"
+                className={`${
+                  isDarkMode
+                    ? "text-[#d3d3d3] dark:text-[#d3d3d3]"
+                    : "text-[var(--Primary)]"
+                }`}
               />
               <div
-                className={`relative inline-block w-9 h-4 ${
-                  isDarkMode ? "bg-blue-500" : "bg-gray-300"
+                className={`relative w-8 h-4 ${
+                  !isDarkMode ? "bg-white" : "bg-[var(--Primary)]"
                 } rounded-full`}
                 onClick={toggleDarkMode}
               >
@@ -260,35 +269,38 @@ const NavBar = ({ setOpen }) => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Navbar */}
-      <div className="relative">
         <div
-          className={`fixed dark:bg-[#1c233085] flex md:hidden items-center justify-between py-1 px-5 border-b-1 border-gray-200 backdrop-blur-xl  dark:border-gray-500  fixed top-0 left-0 right-0 z-50`}
+          className={`${
+            isDarkMode ? "dark" : ""
+          } dark:bg-[#1c233085] flex items-center justify-between px-5 py-2 md:hidden backdrop-blur-xl border-b border-gray-200 dark:border-gray-600`}
         >
           <Link to="/" className="flex items-center gap-2">
             <img
               src="https://github.com/Favour-111/my-asset/blob/main/image.jpg?raw=true"
               alt=""
-              className="w-12 h-12 rounded-[12px] object-contain"
+              className="w-10 h-10 rounded-[12px] object-contain"
             />
-            <div className="font-[700] text-[18px] bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
+            <div className="font-[700] text-[14px] bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
               SportsTips
             </div>
           </Link>
-          <div className="flex items-center gap-4">
-            {/* <div className="text-sm font-[500] dark:text-emerald-300 text-emerald-600 ">
-              Bal : <span className="text-[15px] font-[600]">$300</span>
-            </div> */}
-            <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-3">
+            <div
+              className={`${
+                !isDarkMode ? "bg-gray-300" : "bg-[#e27c2c]"
+              } p-1 rounded-full flex items-center gap-1`}
+            >
               <IoSunny
                 size={14}
-                className="text-[#787878] dark:text-[#d3d3d3]"
+                className={`${
+                  isDarkMode
+                    ? "text-[#d3d3d3] dark:text-[#d3d3d3]"
+                    : "text-[var(--Primary)]"
+                }`}
               />
               <div
-                className={`relative inline-block w-9 h-4 ${
-                  isDarkMode ? "bg-blue-500" : "bg-gray-300"
+                className={`relative w-8 h-4 ${
+                  !isDarkMode ? "bg-white" : "bg-[var(--Primary)]"
                 } rounded-full`}
                 onClick={toggleDarkMode}
               >
@@ -323,7 +335,7 @@ const NavBar = ({ setOpen }) => {
                       <BiWallet />
                     </div>
                     <div className="text-[12px]">
-                      Balance:${compareUser?.availableBalance.toLocaleString()}
+                      יתרה: ${compareUser?.availableBalance.toLocaleString()}
                     </div>
                   </button>
                   <button
@@ -333,7 +345,7 @@ const NavBar = ({ setOpen }) => {
                     <div>
                       <BiPlus />
                     </div>
-                    Add Funds
+                    הטען יתרה
                   </button>
                   <Link
                     to={`settings/${user}`}
@@ -342,19 +354,19 @@ const NavBar = ({ setOpen }) => {
                     <div>
                       <FiSettings />
                     </div>
-                    <div className="text-[12px]">Settings</div>
+                    <div className="text-[12px]">הגדרות</div>
                   </Link>
                   {compareUser?.telegramId !== "" ? (
                     <div
                       onClick={() => {
-                        const botUsername = "spoiqunbot"; // no @
+                        const botUsername = "SportTipsPayBot"; // no @
                         const telegramUrl = `https://t.me/${botUsername}`;
                         window.open(telegramUrl, "_blank");
                       }}
                       className="cursor-pointer text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2"
                     >
                       <BiLink />
-                      Telegram Connected
+                      טלגרם מחובר
                     </div>
                   ) : (
                     <button
@@ -369,14 +381,14 @@ const NavBar = ({ setOpen }) => {
                           );
                           window.open(res.data.deepLink, "_blank");
                         } catch (err) {
-                          toast.error("Failed to generate Telegram link");
+                          toast.error("שגיאה ביצירת קישור לטלגרם");
                         }
                       }}
                     >
                       <div>
                         <BiLink />
                       </div>
-                      <div className="text-[12px]">Connect to Telegram</div>
+                      <div className="text-[12px]">חבר לטלגרם</div>
                     </button>
                   )}
 
@@ -390,7 +402,7 @@ const NavBar = ({ setOpen }) => {
                     <div>
                       <BiExit />
                     </div>
-                    <div className="text-[12px]">LogOut</div>
+                    <div className="text-[12px]">התנתקות</div>
                   </button>
                 </div>
               </div>
@@ -417,14 +429,14 @@ const NavBar = ({ setOpen }) => {
                   to={`/management/${compareUser._id}`}
                   className="w-[100%] text-[13px] dark:text-[#d3d3d3] text-[#787878]"
                 >
-                  Management
+                  ניהול
                 </Link>
               </li>
             )}
             {!user && (
               <li onClick={() => navigate("/")} className="h-8 w-[100%] ">
                 <Link className="w-[100%] text-[13px] dark:text-[#d3d3d3] text-[#787878]">
-                  Home
+                  בית
                 </Link>
               </li>
             )}
@@ -432,7 +444,7 @@ const NavBar = ({ setOpen }) => {
             {user && (
               <li onClick={() => navigate("/")} className="h-8 w-[100%]">
                 <Link className="w-[100%] text-[13px] text-[#787878]  dark:text-[#d3d3d3] py-2">
-                  Dashboard
+                  דשבורד משתמש
                 </Link>
               </li>
             )}
@@ -442,13 +454,13 @@ const NavBar = ({ setOpen }) => {
               className="h-8 w-[100%]"
             >
               <Link className="w-[100%] text-[13px] text-[#787878]  dark:text-[#d3d3d3] py-2">
-                Recommendations
+                המלצות
               </Link>
             </li>
 
             <li onClick={() => navigate("/about")} className="h-8 w-[100%]">
               <Link className=" w-[100%]  text-[13px] text-[#787878]  dark:text-[#d3d3d3] py-2">
-                About
+                אודות
               </Link>
             </li>
             {!user && (
@@ -460,7 +472,7 @@ const NavBar = ({ setOpen }) => {
                 className="custom-btn mt-2"
                 // className="bg-[var(--Primary)] mt-2 shadow-sm shadow-amber-300 text-white px-4 py-2.5 rounded-[10px] text-sm"
               >
-                Login
+                התחברות
               </button>
             )}
           </ul>

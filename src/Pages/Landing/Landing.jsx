@@ -74,42 +74,42 @@ const Landing = () => {
             <div className="home-banner-container flex items-center justify-between w-[100%] overflow-hidden px-6 sm:px-20 pt-15 md:pt-40">
               <div data-aos="fade-left" className="container1 sm:mt-2 mt-20">
                 <div className="container-headersm dark:text-[#d3d3d3]">
-                  our service
+                  השירות שלנו
                 </div>
                 <div className="container-headerBG text-[#111c54] dark:text-[#d3d3d3]">
-                  Join the winning community of smart bettors
+                  הצטרף לקהילת המהמרים שכבר התחילו להרוויח
                 </div>
                 <div className="container-content text-[#111c54] dark:text-[#f6f6f6]">
-                  Get exclusive tips, real-time game analysis, and expert
-                  betting recommendations all designed to help you win more.
+                  קבל המלצות בלעדיות, ניתוחי משחקים בזמן אמת והמלצות הימורים
+                  מקצועיות - הכל מתוכנן כדי לעזור לך להרוויח יותר
                 </div>
                 <div className="button-group">
                   <button
                     className="Read-More"
                     onClick={() => !user && setForm(true)}
                   >
-                    Start winning Now
+                    התחל להרוויח עכשיו
                   </button>
                   <button
                     className="contact-button"
                     onClick={() => !user && setForm(true)}
                   >
-                    Get Started
+                    בוא נתחיל
                   </button>
                 </div>
                 <div className="trusted-text">
                   <div>
                     <HiOutlineShieldCheck className="mb-1" color="green" />
                   </div>
-                  <div>Trusted Betting Recommendations</div>
+                  <div>המלצות משחקים מכורים</div>
                 </div>
               </div>
               <div data-aos="fade-right" className="image-container-content">
                 <img src={image} alt="" />
                 <div className="text-on-image2 shadow">
-                  <div className="text-head">Trusted</div>
+                  <div className="text-head">אמינות מוכחת</div>
                   <div className="flex items-center justify-between mt-1">
-                    <div className="text1">Betting Tips</div>
+                    <div className="text1">המלצות להימורים</div>
                     <div className="percentage">100%</div>
                   </div>
                 </div>
@@ -134,23 +134,23 @@ const Landing = () => {
               data-aos="fade-up"
               className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-2"
             >
-              Games
+              משחקים
             </p>
             <h1
               data-aos="fade-up"
               className="text-2xl dark:text-[#f1f1f1] md:text-4xl font-bold"
             >
-              Featured{" "}
+              טיפים{" "}
               <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-                Premium Tips
+                פרימיום מובילים
               </span>
             </h1>
             <p
               data-aos="fade-up"
               className="md:w-[50%] dark:text-[#d3d3d3] w-[100%] px-10 md:px-0 text-center text-sm text-[#787878] mt-2"
             >
-              Check out our most popular recommendations with high success
-              rates. Join thousands of winning bettors today.
+              בדוק את ההמלצות הפופולריות ביותר שלנו עם אחוזי הצלחה גבוהים. הצטרף
+              למנויים שלנו והתחל להרוויח עוד היום
             </p>
             {gameLoad ? (
               <div className="h-150 gap-2 flex flex-col items-center justify-center">
@@ -173,7 +173,7 @@ const Landing = () => {
                   </svg>
                   <span className="sr-only">Loading...</span>
                 </div>
-                <div className="text-sm">Loading...</div>
+                <div className="text-sm">טוען...</div>
               </div>
             ) : gameFilter.length <= 0 ? (
               <div className="my-20 flex justify-center items-center flex-col gap-3">
@@ -185,7 +185,7 @@ const Landing = () => {
                   />
                 </div>
                 <div className="text-center text-20 text-gray-500">
-                  No Games available
+                  אין משחקים זמינים כרגע
                 </div>
               </div>
             ) : (
@@ -214,7 +214,7 @@ const Landing = () => {
                       onClick={() => setForm(true)}
                       class="cssbuttons-io-button"
                     >
-                      View all Recommendation
+                      צפה בכל ההמלצות
                       <div class="icon">
                         <svg
                           height="24"
@@ -242,24 +242,23 @@ const Landing = () => {
                 data-aos="fade-up"
                 className="text-[12px] dark:text-[#f1f1f1] text-[#787878] tracking-wider uppercase mb-1"
               >
-                Quick Overview
+                סקירה מהירה
               </p>
               <h1
                 data-aos="fade-up"
                 className="text-2xl md:text-4xl font-bold dark:text-[#f1f1f1]"
               >
-                How{" "}
+                איך{" "}
                 <span className="bg-gradient-to-r from-[#f7b822] via-[#ff7300] to-[#f7b822] bg-clip-text text-transparent">
-                  SportsTips
+                  Sport Tips
                 </span>{" "}
-                Works
+                עובד
               </h1>
               <p
                 data-aos="fade-up"
                 className="md:px-0 px-10 dark:text-[#f1f1f1] md:text-sm text-[#787878] mt-1"
               >
-                Get started with premium sports betting tips in just 3 simple
-                steps
+                התחל עם משחקי מכורים בלעדיים ב-3 צעדים פשוטים בלבד
               </p>
             </div>
             <div
@@ -271,11 +270,10 @@ const Landing = () => {
                   <RiExchangeDollarFill size={25} className="text-[#212529] " />
                 </div>
                 <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
-                  Sign up & add funds
+                  הרשמה והטענת יתרה
                 </h1>
                 <p className="text-sm text-[#787878] dark:text-[#d3d3d3] md:w-[80%] w-[100%] ">
-                  Create your account and add funds to your wallet securely. Get
-                  ₹25 welcome bonus!
+                  צור את החשבון שלך הטען יתרה וקבל בונוס הצטרפות של 100%
                 </p>
               </div>
               <div className=" md:w-[80%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600  rounded-[20px] flex flex-col  justify-center gap-3  duration-200 cursor-pointer">
@@ -283,11 +281,11 @@ const Landing = () => {
                   <IoAnalytics size={25} className="text-[#212529] " />
                 </div>
                 <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
-                  Browse Menu Tips
+                  עיין בהמלצות שלנו
                 </h1>
                 <p className="text-sm text-[#787878] dark:text-[#d3d3d3] md:w-[80%] w-[100%] ">
-                  Explore our curated recommendations from professional analysts
-                  with proven track records.
+                  חקור את ההמלצות המובחרות שלנו מאנליסטים מקצועיים עם רקורד מוכח
+                  של הצלחות
                 </p>
               </div>
               <div className="md:w-[80%] w-[100%] px-5 h-[220px] border-1 border-none dark:border-gray-600  rounded-[20px] flex flex-col  justify-center gap-3  duration-200 cursor-pointer">
@@ -295,11 +293,11 @@ const Landing = () => {
                   <IoTrophyOutline size={25} className="text-[#212529] " />
                 </div>
                 <h1 className="text-1xl font-[600] dark:text-[#f1f1f1] uppercase text-[var(--Default)]">
-                  Place Bets & Win
+                  קנה המלצה • והרוויח
                 </h1>
                 <p className="text-sm text-[#787878] dark:text-[#d3d3d3] md:w-[80%] w-[100%] ">
-                  Follow our expert analysis and place your bets with
-                  confidence. Track your success!
+                  עקוב אחרי הניתוח המומחים שלנו והמר בביטחון - תקבל החזר מלא
+                  במקרה של נפילה חלילה
                 </p>
               </div>
             </div>

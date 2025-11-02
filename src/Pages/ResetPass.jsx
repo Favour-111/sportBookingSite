@@ -1,48 +1,44 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom"; // Import useParams
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import toast from "react-hot-toast";
 
 const ResetPass = () => {
   const navigate = useNavigate();
-  const { id, token } = useParams(); // Extract token from URL params
+  const { id, token } = useParams();
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handlePasswordChange = async () => {
-    // Check if passwords match
     if (newPassword !== confirmPassword) {
-      toast.error("Passwords do not match!");
+      toast.error("הסיסמאות אינן תואמות!");
       return;
     }
 
     if (newPassword.length < 8) {
-      toast.error("Password must be at least 8 characters long!");
+      toast.error("הסיסמה חייבת להכיל לפחות 8 תווים!");
       return;
     }
 
     setLoading(true);
 
     try {
-      // Send a POST request to the backend with the new password
       const response = await axios.post(
         `${
           import.meta.env.VITE_REACT_APP_API
-        }/api/auth/reset-password/${id}/${token}`, // Include token in the URL
-        {
-          password: newPassword, // Send the new password in the request body
-        }
+        }/api/auth/reset-password/${id}/${token}`,
+        { password: newPassword }
       );
 
       if (response.status === 200) {
-        toast.success("Password reset successful!");
-        navigate("/"); // Redirect to home page after successful reset
+        toast.success("הסיסמה עודכנה בהצלחה!");
+        navigate("/");
       } else {
-        toast.error(response.data.message || "Error resetting password");
+        toast.error(response.data.message || "שגיאה בעדכון הסיסמה");
       }
     } catch (error) {
-      toast.error("Error resetting password. Please try again.");
+      toast.error("שגיאה בעדכון הסיסמה. נסו שוב");
     } finally {
       setLoading(false);
     }
@@ -60,12 +56,13 @@ const ResetPass = () => {
           />
         </div>
         <div className="sm:mt-1 mt-3 text-[#787878] font-[600] text-[13px]">
-          Don't have an account?{" "}
+          אין לכם חשבון?{" "}
           <a href="/signup" className="text-blue-700">
-            Sign Up
+            הרשמו כאן
           </a>
         </div>
       </nav>
+
       <div className="h-[80vh] px-5 md:px-10 flex md:flex-row flex-col-reverse mt-20 md:mt-1 items-center justify-between">
         <div className="w-[50%]">
           <img
@@ -74,47 +71,49 @@ const ResetPass = () => {
             className="md:flex hidden"
           />
         </div>
+
         <div className="md:w-[50%] w-[100%]">
-          <h1 className="text-2xl font-[600] tracking-wide">
-            Reset your password?
-          </h1>
+          <h1 className="text-2xl font-[600] tracking-wide">שחזור סיסמה</h1>
           <p className="mt-2 text-sm w-[100%] md:w-[50%] text-[#787878]">
-            Enter a new password with at least 8 characters, including letters,
-            numbers, or symbols.
+            הזינו סיסמה חדשה עם לפחות 8 תווים, הכוללת אותיות, מספרים או סימנים
           </p>
+
           <div>
             <input
               type="password"
               className="border outline-none border-[#d3d3d3] px-3 py-2 rounded-[8px] placeholder:text-sm sm:w-80 w-[100%] mt-5"
-              placeholder="Enter new password"
+              placeholder="סיסמה חדשה"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
             />
           </div>
+
           <div>
             <input
               type="password"
               className="border outline-none border-[#d3d3d3] px-3 py-2 rounded-[8px] placeholder:text-sm sm:w-80 w-[100%] mt-5"
-              placeholder="Confirm new password"
+              placeholder="אימות סיסמה"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
+
           <div>
             <button
               onClick={handlePasswordChange}
               className="mt-4 w-[100%] sm:w-80 bg-[var(--Primary)] py-2.5 rounded-[10px] shadow shadow-amber-300 text-white"
               disabled={loading}
             >
-              {loading ? "Resetting..." : "Reset Now"}
+              {loading ? "מעבד..." : "עדכן סיסמה"}
             </button>
           </div>
+
           <div>
             <button
               onClick={() => navigate("/")}
               className="mt-4 w-[100%] sm:w-80 bg-zinc-100 py-2.5 rounded-[10px] shadow text-sm text-black"
             >
-              Go Back
+              חזור לדף הבית
             </button>
           </div>
         </div>
