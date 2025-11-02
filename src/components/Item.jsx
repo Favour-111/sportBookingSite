@@ -523,25 +523,25 @@ const Item = ({ item, setForm, setOpens }) => {
                       <p className="mt-3 text-sm font-[600] text-gray-500 whitespace-nowrap">
                         ⚠ Important instructions:
                       </p>
-                      <div className="mt-2 flex items-center gap-1">
+                      <div className="mt-2 text-[13px] flex items-center gap-1">
                         <p>
                           🔃 Please Click continue then refresh page after
                           successful purchase
                         </p>
                       </div>
-                      <div className="mt-2 flex items-center gap-1">
+                      <div className="mt-2 text-[12px] flex items-center gap-1">
                         <p>🎲 Place bet on betting site listed above</p>
                       </div>
-                      <div className="mt-2 flex items-center gap-1">
+                      <div className="mt-2 text-[12px] flex items-center gap-1">
                         <p>🔒 This content is for your use only</p>
                       </div>
-                      <div className="mt-2 flex items-center gap-1">
+                      <div className="mt-2 text-[12px] flex items-center gap-1">
                         <p>🧭 Navigate to My Purchase to see game status</p>
                       </div>
-                      <div className="mt-2 flex items-center gap-1">
+                      <div className="mt-2 text-[12px] flex items-center gap-1">
                         <p>🚫 Do not share content with others</p>
                       </div>
-                      <div className="mt-2 flex items-center gap-1">
+                      <div className="mt-2 text-[12px] flex items-center gap-1">
                         <p>
                           📞 For any issues or questions, please click the
                           support button to contact us{" "}
