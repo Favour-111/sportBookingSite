@@ -190,7 +190,7 @@ const NavBar = ({ setOpen }) => {
                     <div
                       className="cursor-pointer text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2 cursor-pointer hover:bg-green-100 duration-200"
                       onClick={() => {
-                        const botUsername = "SportTipsPayBot"; // no @
+                        const botUsername = "spoiqunbot"; // no @
                         const telegramUrl = `https://t.me/${botUsername}`;
                         window.open(telegramUrl, "_blank");
                       }}
@@ -347,7 +347,7 @@ const NavBar = ({ setOpen }) => {
                   {compareUser?.telegramId !== "" ? (
                     <div
                       onClick={() => {
-                        const botUsername = "SportTipsPayBot"; // no @
+                        const botUsername = "spoiqunbot"; // no @
                         const telegramUrl = `https://t.me/${botUsername}`;
                         window.open(telegramUrl, "_blank");
                       }}
