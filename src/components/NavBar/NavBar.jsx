@@ -237,19 +237,27 @@ const NavBar = ({ setOpen }) => {
                 </div>
               </div>
             )}
-            <div className="flex gap-2 items-center">
+            <div
+              className={`${
+                !isDarkMode ? "bg-gray-300" : "bg-[#e27c2c]"
+              } p-1 rounded-full flex items-center gap-1`}
+            >
               <IoSunny
                 size={14}
-                className="text-[#787878] dark:text-[#d3d3d3]"
+                className={`${
+                  isDarkMode
+                    ? "text-[#d3d3d3] dark:text-[#d3d3d3]"
+                    : "text-[var(--Primary)]"
+                }`}
               />
               <div
-                className={`relative inline-block w-9 h-4 ${
-                  isDarkMode ? "bg-blue-500" : "bg-gray-300"
+                className={`relative w-9 h-4 ${
+                  !isDarkMode ? "bg-white" : "bg-[var(--Primary)]"
                 } rounded-full`}
                 onClick={toggleDarkMode}
               >
                 <span
-                  className={`absolute left-[2px] top-[2px] w-3 h-3 bg-white rounded-full transition-transform ${
+                  className={`absolute left-[2px] top-[2px] w-3 h-3 bg-[#d3d3d3] dark:bg-white rounded-full transition-transform ${
                     isDarkMode ? "transform translate-x-5" : ""
                   }`}
                 ></span>
@@ -261,7 +269,6 @@ const NavBar = ({ setOpen }) => {
             </div>
           </div>
         </div>
-
         <div
           className={`${
             isDarkMode ? "dark" : ""
@@ -277,21 +284,137 @@ const NavBar = ({ setOpen }) => {
               SportsTips
             </div>
           </Link>
-          <div className="flex gap-2 items-center">
-            <IoSunny size={14} className="text-[#787878] dark:text-[#d3d3d3]" />
+          <div className="flex items-center gap-3">
             <div
-              className={`relative inline-block w-9 h-4 ${
-                isDarkMode ? "bg-blue-500" : "bg-gray-300"
-              } rounded-full`}
-              onClick={toggleDarkMode}
+              className={`${
+                !isDarkMode ? "bg-gray-300" : "bg-[#e27c2c]"
+              } p-1 rounded-full flex items-center gap-1`}
             >
-              <span
-                className={`absolute left-[2px] top-[2px] w-3 h-3 bg-white rounded-full transition-transform ${
-                  isDarkMode ? "transform translate-x-5" : ""
+              <IoSunny
+                size={14}
+                className={`${
+                  isDarkMode
+                    ? "text-[#d3d3d3] dark:text-[#d3d3d3]"
+                    : "text-[var(--Primary)]"
                 }`}
-              ></span>
+              />
+              <div
+                className={`relative w-9 h-4 ${
+                  !isDarkMode ? "bg-white" : "bg-[var(--Primary)]"
+                } rounded-full`}
+                onClick={toggleDarkMode}
+              >
+                <span
+                  className={`absolute left-[2px] top-[2px] w-3 h-3 bg-[#d3d3d3] dark:bg-white rounded-full transition-transform ${
+                    isDarkMode ? "transform translate-x-5" : ""
+                  }`}
+                ></span>
+              </div>
+              <BiMoon
+                size={14}
+                className="text-[#787878] dark:text-[#d3d3d3]"
+              />
             </div>
-            <BiMoon size={14} className="text-[#787878] dark:text-[#d3d3d3]" />
+            {user && (
+              <div className="relative">
+                <button
+                  onClick={() => SetDrop(!drop)}
+                  className="dark:text-[#f6f6f6] overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
+                >
+                  <FiUser />
+                </button>
+                <div
+                  className={`${
+                    drop
+                      ? "translate-y-0 opacity-100 visibility-visible"
+                      : "translate-y-[-10px] opacity-0 visibility-hidden pointer-events-none"
+                  } fixed mt-2 w-[200px] right-[50px] dark:bg-[var(--default)] border dark:border-[#787878] border-[#d3d3d3] bg-[#fbfbfb] z-[9999] shadow rounded-[8px] transition-all duration-300 ease-in-out`}
+                >
+                  <button className="dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-3 dark:text-[#d3d3d3] border-b dark:border-[#787878] hover:bg-[#f1f1f1] duration-200 border-b-[#0000000a]">
+                    <div>
+                      <BiWallet />
+                    </div>
+                    <div className="text-[12px]">
+                      יתרה: ${compareUser?.availableBalance.toLocaleString()}
+                    </div>
+                  </button>
+                  <button
+                    onClick={() => setOpen(true)}
+                    className="text-sm text-[#c3422b]  dark:bg-transparent bg-[#ff634716] dark:hover:bg-[#202736] w-[100%] flex items-center gap-1 p-2 dark:text-[#d3d3d3] px-3 hover:bg-[#f1f1f1] duration-200"
+                  >
+                    <div>
+                      <BiPlus />
+                    </div>
+                    הטען יתרה
+                  </button>
+                  <Link
+                    to={`settings/${user}`}
+                    className=" dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-2 dark:text-[#d3d3d3] px-3 hover:bg-[#f1f1f1] duration-200"
+                  >
+                    <div>
+                      <FiSettings />
+                    </div>
+                    <div className="text-[12px]">הגדרות</div>
+                  </Link>
+                  {compareUser?.telegramId !== "" ? (
+                    <div
+                      onClick={() => {
+                        const botUsername = "SportTipsPayBot"; // no @
+                        const telegramUrl = `https://t.me/${botUsername}`;
+                        window.open(telegramUrl, "_blank");
+                      }}
+                      className="cursor-pointer text-[13px] px-3 p-2 bg-green-50 text-green-500 flex items-center gap-2"
+                    >
+                      <BiLink />
+                      טלגרם מחובר
+                    </div>
+                  ) : (
+                    <button
+                      className="dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-2 dark:text-[#d3d3d3] px-3 hover:bg-[#f1f1f1] duration-200"
+                      onClick={async () => {
+                        try {
+                          const res = await axios.post(
+                            `${
+                              import.meta.env.VITE_REACT_APP_API
+                            }/api/auth/connect/telegram`,
+                            { userId: localStorage.getItem("userId") }
+                          );
+                          window.open(res.data.deepLink, "_blank");
+                        } catch (err) {
+                          toast.error("שגיאה ביצירת קישור לטלגרם");
+                        }
+                      }}
+                    >
+                      <div>
+                        <BiLink />
+                      </div>
+                      <div className="text-[12px]">חבר לטלגרם</div>
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() => {
+                      localStorage.clear();
+                      window.location.replace("/");
+                    }}
+                    className=" dark:hover:bg-[#202736] w-[100%] flex items-center gap-2 p-2 dark:text-[#d3d3d3] px-3 hover:bg-[#f1f1f1] duration-200"
+                  >
+                    <div>
+                      <BiExit />
+                    </div>
+                    <div className="text-[12px]">התנתקות</div>
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="cursor-pointer" onClick={() => setMenu(!menu)}>
+              {menu ? (
+                <AiOutlineClose size={22} className="dark:text-[#d3d3d3]" />
+              ) : (
+                <RxHamburgerMenu size={22} className="dark:text-[#d3d3d3]" />
+              )}
+            </div>
           </div>
         </div>
         <div
