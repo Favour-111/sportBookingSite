@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { IoSunny } from "react-icons/io5";
+import { IoSunny, IoWalletOutline } from "react-icons/io5";
 import { BiExit, BiLink, BiMoon, BiPlus, BiWallet } from "react-icons/bi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { ShopContext } from "../shopContext";
@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { FaAngleDown } from "react-icons/fa6";
 import toast from "react-hot-toast";
 import axios from "axios";
+import Funds from "../Funds/Funds";
 const NavBar = ({ setOpen }) => {
   const { t, i18n } = useTranslation();
   // Consume the dark mode context
@@ -20,6 +21,7 @@ const NavBar = ({ setOpen }) => {
   const [menu, setMenu] = useState(false);
   const [form, setForm] = useState(false);
   const [drop, SetDrop] = useState(false);
+  const [fundsOpen, setFundsOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const navigate = useNavigate();
   const changeLanguage = (lang) => {
@@ -130,7 +132,14 @@ const NavBar = ({ setOpen }) => {
               </li>
             </ul>
           </div>
+
           <div className="flex items-center gap-5">
+            <button
+              onClick={() => setFundsOpen(true)}
+              className="dark:text-[#f6f6f6] cursor-pointer overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
+            >
+              <IoWalletOutline color="tomato" />
+            </button>
             {/* <div className="text-[16px] font-[500] dark:text-emerald-300 text-emerald-600 ">
             יתרה : <span className=" font-[600]">$300</span>
           </div> */}
@@ -315,6 +324,12 @@ const NavBar = ({ setOpen }) => {
                 className="text-[#787878] dark:text-[#d3d3d3]"
               />
             </div>
+            <button
+              onClick={() => setFundsOpen(true)}
+              className="dark:text-[#f6f6f6] cursor-pointer overflow-hidden dark:bg-[var(--default)] border dark:border-[#d3d3d3]  w-9 h-9 flex items-center justify-center rounded-full bg-[#f6f6f6] border-white"
+            >
+              <IoWalletOutline color="tomato" />
+            </button>
             {user && (
               <div className="relative">
                 <button
@@ -477,6 +492,8 @@ const NavBar = ({ setOpen }) => {
             )}
           </ul>
         </div>
+        <Funds open={fundsOpen} setOpen={setFundsOpen} />
+
         {form && <Login state={setForm} />}
       </div>
     </div>
